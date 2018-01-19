@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <QThread>
 #include "celula.h"
 
 static int contador = 0;

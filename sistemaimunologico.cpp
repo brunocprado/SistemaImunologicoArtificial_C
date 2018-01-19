@@ -1,6 +1,6 @@
 #include "sistemaimunologico.h"
 
-#include "celula.h"
+#include "macrofago.h"
 
 #include <QList>
 
@@ -13,13 +13,13 @@ SistemaImunologico::SistemaImunologico() : QObject(nullptr){
 
 void SistemaImunologico::geraPrimeiraGeracao(){
     for(int i =0;i<300;i++){
-        celulas[i] = new Celula(Celula::TIPO_CELULA::MACROFAGO);
+        celulas[i] = new Macrofago();
         renderizaCelula(celulas[i]);
     }
-    for(int i =300;i<600;i++){
-        celulas[i] = new Celula(Celula::TIPO_CELULA::NEUTROFILO);
-        renderizaCelula(celulas[i]);
-    }
+//    for(int i =300;i<600;i++){
+//        celulas[i] = new Celula(Celula::TIPO_CELULA::NEUTROFILO);
+//        renderizaCelula(celulas[i]);
+//    }
 
 //    while(true){
     for(int d = 0;d<800;d++){
@@ -29,9 +29,9 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     }
 }
 
-Celula SistemaImunologico::getCelulas(){
-    return Celula();
-}
+//Celula SistemaImunologico::getCelulas(){
+//    return (Celula)Macrofago();
+//}
 
 void SistemaImunologico::renderizaCelula(Celula* celula){
     emit adicionaCelula(celula->id,celula->getTipo(),celula->x,celula->y);

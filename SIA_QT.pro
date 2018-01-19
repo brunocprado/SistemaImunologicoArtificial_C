@@ -15,10 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     sistemaimunologico.cpp \
     celula.cpp \
-    main.cpp \
-    celula.cpp \
-    main.cpp \
-    sistemaimunologico.cpp
+    macrofago.cpp
 
 #RESOURCES += \
 #    qml.qrc
@@ -37,8 +34,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     sistemaimunologico.h \
     celula.h \
-    celula.h \
-    sistemaimunologico.h
+    macrofago.h
 
 DISTFILES += \
     script/script.js \

@@ -15,7 +15,7 @@ public:
 
     void renderizaCelula(Celula* celula);
 
-    Celula getCelulas();
+//    Celula getCelulas();
 
 private:
     Celula* celulas[TAM_MAX_CELULAS];
