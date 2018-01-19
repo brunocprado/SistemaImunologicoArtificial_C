@@ -2,7 +2,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtCharts 2.2
 
-import "script/script.js" as Script
+import "../script/script.js" as Script
 
 ApplicationWindow {
     id: janela
@@ -11,50 +11,27 @@ ApplicationWindow {
     height: 720
     color: "#c6c6c6"
     title: qsTr("SIA")
-    Component.onCompleted: Script.inicia();
+    Component.onCompleted: {
+        Script.inicia();
+//        sistema.start();
+    }
 
     Image {
         id: fundo
-        transformOrigin: Item.TopLeft
-        scale: 0.6
-        //        transformOrigin: Item.TopLeft
-        //        width: 1600
-        //        height: 900
-        //        anchors.rightMargin: -425
-        //        anchors.bottomMargin: -238
-        //        scale: 0.75
         anchors.fill: parent
         fillMode: Image.Stretch
-        source: "imagens/blood.jpg"
-        ChartView {
-            title: "Line"
-            anchors.fill: parent
-            antialiasing: true
-
-            LineSeries {
-                name: "LineSeries"
-                XYPoint { x: 0; y: 0 }
-                XYPoint { x: 1.1; y: 2.1 }
-                XYPoint { x: 1.9; y: 3.3 }
-                XYPoint { x: 2.1; y: 2.1 }
-                XYPoint { x: 2.9; y: 4.9 }
-                XYPoint { x: 3.4; y: 3.0 }
-                XYPoint { x: 4.1; y: 3.3 }
-            }
-        }
+        source: "../imagens/blood.jpg"
     }
 
     Connections {
         target: sistema
         onAdicionaCelula: {
-
             Script.cria(id,fundo,tipo,x,y);
         }
         onMovimentaCelula:{
-            //            console.log(Script.celulas[id].x);
-            //            Script.celulas[id].x = mx;
-            //            Script.celulas[id].y = my;
-            //            console.log(Script.celulas[id].x);
+            if(Script.celulas[id] == undefined) return;
+            Script.celulas[id].x += mx;
+            Script.celulas[id].y += my;
         }
     }
 
@@ -103,10 +80,8 @@ ApplicationWindow {
             MenuItem {
                 text: "Patogeno"
                 onClicked: {
-                    //                    console.log("TESTE");
-                    //                    console.log(teste.renderiza())
-//                    Script.celulas[20].x += 10;
-//                    Script.celulas[20].y += 10;
+                    Script.celulas[5].x += 10;
+                    Script.celulas[5].y += 10;
                 }
             }
         }

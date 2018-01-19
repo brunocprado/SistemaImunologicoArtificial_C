@@ -1,18 +1,27 @@
-#include "sistemaimunologico.h"
+#include <QThread>
+#include <QtConcurrent/QtConcurrent>
 
+#include <stdlib.h>
+#include "sistemaimunologico.h"
 #include "celulas/macrofago.h"
 
-#include <QList>
+SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 
-SistemaImunologico::SistemaImunologico() : QObject(nullptr){
-//    carregaParametros();
-//    this->celulas = (Celula *) malloc(sizeof(Celula) * TAM_MAX_CELULAS);
-//    this->celulas = new Celula[600]();
-//    free(this);
+SistemaImunologico::SistemaImunologico() : QThread(nullptr){
+    this->start(Priority::NormalPriority);
+}
+
+SistemaImunologico::~SistemaImunologico(){
+    this->terminate();
+}
+
+SistemaImunologico* SistemaImunologico::getInstancia(){
+    if(INSTANCIA == 0) INSTANCIA = new SistemaImunologico();
+    return INSTANCIA;
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
-    for(int i =0;i<300;i++){
+    for(int i =0;i<15;i++){
         celulas[i] = new Macrofago();
         renderizaCelula(celulas[i]);
     }
@@ -20,34 +29,28 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 //        celulas[i] = new Celula(Celula::TIPO_CELULA::NEUTROFILO);
 //        renderizaCelula(celulas[i]);
 //    }
-
-//    while(true){
-    for(int d = 0;d<800;d++){
-        celulas[10]->x++;
-
-        emit movimentaCelula(celulas[10]->id,celulas[10]->x,celulas[10]->y);
-    }
 }
 
-//Celula SistemaImunologico::getCelulas(){
-//    return (Celula)Macrofago();
-//}
+void SistemaImunologico::run(){
+    msleep(500);
+    while(true){
+//        celulas[5]->loop();
+        for(int i=0;i<16;i++){
+            emit movimentaCelula(i,2,2);
+        }
+
+        msleep(40);
+    }
+}
 
 void SistemaImunologico::renderizaCelula(Celula* celula){
     emit adicionaCelula(celula->id,celula->getTipo(),celula->x,celula->y);
 }
 
-//Celula* SistemaImunologico::renderiza(){
-////    QList<Celula*> tmp;
+void SistemaImunologico::moveCelula(Celula* celula){
+    emit movimentaCelula(celula->id,2,2);
+}
 
-////    for(int i = 0;i<10;i++){
-////        tmp.append(celulas[i]);
-////    }
-////    return tmp;
+void SistemaImunologico::carregaParametros() {
 
-//    return celulas[0];
-//}
-
-//void SistemaImunologico::carregaParametros() {
-
-//}
+}

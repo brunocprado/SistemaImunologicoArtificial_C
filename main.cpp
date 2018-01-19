@@ -18,7 +18,10 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("sistema",&sistema);
+//    engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
+
+//    engine.load("/views/main.qml");
 
     sistema.geraPrimeiraGeracao();
 

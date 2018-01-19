@@ -3,7 +3,7 @@ var componente;
 var celulas = {};
 
 function inicia(){
-    componente =  Qt.createComponent("../celula.qml");
+    componente =  Qt.createComponent("../views/celula.qml");
 }
 
 function cria(id,parente,imagem,x,y) {
