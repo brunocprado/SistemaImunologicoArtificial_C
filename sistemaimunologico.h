@@ -2,7 +2,7 @@
 #define SISTEMAIMUNOLOGICO_H
 
 #include <QObject>
-#include "celula.h"
+#include "celulas/celula.h"
 
 #define TAM_MAX_CELULAS 600
 
@@ -14,6 +14,8 @@ public:
     void geraPrimeiraGeracao();
 
     void renderizaCelula(Celula* celula);
+
+    void loop();
 
 //    Celula getCelulas();
 

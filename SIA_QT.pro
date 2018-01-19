@@ -14,8 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     sistemaimunologico.cpp \
-    celula.cpp \
-    macrofago.cpp
+    celulas/celula.cpp \
+    celulas/macrofago.cpp
 
 #RESOURCES += \
 #    qml.qrc
@@ -33,15 +33,34 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     sistemaimunologico.h \
-    celula.h \
-    macrofago.h
+    celulas/celula.h \
+    celulas/macrofago.h
 
 DISTFILES += \
     script/script.js \
     qtquickcontrols2.conf \
     celula.qml \
-    main.qml
+    main.qml \
+    script/script.js \
+    imagens/blood.jpg \
+    imagens/immune-system-cells.jpg \
+    imagens/anti.png \
+    imagens/celula.png \
+    imagens/estatisticas.png \
+    imagens/icone.png \
+    imagens/Linfocito.png \
+    imagens/macro.png \
+    imagens/neutrofilo.png \
+    imagens/opcoes.png \
+    imagens/PAMP.png \
+    imagens/sangue.png \
+    imagens/terminal.png \
+    imagens/ufrrjLogo.png \
+    qtquickcontrols2.conf \
+    views/celula.qml \
+    views/main.qml
 
 SUBDIRS += \
+    SIA_QT.pro \
     SIA_QT.pro
 

@@ -1,6 +1,6 @@
 #include "sistemaimunologico.h"
 
-#include "macrofago.h"
+#include "celulas/macrofago.h"
 
 #include <QList>
 
