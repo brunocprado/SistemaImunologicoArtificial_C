@@ -8,10 +8,11 @@
 SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 
 SistemaImunologico::SistemaImunologico() : QThread(nullptr){
-    this->start(Priority::NormalPriority);
+    this->start(QThread::HighPriority);
 }
 
 SistemaImunologico::~SistemaImunologico(){
+    printf("Encerrando a Thread %d [Sistema imunologico (Logica)]",QThread::currentThreadId());
     this->terminate();
 }
 
@@ -21,7 +22,7 @@ SistemaImunologico* SistemaImunologico::getInstancia(){
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
-    for(int i =0;i<15;i++){
+    for(int i =0;i<400;i++){
         celulas[i] = new Macrofago();
         renderizaCelula(celulas[i]);
     }
@@ -35,11 +36,11 @@ void SistemaImunologico::run(){
     msleep(500);
     while(true){
 //        celulas[5]->loop();
-        for(int i=0;i<16;i++){
-            emit movimentaCelula(i,2,2);
+        for(int i=0;i<50;i++){
+            emit movimentaCelula(i,(rand() % 5 - 2),(rand() % 5 - 2));
         }
 
-        msleep(40);
+        msleep(INTERVALO_PROCESSAMENTO);
     }
 }
 

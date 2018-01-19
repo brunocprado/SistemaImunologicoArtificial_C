@@ -5,7 +5,8 @@
 #include <QThread>
 #include "celulas/celula.h"
 
-#define TAM_MAX_CELULAS 3000
+#define INTERVALO_PROCESSAMENTO 30
+#define TAM_MAX_CELULAS 1000
 
 class SistemaImunologico : public QThread{
     Q_OBJECT

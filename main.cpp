@@ -5,25 +5,21 @@
 
 #include "sistemaimunologico.h"
 
-int main(int argc, char *argv[])
-{
-#if defined(Q_OS_WIN)
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
+int main(int argc, char *argv[]){
+    #if defined(Q_OS_WIN)
+        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    #endif
 
     QGuiApplication app(argc, argv);
 
-    SistemaImunologico sistema;
+    SistemaImunologico* sistema = SistemaImunologico::getInstancia();
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty("sistema",&sistema);
-//    engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
+    engine.rootContext()->setContextProperty("sistema",sistema);
     engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
 
-//    engine.load("/views/main.qml");
-
-    sistema.geraPrimeiraGeracao();
+    sistema->geraPrimeiraGeracao();
 
     return app.exec();
 }
