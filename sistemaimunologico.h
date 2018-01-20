@@ -2,10 +2,11 @@
 #define SISTEMAIMUNOLOGICO_H
 
 #include <QObject>
+#include <QDateTime>
 #include <QThread>
 #include "celulas/celula.h"
 
-#define INTERVALO_PROCESSAMENTO 30
+#define INTERVALO_PROCESSAMENTO 20
 #define TAM_MAX_CELULAS 1000
 
 class SistemaImunologico : public QThread{
@@ -16,14 +17,14 @@ public:
     ~SistemaImunologico();
 
     void geraPrimeiraGeracao();
-
     void renderizaCelula(Celula* celula);
-    void moveCelula(Celula* celula);
 
     static SistemaImunologico* getInstancia();
 
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
+
+    QDateTime INICIO_SISTEMA;
 
     Celula* celulas[TAM_MAX_CELULAS];
 
