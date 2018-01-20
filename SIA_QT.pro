@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     sistemaimunologico.cpp \
     celulas/celula.cpp \
     celulas/macrofago.cpp \
-    quimica/camadaquimica.cpp
+    quimica/camadaquimica.cpp \
+    quimica/compostoquimico.cpp
 
 #RESOURCES += \
 #    qml.qrc
@@ -36,7 +37,8 @@ HEADERS += \
     sistemaimunologico.h \
     celulas/celula.h \
     celulas/macrofago.h \
-    quimica/camadaquimica.h
+    quimica/camadaquimica.h \
+    quimica/compostoquimico.h
 
 
 SUBDIRS += \
