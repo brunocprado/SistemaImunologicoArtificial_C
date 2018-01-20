@@ -1,4 +1,4 @@
-#include "camadaquimica.h"
+#include "quimica/camadaquimica.h"
 
 #include <QThread>
 
