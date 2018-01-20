@@ -36,7 +36,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 }
 
 void SistemaImunologico::run(){
-    msleep(2000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
+    msleep(6000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
     while(true){
         for(int i=0;i<100;i++){
             celulas[i]->loop();

@@ -1,6 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtCharts 2.2
+import QtQuick.Window 2.3
 
 import "../script/script.js" as Script
 
@@ -13,7 +13,8 @@ ApplicationWindow {
     title: qsTr("SIA")
     Component.onCompleted: {
         Script.inicia();
-//        sistema.start();
+        setX(Screen.width / 2 - width / 2);
+        setY(Screen.height / 2 - height / 2);
     }
 
     Image {
