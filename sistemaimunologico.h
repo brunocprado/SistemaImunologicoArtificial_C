@@ -1,12 +1,13 @@
 #ifndef SISTEMAIMUNOLOGICO_H
 #define SISTEMAIMUNOLOGICO_H
 
-#include <QObject>
 #include <QDateTime>
 #include <QThread>
+
+#include "quimica/camadaquimica.h"
 #include "celulas/celula.h"
 
-#define INTERVALO_PROCESSAMENTO 20
+#define INTERVALO_PROCESSAMENTO 30
 #define TAM_MAX_CELULAS 1000
 
 class SistemaImunologico : public QThread{
@@ -27,6 +28,7 @@ private:
     QDateTime INICIO_SISTEMA;
 
     Celula* celulas[TAM_MAX_CELULAS];
+    CamadaQuimica* quimica;
 
     void carregaParametros();
     void run(); //Loop do QThread

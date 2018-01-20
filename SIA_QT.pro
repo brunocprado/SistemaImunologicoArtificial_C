@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     sistemaimunologico.cpp \
     celulas/celula.cpp \
-    celulas/macrofago.cpp
+    celulas/macrofago.cpp \
+    quimica/camadaquimica.cpp
 
 #RESOURCES += \
 #    qml.qrc
@@ -34,7 +35,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     sistemaimunologico.h \
     celulas/celula.h \
-    celulas/macrofago.h
+    celulas/macrofago.h \
+    quimica/camadaquimica.h
 
 
 SUBDIRS += \

@@ -1,8 +1,9 @@
 #include <QThread>
 #include <QtConcurrent/QtConcurrent>
-
 #include <stdlib.h>
+
 #include "sistemaimunologico.h"
+#include "quimica/camadaquimica.h"
 #include "celulas/macrofago.h"
 
 SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
@@ -10,6 +11,7 @@ SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 SistemaImunologico::SistemaImunologico() : QThread(nullptr){
     INICIO_SISTEMA = QDateTime::currentDateTime();
     this->start(QThread::HighPriority);
+    quimica = new CamadaQuimica();
 }
 
 SistemaImunologico::~SistemaImunologico(){
@@ -44,7 +46,7 @@ void SistemaImunologico::run(){
 }
 
 void SistemaImunologico::renderizaCelula(Celula* celula){
-    emit adicionaCelula(celula->id,celula->getTipo(),celula->x,celula->y);
+    emit adicionaCelula(celula->id,celula->getTipo(),celula->getX(),celula->getY());
 }
 
 void SistemaImunologico::carregaParametros() {
