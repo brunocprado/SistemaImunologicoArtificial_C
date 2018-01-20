@@ -3,9 +3,9 @@
 
 #include "celula.h"
 
-class Macrofago : public Celula{
+class Macrofago : public virtual Celula{
 public:
-    Macrofago();
+    explicit Macrofago();
 
     void loop();
 };

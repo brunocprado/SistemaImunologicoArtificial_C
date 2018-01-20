@@ -17,6 +17,15 @@ Celula::Celula(TIPO_CELULA t) {
     y = rand() % 900 + 1;
 }
 
+void Celula::move(int x, int y){
+    this->x = x;
+    this->y = y;
+}
+
+double Celula:: calculaDistancia(int x, int y){
+    return 1;
+}
+
 Celula::TIPO_CELULA Celula::getTipo(){
     return tipo;
 }

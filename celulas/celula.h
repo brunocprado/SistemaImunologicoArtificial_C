@@ -12,6 +12,7 @@ public:
 
     //=======| Funções |========// TODO : Get/Set
     void move(int x,int y);
+    double calculaDistancia(int x,int y);
     virtual void loop() = 0;
 
     int x,y,id;
