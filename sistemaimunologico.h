@@ -3,6 +3,8 @@
 
 #include <QDateTime>
 #include <QThread>
+#include <QColor>
+#include <QList>
 
 #include "quimica/camadaquimica.h"
 #include "celulas/celula.h"
@@ -19,16 +21,17 @@ public:
 
     void geraPrimeiraGeracao();
     void renderizaCelula(Celula* celula);
+    void log(QString texto);
+    void log(QColor cor,QString texto);
 
     static SistemaImunologico* getInstancia();
-
+    CamadaQuimica* quimica;
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
 
     QDateTime INICIO_SISTEMA;
 
-    Celula* celulas[TAM_MAX_CELULAS];
-    CamadaQuimica* quimica;
+    QList<Celula*>* celulas;
 
     void carregaParametros();
     void run(); //Loop do QThread
@@ -36,6 +39,7 @@ private:
 signals:
     void adicionaCelula(int id,int tipo,int x,int y);
     void movimentaCelula(int id,int mx,int my);
+    void escreveLog(QString texto);
 
 public slots:
 };

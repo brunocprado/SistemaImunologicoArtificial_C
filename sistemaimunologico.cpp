@@ -10,6 +10,7 @@ SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 
 SistemaImunologico::SistemaImunologico() : QThread(nullptr){
     INICIO_SISTEMA = QDateTime::currentDateTime();
+    celulas = new QList<Celula*>();
     this->start(QThread::HighPriority);
     quimica = new CamadaQuimica();
 }
@@ -26,20 +27,16 @@ SistemaImunologico* SistemaImunologico::getInstancia(){
 
 void SistemaImunologico::geraPrimeiraGeracao(){
     for(int i =0;i<700;i++){
-        celulas[i] = new Macrofago();
-        renderizaCelula(celulas[i]);
+        celulas->append(new Macrofago());
+        renderizaCelula(celulas->at(i));
     }
-//    for(int i =300;i<600;i++){
-//        celulas[i] = new Celula(Celula::TIPO_CELULA::NEUTROFILO);
-//        renderizaCelula(celulas[i]);
-//    }
 }
 
 void SistemaImunologico::run(){
-    msleep(6000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
+    msleep(2000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
     while(true){
         for(int i=0;i<100;i++){
-            celulas[i]->loop();
+            celulas->at(i)->loop();
         }
         msleep(INTERVALO_PROCESSAMENTO);
     }
@@ -51,4 +48,14 @@ void SistemaImunologico::renderizaCelula(Celula* celula){
 
 void SistemaImunologico::carregaParametros() {
 
+}
+
+void SistemaImunologico::log(QString texto){
+    qDebug() << texto;
+    emit escreveLog(texto);
+}
+
+void SistemaImunologico::log(QColor cor, QString texto){
+    qDebug() << texto;
+    emit escreveLog(texto); //TODO INCLUIR COR
 }
