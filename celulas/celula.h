@@ -16,7 +16,7 @@ public:
     void move(Celula* celula);
     void move(int x,int y);
     double calculaDistancia(int x,int y);
-    void emiteQuimica();
+    void emiteQuimica(int tipo,int qt);
 
     virtual void loop() = 0;
 

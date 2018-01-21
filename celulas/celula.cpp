@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <math.h>
+
+#include "sistemaimunologico.h"
 #include "celula.h"
+#include "quimica/compostoquimico.h"
 
 static int contador = 0;
 
@@ -30,10 +33,9 @@ double Celula:: calculaDistancia(int x, int y){
     return sqrt((deltaX * deltaX) + (deltaY * deltaY));
 }
 
-//    protected void emiteQuimica(CompostoQuimico.TIPO_COMPOSTO tipo){
-////        Posicao tmp = new Posicao((int)getX(), (int)getY());
-//        sistema.getCamada().compostos.add(new CompostoQuimico(tipo, 40,getX(),getY(),this));
-//    }
+void Celula::emiteQuimica(int tipo, int qt){
+    SistemaImunologico::getInstancia()->getQuimica()->compostos->append(new CompostoQuimico((CompostoQuimico::TIPO_COMPOSTO) tipo,qt,this));
+}
 
 Celula::TIPO_CELULA Celula::getTipo(){
     return tipo;
