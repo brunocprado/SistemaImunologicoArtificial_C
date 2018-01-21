@@ -12,8 +12,10 @@ public:
 
     void run();
 
-    QList<CompostoQuimico*>* compostos;
+    QList<CompostoQuimico*>* getCompostos();
+
 private:
+    QList<CompostoQuimico*>* compostos;
 
 };
 
