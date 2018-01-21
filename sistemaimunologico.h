@@ -3,8 +3,10 @@
 
 #include <QDateTime>
 #include <QThread>
+#include <QString>
 #include <QColor>
 #include <QList>
+#include <QMap>
 
 #include "quimica/camadaquimica.h"
 #include "celulas/celula.h"
@@ -25,13 +27,17 @@ public:
     void log(QColor cor,QString texto);
 
     static SistemaImunologico* getInstancia();
-    CamadaQuimica* quimica;
+
+    double getParametro(std::string parametro);
+
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
 
     QDateTime INICIO_SISTEMA;
 
     QList<Celula*>* celulas;
+    CamadaQuimica* quimica;
+    QMap<std::string,double>* parametros;
 
     void carregaParametros();
     void run(); //Loop do QThread

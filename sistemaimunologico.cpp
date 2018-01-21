@@ -11,6 +11,7 @@ SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 SistemaImunologico::SistemaImunologico() : QThread(nullptr){
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
+    carregaParametros();
     this->start(QThread::HighPriority);
     quimica = new CamadaQuimica();
 }
@@ -26,7 +27,7 @@ SistemaImunologico* SistemaImunologico::getInstancia(){
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
-    for(int i =0;i<700;i++){
+    for(int i =0;i<600;i++){
         celulas->append(new Macrofago());
         renderizaCelula(celulas->at(i));
     }
@@ -47,7 +48,12 @@ void SistemaImunologico::renderizaCelula(Celula* celula){
 }
 
 void SistemaImunologico::carregaParametros() {
+    parametros = new QMap<std::string,double>();
+    parametros->insert("TESTE",5);
+}
 
+double SistemaImunologico::getParametro(std::string parametro){
+    return parametros->value(parametro);
 }
 
 void SistemaImunologico::log(QString texto){
