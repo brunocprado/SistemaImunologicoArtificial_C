@@ -9,6 +9,7 @@
 SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 
 SistemaImunologico::SistemaImunologico() : QThread(nullptr){
+    GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
     carregaParametros();
@@ -34,7 +35,7 @@ void SistemaImunologico::carregaParametros() {
 void SistemaImunologico::geraPrimeiraGeracao(){
     int nInicial = rand() % 700 + 400;
     log(QString().fromStdString(std::to_string(nInicial)));
-    for(int i =0;i<500;i++){
+    for(int i =0;i<600;i++){
         celulas->append(new Macrofago());
         renderizaCelula(celulas->at(i));
     }
@@ -43,15 +44,15 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 void SistemaImunologico::run(){
     msleep(2000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
     while(true){
-        for(int i=0;i<100;i++){
+        for(int i=0;i<50;i++){
             celulas->at(i)->loop();
         }
-        msleep(INTERVALO_PROCESSAMENTO);
+        msleep(INTERVALO_PROCESSAMENTO / 10);
     }
 }
 
 void SistemaImunologico::renderizaCelula(Celula* celula){
-    emit adicionaCelula(celula->id,celula->getTipo(),celula->getX(),celula->getY());
+    emit adicionaCelula(celula->id,celula->getTipo(),celula->x,celula->y);
 }
 
 void SistemaImunologico::log(QString texto){
