@@ -3,8 +3,8 @@
 CompostoQuimico::CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,Celula* emissor){
     this->tipo = tipo;
     this->emissor = emissor;
-    x = emissor->getX();
-    y = emissor->getY();
+    x = emissor->x;
+    y = emissor->y;
 }
 
 CompostoQuimico::TIPO_COMPOSTO CompostoQuimico::getTipo(){

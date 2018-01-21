@@ -3,7 +3,7 @@
 
 class Celula{
 public:
-    enum TIPO_CELULA {COMUM,MACROFAGO,NEUTROFILO,LINFOCITO};
+    enum TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO};
     TIPO_CELULA getTipo();
 
     int id;
@@ -14,18 +14,17 @@ public:
 
     //=======| Funções |========// TODO : Get/Set
     void move(Celula* celula);
-    void move(int x,int y);
-    double calculaDistancia(int x,int y);
+    void move(short int x,short int y);
+    double calculaDistancia(short int x,short int y);
     void emiteQuimica(int tipo,int qt);
 
     virtual void loop() = 0;
 
-    int getX();
-    int getY();
+    unsigned short int x,y;
 
 private:
     TIPO_CELULA tipo;
-    int x,y;
+
 };
 
 #endif // CELULA_H
