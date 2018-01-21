@@ -35,8 +35,6 @@ public:
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
 
-    unsigned int GERADOR;
-
     QDateTime INICIO_SISTEMA;
 
     QList<Celula*>* celulas;

@@ -22,12 +22,12 @@ Celula::Celula(TIPO_CELULA t) {
 }
 
 void Celula::move(Celula* celula){
-    double angulo = atan2(celula->x - x,celula->y - y);
+    double angulo = atan2(celula->getX() - x,celula->getY() - y);
     x += cos(angulo);
     y += sin(angulo);
 }
 
-double Celula:: calculaDistancia(short int x, short int y){
+double Celula:: calculaDistancia(int x, int y){
     double deltaX = this->x - x;
     double deltaY = this->y - y;
     return sqrt((deltaX * deltaX) + (deltaY * deltaY));
@@ -39,4 +39,12 @@ void Celula::emiteQuimica(int tipo, int qt){
 
 Celula::TIPO_CELULA Celula::getTipo(){
     return tipo;
+}
+
+int Celula::getX(){
+    return x;
+}
+
+int Celula::getY(){
+    return y;
 }
