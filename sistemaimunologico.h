@@ -32,6 +32,8 @@ public:
     QList<Celula*>* getCelulas();
     CamadaQuimica* getQuimica();
 
+    void setGerador(int g);
+
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
 

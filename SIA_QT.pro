@@ -46,3 +46,4 @@ SUBDIRS += \
 RESOURCES += \
     qml.qrc
 
+ICON = icone.icns
