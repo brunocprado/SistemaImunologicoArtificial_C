@@ -29,6 +29,8 @@ public:
     static SistemaImunologico* getInstancia();
 
     double getParametro(std::string parametro);
+    QList<Celula*>* getCelulas();
+    CamadaQuimica* getQuimica();
 
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON

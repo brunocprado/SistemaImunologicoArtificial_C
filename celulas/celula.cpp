@@ -34,7 +34,7 @@ double Celula:: calculaDistancia(int x, int y){
 }
 
 void Celula::emiteQuimica(int tipo, int qt){
-    SistemaImunologico::getInstancia()->getQuimica()->compostos->append(new CompostoQuimico((CompostoQuimico::TIPO_COMPOSTO) tipo,qt,this));
+    SistemaImunologico::getInstancia()->getQuimica()->getCompostos()->append(new CompostoQuimico((CompostoQuimico::TIPO_COMPOSTO) tipo,qt,this));
 }
 
 Celula::TIPO_CELULA Celula::getTipo(){

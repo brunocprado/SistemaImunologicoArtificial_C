@@ -26,8 +26,15 @@ SistemaImunologico* SistemaImunologico::getInstancia(){
     return INSTANCIA;
 }
 
+void SistemaImunologico::carregaParametros() {
+    parametros = new QMap<std::string,double>();
+    parametros->insert("TESTE",5);
+}
+
 void SistemaImunologico::geraPrimeiraGeracao(){
-    for(int i =0;i<600;i++){
+    int nInicial = rand() % 700 + 400;
+    log(QString().fromStdString(std::to_string(nInicial)));
+    for(int i =0;i<500;i++){
         celulas->append(new Macrofago());
         renderizaCelula(celulas->at(i));
     }
@@ -47,15 +54,6 @@ void SistemaImunologico::renderizaCelula(Celula* celula){
     emit adicionaCelula(celula->id,celula->getTipo(),celula->getX(),celula->getY());
 }
 
-void SistemaImunologico::carregaParametros() {
-    parametros = new QMap<std::string,double>();
-    parametros->insert("TESTE",5);
-}
-
-double SistemaImunologico::getParametro(std::string parametro){
-    return parametros->value(parametro);
-}
-
 void SistemaImunologico::log(QString texto){
     qDebug() << texto;
     emit escreveLog(texto);
@@ -64,4 +62,16 @@ void SistemaImunologico::log(QString texto){
 void SistemaImunologico::log(QColor cor, QString texto){
     qDebug() << texto;
     emit escreveLog(texto); //TODO INCLUIR COR
+}
+
+double SistemaImunologico::getParametro(std::string parametro){
+    return parametros->value(parametro);
+}
+
+CamadaQuimica* SistemaImunologico::getQuimica(){
+    return quimica;
+}
+
+QList<Celula*>* SistemaImunologico::getCelulas(){
+    return celulas;
 }
