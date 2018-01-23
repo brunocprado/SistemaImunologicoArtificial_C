@@ -17,6 +17,7 @@ int main(int argc, char *argv[]){
 
     engine.rootContext()->setContextProperty("sistema",sistema);
     engine.load(QUrl(QStringLiteral("qrc:/views/terminal.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/views/novoSistema.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
 
     for(int a = 1; a < QCoreApplication::arguments().length();a++){

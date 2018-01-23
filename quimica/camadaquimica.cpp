@@ -1,7 +1,7 @@
 #include "quimica/camadaquimica.h"
 
 CamadaQuimica::CamadaQuimica() : QThread(nullptr){
-    this->compostos = new QList<CompostoQuimico*>();
+//    this->compostos = new QList<CompostoQuimico*>();
     this->start(QThread::NormalPriority);
 }
 

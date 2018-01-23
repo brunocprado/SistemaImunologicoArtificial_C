@@ -19,5 +19,6 @@
         <file>views/celula.qml</file>
         <file>views/main.qml</file>
         <file>views/terminal.qml</file>
+        <file>views/novoSistema.qml</file>
     </qresource>
 </RCC>

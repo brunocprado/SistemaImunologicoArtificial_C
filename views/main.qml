@@ -37,7 +37,7 @@ ApplicationWindow {
     }
 
     Drawer {
-        id: drawer
+        id: opcoes
         width: 300
         height: janela.height
         y: menu.height+1
@@ -65,18 +65,21 @@ ApplicationWindow {
             }
 
         }
-
-
-
     }
-
 
     menuBar: MenuBar {
         id: menu
-        opacity: 0.8
+        opacity: 1
         Menu {
             title: "Novo"
             z: 999
+
+            MenuItem {
+                text: "Sistema"
+                onClicked: {
+                    Script.novoSistema();
+                }
+            }
 
             MenuItem {
                 text: "Patogeno"
@@ -87,16 +90,37 @@ ApplicationWindow {
             }
         }
 
-        //        Menu {
-        //            on
+        MenuBarItem{
+            text: "Opções"
+            onClicked: {
+                if(opcoes.visible) {
+                    opcoes.close();
+                    Script.mudaVisibilidade(2,false);
+                } else {
+                    opcoes.open();
+                }
+            }
+        }
 
-        //        }
+        MenuBarItem{
+            id: menuPausar
+            text: "Pausar"
+            onClicked:{
+                if(menuPausar.text == "Pausar"){
+                    menuPausar.text = "Resumir";
+                } else {
+                    menuPausar.text = "Pausar";
+                }
+            }
+        }
+
+        Menu{
+            id: menuEstatisticas
+            title: "Estatísticas"
+        }
+
+        MenuBarItem{
+            text: "Sobre"
+        }
     }
-
-
-
-
-
-
-
 }

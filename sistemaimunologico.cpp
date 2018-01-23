@@ -35,7 +35,7 @@ void SistemaImunologico::carregaParametros() {
 void SistemaImunologico::geraPrimeiraGeracao(){
     int nInicial = rand() % 700 + 400;
     log(QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial) + " leucócitos por microlitro de sangue"));
-    for(int i =0;i<600;i++){
+    for(int i =0;i<nInicial;i++){
         celulas->append(new Macrofago());
         renderizaCelula(celulas->at(i));
     }
@@ -44,7 +44,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 void SistemaImunologico::run(){
     msleep(2000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
     while(true){
-        for(int i=0;i<50;i++){
+        for(int i=0;i<celulas->length()/3;i++){
             celulas->at(i)->loop();
         }
         msleep(INTERVALO_PROCESSAMENTO);
@@ -65,6 +65,14 @@ void SistemaImunologico::log(QColor cor, QString texto){
     emit escreveLog(texto); //TODO INCLUIR COR
 }
 
+void SistemaImunologico::pausar(){
+
+}
+
+void SistemaImunologico::resumir(){
+
+}
+
 double SistemaImunologico::getParametro(std::string parametro){
     return parametros->value(parametro);
 }
@@ -80,4 +88,5 @@ QList<Celula*>* SistemaImunologico::getCelulas(){
 void SistemaImunologico::setGerador(int g){
     this->GERADOR = g;
     srand(GERADOR);
+    this->geraPrimeiraGeracao();
 }

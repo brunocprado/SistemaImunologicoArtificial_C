@@ -11,7 +11,7 @@
 #include "quimica/camadaquimica.h"
 #include "celulas/celula.h"
 
-#define INTERVALO_PROCESSAMENTO 30
+#define INTERVALO_PROCESSAMENTO 300
 #define TAM_MAX_CELULAS 1000
 
 class SistemaImunologico : public QThread{
@@ -25,6 +25,8 @@ public:
     void renderizaCelula(Celula* celula);
     void log(QString texto);
     void log(QColor cor,QString texto);
+    void pausar();
+    void resumir();
 
     static SistemaImunologico* getInstancia();
 
