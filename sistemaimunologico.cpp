@@ -13,13 +13,19 @@ SistemaImunologico::SistemaImunologico() : QThread(nullptr){
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
     carregaParametros();
-    this->start(QThread::HighPriority);
-    quimica = new CamadaQuimica();
 }
 
 SistemaImunologico::~SistemaImunologico(){
     printf("Encerrando a Thread %d [Sistema imunologico (Logica)]",QThread::currentThreadId());
+    free(celulas);
     this->terminate();
+}
+
+void SistemaImunologico::inicia(){
+    carregaParametros();
+    geraPrimeiraGeracao();
+    this->start(QThread::HighPriority);
+    quimica = new CamadaQuimica();
 }
 
 SistemaImunologico* SistemaImunologico::getInstancia(){
@@ -29,12 +35,29 @@ SistemaImunologico* SistemaImunologico::getInstancia(){
 
 void SistemaImunologico::carregaParametros() {
     parametros = new QMap<std::string,double>();
-    parametros->insert("TESTE",5);
+
+    QFile arquivo("/parametros.xml");
+    arquivo.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    QXmlStreamReader leitor;
+    leitor.setDevice(&arquivo);
+    leitor.readNext();
+
+    while(!leitor.atEnd()) {
+        if(leitor.readNext() == QXmlStreamReader::StartElement) {
+            if(leitor.name() == "parametros") continue;
+            log("#0f0","[ " + leitor.name() + " ] = " + leitor.readElementText());
+            parametros->insert(leitor.name().toString().toStdString(),leitor.readElementText().toDouble());
+        }
+    }
+
+    leitor.clear();
+    arquivo.close();
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
     int nInicial = rand() % 700 + 400;
-    log(QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial) + " leucócitos por microlitro de sangue"));
+    log(QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
     for(int i =0;i<nInicial;i++){
         celulas->append(new Macrofago());
         renderizaCelula(celulas->at(i));
@@ -44,7 +67,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 void SistemaImunologico::run(){
     msleep(2000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
     while(true){
-        for(int i=0;i<celulas->length()/3;i++){
+        for(int i=0;i<celulas->length()/8;i++){
             celulas->at(i)->loop();
         }
         msleep(INTERVALO_PROCESSAMENTO);
@@ -60,9 +83,9 @@ void SistemaImunologico::log(QString texto){
     emit escreveLog(texto);
 }
 
-void SistemaImunologico::log(QColor cor, QString texto){
+void SistemaImunologico::log(QString cor, QString texto){
     qDebug() << texto;
-    emit escreveLog(texto); //TODO INCLUIR COR
+    emit escreveLog('<font color="' + cor + '">' + texto + '</font>');
 }
 
 void SistemaImunologico::pausar(){
@@ -70,6 +93,10 @@ void SistemaImunologico::pausar(){
 }
 
 void SistemaImunologico::resumir(){
+
+}
+
+void SistemaImunologico::encerra(){
 
 }
 
@@ -88,5 +115,4 @@ QList<Celula*>* SistemaImunologico::getCelulas(){
 void SistemaImunologico::setGerador(int g){
     this->GERADOR = g;
     srand(GERADOR);
-    this->geraPrimeiraGeracao();
 }

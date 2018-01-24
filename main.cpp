@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QObject>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
@@ -17,17 +18,17 @@ int main(int argc, char *argv[]){
 
     engine.rootContext()->setContextProperty("sistema",sistema);
     engine.load(QUrl(QStringLiteral("qrc:/views/terminal.qml")));
-    engine.load(QUrl(QStringLiteral("qrc:/views/novoSistema.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
+
+//    QObject::connect(engine.rootContext(), SIGNAL(quit()), app, SLOT(quit()));
 
     for(int a = 1; a < QCoreApplication::arguments().length();a++){
         if(QCoreApplication::arguments().at(a) == QString("gerador")) {
-            sistema->log(QCoreApplication::arguments().at(a+1));
             sistema->setGerador(QCoreApplication::arguments().at(a+1).toInt());
         }
     }
 
-    sistema->geraPrimeiraGeracao();
+    sistema->inicia();
 
     return app.exec();
 }

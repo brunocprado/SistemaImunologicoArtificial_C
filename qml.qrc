@@ -20,5 +20,8 @@
         <file>views/main.qml</file>
         <file>views/terminal.qml</file>
         <file>views/novoSistema.qml</file>
+        <file>views/tooltip.qml</file>
+        <file>views/sobre.qml</file>
+        <file>parametros.xml</file>
     </qresource>
 </RCC>
