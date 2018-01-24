@@ -6,6 +6,7 @@ ApplicationWindow {
     id: sobre
     title: "Sobre"
     visible: true
+    flags: Qt.WindowStaysOnTopHint
     width: 410
     height: 220
     minimumHeight: 220

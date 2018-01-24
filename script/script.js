@@ -1,9 +1,10 @@
-var viewCelula, viewNovoSistema;
-var celulas = {};
+var viewCelula, viewNovoSistema, viewSobre;
+var celulas = [];
 
 function inicia(){
     viewCelula = Qt.createComponent("../views/celula.qml");
     viewNovoSistema =Qt.createComponent("../views/celula.qml");
+    viewSobre = Qt.createComponent("../views/sobre.qml");
 }
 
 function cria(id,parente,imagem,x,y) {
@@ -17,17 +18,20 @@ function cria(id,parente,imagem,x,y) {
 
     tmp = "../imagens/" + tmp;
 
-    celulas[id] = viewCelula.createObject(parente,{"x":x,"y":y,"source":tmp});
-    celulas[id].tipo = 2;
+    celulas.push(viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x,"y":y,"source":tmp}));
 }
 
-function mudaVisibilidade(tipo,visivel){
+function mudaVisibilidade(tipo){
     for(var i = 0;i<celulas.length;i++){
-        if(celulas[i].tipo == tipo) celulas[i].visible = visivel;
+        if(celulas[i].tipo == tipo)
+            celulas[i].visivel = !celulas[i].visivel;
     }
 }
 
 function novoSistema(){
-    console.log("TTTT");
     viewNovoSistema.createObject();
+}
+
+function exibeSobre(){
+    viewSobre.createObject(janela,{});
 }
