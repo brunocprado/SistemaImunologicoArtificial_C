@@ -31,9 +31,10 @@ ApplicationWindow {
         contentHeight:  log.height
         Text {
             id: log
-            color: "#bbb"
+            color: "#ccc"
             padding: 10
             font.pixelSize: 12
+            lineHeight: 1.4
             width: parent.width
             transform: Scale { yScale: -1; origin.y: log.height/2 }
         }
@@ -41,16 +42,12 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: rectangle
         y: 353
         height: 50
         color: "#ccc"
         anchors.right: parent.right
-        anchors.rightMargin: 0
         anchors.left: parent.left
-        anchors.leftMargin: 0
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
 
         TextField {
             id: txtComando
@@ -71,10 +68,6 @@ ApplicationWindow {
             height: 40
             y: 5
             text: qsTr("OK")
-            autoRepeat: false
-            autoExclusive: false
-            checked: false
-            checkable: false
             anchors.right: parent.right
             anchors.rightMargin: 15
         }

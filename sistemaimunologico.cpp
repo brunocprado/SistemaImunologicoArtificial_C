@@ -36,6 +36,8 @@ SistemaImunologico* SistemaImunologico::getInstancia(){
 void SistemaImunologico::carregaParametros() {
     parametros = new QMap<std::string,double>();
 
+    log("#f00","Carregando parametros");
+
     QFile arquivo("/parametros.xml");
     arquivo.open(QIODevice::ReadOnly | QIODevice::Text);
 
@@ -57,7 +59,7 @@ void SistemaImunologico::carregaParametros() {
 
 void SistemaImunologico::geraPrimeiraGeracao(){
     int nInicial = rand() % 700 + 400;
-    log(QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
+    log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
     for(int i =0;i<nInicial;i++){
         celulas->append(new Macrofago());
         renderizaCelula(celulas->at(i));

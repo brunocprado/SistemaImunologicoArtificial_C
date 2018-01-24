@@ -4,9 +4,7 @@ import QtQuick.Controls 2.3
 Image {
     property int id: 0
     property int tipo: 0
-    property bool visivel: true
-
-    visible: visivel
+    visible: true
     width: 10
     height: 10
     MouseArea{

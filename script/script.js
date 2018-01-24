@@ -24,7 +24,7 @@ function cria(id,parente,imagem,x,y) {
 function mudaVisibilidade(tipo){
     for(var i = 0;i<celulas.length;i++){
         if(celulas[i].tipo == tipo)
-            celulas[i].visivel = !celulas[i].visivel;
+            celulas[i].visible = !celulas[i].visible;
     }
 }
 
