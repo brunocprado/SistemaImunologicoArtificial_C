@@ -12,6 +12,8 @@ public:
 
     void run();
 
+    void remove(CompostoQuimico* composto);
+
     QList<CompostoQuimico*>* getCompostos();
 
 private:
