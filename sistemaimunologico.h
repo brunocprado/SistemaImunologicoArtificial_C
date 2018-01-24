@@ -56,7 +56,7 @@ private:
 signals:
     void adicionaCelula(int id,int tipo,int x,int y);
     void movimentaCelula(int id,int mx,int my);
-    void escreveLog(QString texto);
+    void escreveLog(QString cor,QString texto);
 
 public slots:
 };

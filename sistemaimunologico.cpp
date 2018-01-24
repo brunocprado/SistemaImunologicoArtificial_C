@@ -46,7 +46,7 @@ void SistemaImunologico::carregaParametros() {
     while(!leitor.atEnd()) {
         if(leitor.readNext() == QXmlStreamReader::StartElement) {
             if(leitor.name() == "parametros") continue;
-            log("#0f0","[ " + leitor.name() + " ] = " + leitor.readElementText());
+            log("[ " + leitor.name() + " ] = " + leitor.readElementText());
             parametros->insert(leitor.name().toString().toStdString(),leitor.readElementText().toDouble());
         }
     }
@@ -80,12 +80,12 @@ void SistemaImunologico::renderizaCelula(Celula* celula){
 
 void SistemaImunologico::log(QString texto){
     qDebug() << texto;
-    emit escreveLog(texto);
+    emit escreveLog(nullptr,texto);
 }
 
 void SistemaImunologico::log(QString cor, QString texto){
     qDebug() << texto;
-    emit escreveLog('<font color="' + cor + '">' + texto + '</font>');
+    emit escreveLog(cor,texto);
 }
 
 void SistemaImunologico::pausar(){
