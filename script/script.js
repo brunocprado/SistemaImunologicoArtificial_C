@@ -11,9 +11,10 @@ function cria(id,parente,imagem,x,y) {
     var tmp;
 
     switch(imagem){
-        case 1: tmp = "macro.png"; break;
-        case 2: tmp = "neutrofilo.png"; break;
-        case 3: tmp = "Linfocito.png"; break;
+        case 1: tmp = "anti.png"; break;
+        case 2: tmp = "macro.png"; break;
+        case 3: tmp = "neutrofilo.png"; break;
+        case 4: tmp = "Linfocito.png"; break;
     }
 
     tmp = "../imagens/" + tmp;
@@ -23,7 +24,7 @@ function cria(id,parente,imagem,x,y) {
 
 function mudaVisibilidade(tipo){
     for(var i = 0;i<celulas.length;i++){
-        if(celulas[i].tipo == tipo)
+        if(celulas[i].tipo === tipo)
             celulas[i].visible = !celulas[i].visible;
     }
 }
