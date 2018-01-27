@@ -1,8 +1,10 @@
-var viewCelula, viewNovoSistema, viewSobre;
+var viewCelula, viewComposto, viewNovoSistema, viewSobre;
 var celulas = [];
+var compostos = [];
 
 function inicia(){
     viewCelula = Qt.createComponent("../views/celula.qml");
+    viewComposto = Qt.createComponent("../views/composto.qml");
     viewNovoSistema =Qt.createComponent("../views/celula.qml");
     viewSobre = Qt.createComponent("../views/sobre.qml");
 }
@@ -20,6 +22,10 @@ function cria(id,parente,imagem,x,y) {
     tmp = "../imagens/" + tmp;
 
     celulas.push(viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x,"y":y,"source":tmp}));
+}
+
+function addComposto(id,tipo,x,y){
+    compostos.push(viewComposto.createObject(celulas,{"x":x,"y":y}));
 }
 
 function mudaVisibilidade(tipo){
