@@ -1,4 +1,7 @@
 #include "quimica/camadaquimica.h"
+#include "sistemaimunologico.h"
+
+SistemaImunologico* sistema = SistemaImunologico::getInstancia();
 
 CamadaQuimica::CamadaQuimica() : QThread(nullptr){
     this->compostos = new QList<CompostoQuimico*>();
@@ -6,7 +9,10 @@ CamadaQuimica::CamadaQuimica() : QThread(nullptr){
 }
 
 void CamadaQuimica::run(){
-
+    while(true){
+        while(sistema->pausado) msleep(5);
+        msleep(200 * sistema->velocidade);
+    }
 }
 
 void CamadaQuimica::remove(CompostoQuimico *composto){
