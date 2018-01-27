@@ -20,7 +20,6 @@ ApplicationWindow {
     }
 
     Component.onDestruction:  {
-        console.log("TESDASDAS");
         Qt.quit();
     }
 
@@ -50,6 +49,10 @@ ApplicationWindow {
             if(Script.celulas[id] == undefined) return;
             Script.celulas[id].x += mx;
             Script.celulas[id].y += my;
+        }
+        onAdicionaComposto: {
+//            console.log("asdsad");
+//            Script.addComposto(5,2,55,146);
         }
     }
 
@@ -117,7 +120,7 @@ ApplicationWindow {
         id: opcoes
         width: 320
         height: janela.height
-        y: menu.height+1
+        y: menu.height
         background: Rectangle {
             color: "#8f4f4f"
             Rectangle {

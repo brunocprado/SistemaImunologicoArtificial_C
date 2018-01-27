@@ -23,5 +23,6 @@
         <file>views/tooltip.qml</file>
         <file>views/sobre.qml</file>
         <file>parametros.xml</file>
+        <file>views/composto.qml</file>
     </qresource>
 </RCC>

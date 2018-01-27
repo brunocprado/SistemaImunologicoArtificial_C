@@ -13,12 +13,13 @@ public:
 
     TIPO_COMPOSTO getTipo();
 
+    int x,y;  //CENTRO
 private:
     TIPO_COMPOSTO tipo;
     Celula* emissor;
     int concetracao;
     int raio;
-    int x,y;  //CENTRO
+
 
 };
 
