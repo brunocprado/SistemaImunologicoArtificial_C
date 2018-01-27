@@ -12,6 +12,7 @@ SistemaImunologico::SistemaImunologico() : QThread(nullptr){
     GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
+    mutex = new QMutex();
     carregaParametros();
 }
 
@@ -69,10 +70,11 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 void SistemaImunologico::run(){
     msleep(2000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
     while(true){
+        while(pausado) msleep(5);
         for(int i=0;i<celulas->length()/8;i++){
             celulas->at(i)->loop();
         }
-        msleep(INTERVALO_PROCESSAMENTO);
+        msleep(INTERVALO_PROCESSAMENTO * velocidade);
     }
 }
 
@@ -91,15 +93,15 @@ void SistemaImunologico::log(QString cor, QString texto){
 }
 
 void SistemaImunologico::pausar(){
-
+    this->pausado = true;
 }
 
 void SistemaImunologico::resumir(){
-
+    this->pausado = false;
 }
-
+#include <QGuiApplication>
 void SistemaImunologico::encerra(){
-
+    QGuiApplication::quit();
 }
 
 double SistemaImunologico::getParametro(std::string parametro){

@@ -3,6 +3,7 @@
 
 #include <QDateTime>
 #include <QThread>
+#include <QMutex>
 #include <QString>
 #include <QColor>
 #include <QList>
@@ -20,14 +21,18 @@ public:
 
     ~SistemaImunologico();
 
+    double velocidade = 1;
+    bool pausado = false;
+
     void inicia();
 
     void geraPrimeiraGeracao();
     void renderizaCelula(Celula* celula);
     void log(QString texto);
     void log(QString cor,QString texto);
-    void pausar();
-    void resumir();
+
+    Q_INVOKABLE void pausar();
+    Q_INVOKABLE void resumir();
 
     Q_INVOKABLE void encerra();
 
@@ -46,6 +51,8 @@ private:
 
     QDateTime INICIO_SISTEMA;
 
+    QMutex* mutex;
+
     QList<Celula*>* celulas;
     CamadaQuimica* quimica;
     QMap<std::string,double>* parametros;
@@ -56,6 +63,7 @@ private:
 signals:
     void adicionaCelula(int id,int tipo,int x,int y);
     void movimentaCelula(int id,int mx,int my);
+    void adicionaComposto(int id,int tipo,int x,int y);
     void escreveLog(QString cor,QString texto);
 
 public slots:
