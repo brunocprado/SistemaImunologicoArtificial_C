@@ -12,12 +12,17 @@ public:
     void aumentaRaio(short tam);
 
     TIPO_COMPOSTO getTipo();
+    short getRaio();
+    int getId();
+    Celula* getEmissor();
 
-    int x,y;  //CENTRO
+    short x,y;  //CENTRO
 private:
+    int id;
+
     TIPO_COMPOSTO tipo;
     Celula* emissor;
-    int concetracao;
+    short concentracao;
     int raio;
 
 
