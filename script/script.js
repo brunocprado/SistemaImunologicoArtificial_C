@@ -1,6 +1,6 @@
 var viewCelula, viewComposto, viewNovoSistema, viewSobre;
 var celulas = [];
-var compostos = [];
+var compostos = {};
 
 function inicia(){
     viewCelula = Qt.createComponent("../views/celula.qml");
@@ -13,7 +13,7 @@ function cria(id,parente,imagem,x,y) {
     var tmp;
 
     switch(imagem){
-        case 1: tmp = "anti.png"; break;
+        case 1: tmp = "neutrofilo.png"; break;
         case 2: tmp = "macro.png"; break;
         case 3: tmp = "neutrofilo.png"; break;
         case 4: tmp = "Linfocito.png"; break;
@@ -21,11 +21,17 @@ function cria(id,parente,imagem,x,y) {
 
     tmp = "../imagens/" + tmp;
 
-    celulas.push(viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x,"y":y,"source":tmp}));
+    celulas[id] = viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x,"y":y,"source":tmp});
 }
 
-function addComposto(id,tipo,x,y){
-    compostos.push(viewComposto.createObject(celulas,{"x":x,"y":y}));
+function addComposto(parente,id,cor,raio,x,y){
+    switch(cor){
+        case 0: cor = "#fff"; break;
+        case 1: cor = "#faa"; break;
+        case 2: cor = "#afa"; break;
+        case 3: cor = "#aaa"; break;
+    }
+    compostos[id] = viewComposto.createObject(parente,{"x":x-raio,"y":y-raio,"width":raio*2,"color":cor});
 }
 
 function mudaVisibilidade(tipo){
