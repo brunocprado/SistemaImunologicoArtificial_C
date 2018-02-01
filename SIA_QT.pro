@@ -16,9 +16,10 @@ SOURCES += main.cpp \
     sistemaimunologico.cpp \
     celulas/celula.cpp \
     celulas/macrofago.cpp \
+    celulas/patogeno.cpp \
     quimica/camadaquimica.cpp \
     quimica/compostoquimico.cpp \
-    celulas/patogeno.cpp
+    estatisticas/virus.cpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -35,9 +36,10 @@ HEADERS += \
     sistemaimunologico.h \
     celulas/celula.h \
     celulas/macrofago.h \
+    celulas/patogeno.h \
     quimica/camadaquimica.h \
     quimica/compostoquimico.h \
-    celulas/patogeno.h
+    estatisticas/virus.h
 
 
 SUBDIRS += \
