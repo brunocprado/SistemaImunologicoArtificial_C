@@ -11,8 +11,10 @@ public:
     void remove();
 
     int getEpitopo();
+    short getQuantidade();
+
 private:
-    short quantidade;
+    short quantidade = 0;
     QString identificador;
     int epitopo;
 };
