@@ -9,16 +9,21 @@ CamadaQuimica::CamadaQuimica() : QThread(nullptr){
 }
 
 void CamadaQuimica::run(){
+    msleep(2100);
     while(true){
         while(sistema->pausado) msleep(5);
+        QList<CompostoQuimico*>::iterator i = compostos->begin();
+        for (; i != compostos->end(); ++i){
+            (*i)->aumentaRaio(4);
+        }
         msleep(200 * sistema->velocidade);
     }
 }
 
 void CamadaQuimica::remove(CompostoQuimico *composto){
     compostos->removeOne(composto);
+    emit sistema->eliminaComposto(composto->getId());
     free(composto);
-    //ESCONDE
 }
 
 QList<CompostoQuimico*>* CamadaQuimica::getCompostos(){
