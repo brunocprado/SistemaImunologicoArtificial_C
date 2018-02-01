@@ -37,6 +37,7 @@ public:
     Q_INVOKABLE void encerra();
 
     static SistemaImunologico* getInstancia();
+    static QList<CompostoQuimico*>* getCompostos();
 
     double getParametro(std::string parametro);
     QList<Celula*>* getCelulas();
@@ -61,9 +62,11 @@ private:
     void run(); //Loop do QThread
 
 signals:
-    void adicionaCelula(int id,int tipo,int x,int y);
-    void movimentaCelula(int id,int mx,int my);
-    void adicionaComposto(int id,int tipo,int x,int y);
+    void adicionaCelula(int id,int tipo,short x,short y);
+    void movimentaCelula(int id,short mx,short my);
+    void adicionaComposto(int id,int tipo,int raio,int x,int y);
+    void mudaComposto(short id,short varRaio,short concentracao);
+    void eliminaComposto(short id);
     void escreveLog(QString cor,QString texto);
 
 public slots:

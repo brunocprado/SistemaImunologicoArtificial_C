@@ -5,6 +5,7 @@
 #include "sistemaimunologico.h"
 #include "quimica/camadaquimica.h"
 #include "celulas/macrofago.h"
+#include "celulas/patogeno.h"
 
 SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 
@@ -24,14 +25,18 @@ SistemaImunologico::~SistemaImunologico(){
 
 void SistemaImunologico::inicia(){
     carregaParametros();
+    quimica = new CamadaQuimica();
     geraPrimeiraGeracao();
     this->start(QThread::HighPriority);
-    quimica = new CamadaQuimica();
 }
 
 SistemaImunologico* SistemaImunologico::getInstancia(){
     if(INSTANCIA == 0) INSTANCIA = new SistemaImunologico();
     return INSTANCIA;
+}
+
+QList<CompostoQuimico*>* SistemaImunologico::getCompostos(){
+    return INSTANCIA->getQuimica()->getCompostos();
 }
 
 void SistemaImunologico::carregaParametros() {
@@ -65,14 +70,17 @@ void SistemaImunologico::geraPrimeiraGeracao(){
         celulas->append(new Macrofago());
         renderizaCelula(celulas->at(i));
     }
+    celulas->append(new Patogeno());
+    renderizaCelula(celulas->last());
 }
 
+QList<Celula*>::iterator i;
 void SistemaImunologico::run(){
-    msleep(2000); // PRA GARANTIR QUE TD JÁ FOI INSTANCIADO
+    msleep(2000);
     while(true){
         while(pausado) msleep(5);
-        for(int i=0;i<celulas->length()/8;i++){
-            celulas->at(i)->loop();
+        for (i = celulas->begin(); i != celulas->end(); ++i){
+            (*i)->loop();
         }
         msleep(INTERVALO_PROCESSAMENTO * velocidade);
     }
@@ -101,7 +109,8 @@ void SistemaImunologico::resumir(){
 }
 #include <QGuiApplication>
 void SistemaImunologico::encerra(){
-    QGuiApplication::quit();
+
+    QGuiApplication::instance()->quit();
 }
 
 double SistemaImunologico::getParametro(std::string parametro){
