@@ -13,6 +13,9 @@ public:
 
 private:
     Virus* virus;
+
+    Celula* prox = nullptr;
+    bool processando = false;
 };
 
 #endif // PATOGENO_H
