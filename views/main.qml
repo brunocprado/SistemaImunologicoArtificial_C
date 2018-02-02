@@ -7,12 +7,13 @@ import "../script/script.js" as Script
 ApplicationWindow {
     id: janela
     visible: true
-    width: 1280
-    height: 720
+    width: 1600
+    height: 900
     minimumHeight: 600
     minimumWidth: 1000
     color: "#c6c6c6"
     title: qsTr("Sistema imunológico artificial C++")
+
     Component.onCompleted: {
         Script.inicia();
         setX(Screen.width / 2 - width / 2);
@@ -20,7 +21,38 @@ ApplicationWindow {
     }
 
     Component.onDestruction:  {
-        Qt.quit();
+        sistema.encerra();
+    }
+
+    onWidthChanged: {
+        if(width > 1600 && celulas.scale == 1){
+            celulas.scale = width/1600;
+        }
+    }
+
+    Connections {
+        target: sistema
+        onAdicionaCelula: {
+            Script.cria(id,celulas,tipo,x,y);
+        }
+        onMovimentaCelula: {
+            if(Script.celulas[id] === undefined) return;
+            Script.celulas[id].x = mx;
+            Script.celulas[id].y = my;
+        }
+        onAdicionaComposto: {
+            Script.addComposto(celulas,id,tipo,raio,x,y);
+        }
+        onMudaComposto: {
+            Script.compostos[id].x -= varRaio;
+            Script.compostos[id].y -= varRaio;
+            Script.compostos[id].width += varRaio * 2;
+            Script.compostos[id].opacity -= 0.1;
+        }
+        onEliminaComposto: {
+            Script.compostos[id].destroy();
+            delete Script.compostos[id];
+        }
     }
 
     Image {
@@ -37,22 +69,6 @@ ApplicationWindow {
                 transformOrigin: Item.TopLeft
                 anchors.fill: parent
             }
-        }
-    }
-
-    Connections {
-        target: sistema
-        onAdicionaCelula: {
-            Script.cria(id,celulas,tipo,x,y);
-        }
-        onMovimentaCelula:{
-            if(Script.celulas[id] == undefined) return;
-            Script.celulas[id].x += mx;
-            Script.celulas[id].y += my;
-        }
-        onAdicionaComposto: {
-//            console.log("asdsad");
-//            Script.addComposto(5,2,55,146);
         }
     }
 
@@ -95,10 +111,10 @@ ApplicationWindow {
             onClicked:{
                 if(menuPausar.text == "Pausar"){
                     menuPausar.text = "Resumir";
-                    celulas.scale += 0.2;
+                    sistema.pausar();
                 } else {
                     menuPausar.text = "Pausar";
-//                    celulas.scale -= 0.2;
+                    sistema.resumir();
                 }
             }
         }
@@ -242,11 +258,6 @@ ApplicationWindow {
                     }
                 }
             }
-
-
-
-
-
 
 
         }
