@@ -1,14 +1,17 @@
 #include "patogeno.h"
+#include "quimica/compostoquimico.h"
 #include "sistemaimunologico.h"
 
 Patogeno::Patogeno() : Celula(PATOGENO){
     this->virus = new Virus("TESTE");
     virus->add();
+    emiteQuimica(CompostoQuimico::TIPO_COMPOSTO::PAMP,8);
 }
 
 Patogeno::Patogeno(Virus *virus) : Celula(PATOGENO){
     this->virus = virus;
     virus->add();
+    emiteQuimica(CompostoQuimico::PAMP,10);
 }
 
 void Patogeno::loop(){
@@ -16,10 +19,10 @@ void Patogeno::loop(){
     if(prox != nullptr){
         if(calculaDistancia(prox) < 6){
             processando = true;
+            //printf("FIM (x,y) = %d %d \n",x,y);
         } else {
             move(prox);
         }
-
         return;
     }
 
@@ -36,8 +39,8 @@ void Patogeno::loop(){
         }
     }
 
-    printf("PATOGENO (x,y) = %d %d \n",x,y);
-    printf("ALVO (x,y) = %d %d \n",prox->x,prox->y);
+    //printf("PATOGENO (x,y) = %d %d \n",x,y);
+    //printf("ALVO (x,y) = %d %d \n",prox->x,prox->y);
 
     move(prox);
 }

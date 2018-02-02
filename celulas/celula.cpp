@@ -21,22 +21,10 @@ Celula::Celula(TIPO_CELULA t) {
     y = rand() % 900 + 1;
 }
 
-void Celula::move(short x, short y){
-//    double angulo = atan2(x - this->x,celula->y - y);
-//    printf("%f",atan2((double)(celula->x - x),(double)(celula->y - y)));
-//    x += 2 * cos(angulo);
-//    y += 2 * sin(angulo);
-//    emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
-}
-
 void Celula::move(Celula* c){
     double angulo = atan2(c->y - y,c->x - x);
     x += 2 * cos(angulo);
     y += 2 * sin(angulo);
-
-
-
-
     emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
 }
 
