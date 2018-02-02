@@ -54,7 +54,8 @@ ApplicationWindow {
         x: 121
         y: 95
         color: "#085bad"
-        text: qsTr("http://github.com/brunocprado")
+        text: "<a href='http://github.com/brunocprado'>http://github.com/brunocprado</a>"
+        onLinkActivated: Qt.openUrlExternally(link)
         font.pixelSize: 11
     }
 
