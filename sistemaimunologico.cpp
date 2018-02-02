@@ -54,16 +54,19 @@ void SistemaImunologico::carregaParametros() {
     while(!leitor.atEnd()) {
         if(leitor.readNext() == QXmlStreamReader::StartElement) {
             if(leitor.name() == "parametros") continue;
-            log("[ " + leitor.name() + " ] = " + leitor.readElementText());
-            parametros->insert(leitor.name().toString().toStdString(),leitor.readElementText().toDouble());
+            QString tmp = leitor.readElementText(); QString nome = leitor.name().toString();
+            log("[ " + nome + " ] = " + tmp);
+            parametros->insert(nome.toStdString(),tmp.toDouble());
         }
     }
 
     leitor.clear();
     arquivo.close();
+    printf("%f",parametros->value("MACROFAGOS"));
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
+
     int nInicial = rand() % 700 + 400;
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
     for(int i =0;i<nInicial;i++){
