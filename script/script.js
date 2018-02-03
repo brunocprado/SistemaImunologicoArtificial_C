@@ -2,6 +2,12 @@ var viewCelula, viewComposto, viewNovoSistema, viewSobre;
 var celulas = [];
 var compostos = {};
 
+var tipoCelula = {
+    "NEUTROFILO" : 1,
+    "MACROFAGO" : 2
+
+}
+
 function inicia(){
     viewCelula = Qt.createComponent("../views/celula.qml");
     viewComposto = Qt.createComponent("../views/composto.qml");
