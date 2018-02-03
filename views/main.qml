@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumHeight: 600
     minimumWidth: 1000
     color: "#c6c6c6"
-    title: qsTr("Sistema imunológico artificial C++")
+    title: "Sistema imunológico artificial C++"
 
     Component.onCompleted: {
         Script.inicia();
@@ -57,9 +57,12 @@ ApplicationWindow {
 
     Timer{
         running: true
+        repeat: true
         interval: 1000
+        property int segundos: 0
         onTriggered: {
-            console.log("aaaaa");
+            segundos++;
+            janela.title = "Sistema imunológico artificial C++ " + segundos;
         }
 
     }
