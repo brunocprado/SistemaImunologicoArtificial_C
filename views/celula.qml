@@ -12,7 +12,7 @@ Image {
     height: 10
     MouseArea{
         anchors.fill: parent
-        cursorShape: Qt.ClosedHandCursor
+        cursorShape: Qt.PointingHandCursor
         onClicked: {
             var tmp = Qt.createComponent("tooltip.qml");
             var t;
