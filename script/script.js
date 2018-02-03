@@ -21,7 +21,7 @@ function cria(id,parente,imagem,x,y) {
 
     tmp = "../imagens/" + tmp;
 
-    celulas[id] = viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x,"y":y,"source":tmp});
+    celulas[id] = viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x,"y":y,"imagem":tmp});
 }
 
 function addComposto(parente,id,cor,raio,x,y){

@@ -55,6 +55,15 @@ ApplicationWindow {
         }
     }
 
+    Timer{
+        running: true
+        interval: 1000
+        onTriggered: {
+            console.log("aaaaa");
+        }
+
+    }
+
     Image {
         id: fundo
         anchors.fill: parent
