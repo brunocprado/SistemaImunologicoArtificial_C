@@ -5,6 +5,7 @@
 #include "sistemaimunologico.h"
 #include "quimica/camadaquimica.h"
 #include "celulas/macrofago.h"
+#include "celulas/neutrofilo.h"
 #include "celulas/patogeno.h"
 
 SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
@@ -62,7 +63,6 @@ void SistemaImunologico::carregaParametros() {
 
     leitor.clear();
     arquivo.close();
-    printf("%f",parametros->value("MACROFAGOS"));
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
@@ -70,7 +70,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){
-//        renderizaCelula(new Macrofago());
+        renderizaCelula(new Neutrofilo());
     }
 
     for(int i =0;i<(nInicial * parametros->value("MACROFAGOS"));i++){
@@ -80,9 +80,6 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     for(int i =0;i<(nInicial * parametros->value("LINFOCITOS"));i++){
 //        renderizaCelula(new Macrofago());
     }
-
-    //celulas->ap/*pend(new Patogeno());
-    //renderizaCelula(celulas->last());*/
 }
 
 QList<Celula*>::iterator i;
@@ -123,6 +120,12 @@ void SistemaImunologico::resumir(){
 void SistemaImunologico::encerra(){
 
 
+}
+
+void SistemaImunologico::addPatogeno(){
+    printf("DEBUG");
+    celulas->append(new Patogeno());
+    renderizaCelula(celulas->last());
 }
 
 double SistemaImunologico::getParametro(std::string parametro){

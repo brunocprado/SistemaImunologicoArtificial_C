@@ -12,11 +12,13 @@ void CamadaQuimica::run(){
     msleep(2100);
     while(true){
         while(sistema->pausado) msleep(5);
-        QList<CompostoQuimico*>::iterator i = compostos->begin();
-        for (; i != compostos->end(); ++i){
-            (*i)->aumentaRaio(4);
+//        QList<CompostoQuimico*>::iterator i = compostos->begin();
+        for (int i = 0; i < compostos->length(); i++){
+//            if(i == compostos->end()) break;
+//            (*i)->aumentaRaio(4);
+                compostos->at(i)->aumentaRaio(10);
         }
-        msleep(200 * sistema->velocidade);
+        msleep(400 * sistema->velocidade);
     }
 }
 

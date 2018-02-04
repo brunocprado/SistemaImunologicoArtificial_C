@@ -33,8 +33,8 @@ public:
 
     Q_INVOKABLE void pausar();
     Q_INVOKABLE void resumir();
-
     Q_INVOKABLE void encerra();
+    Q_INVOKABLE void addPatogeno(); //DEBUG
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();

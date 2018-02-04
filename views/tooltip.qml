@@ -14,7 +14,7 @@ ToolTip {
     Text{
         color: "#fff"
         width: parent.width
-        font.pixelSize: 20
+        font.pixelSize: 18
         text: tipo.toUpperCase()
         horizontalAlignment: Text.AlignHCenter
     }

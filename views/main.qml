@@ -101,7 +101,7 @@ ApplicationWindow {
             MenuItem {
                 text: "Patogeno"
                 onClicked: {
-
+                    sistema.addPatogeno();
                 }
             }
         }

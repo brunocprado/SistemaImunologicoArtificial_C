@@ -9,7 +9,7 @@ public:
 
     CompostoQuimico(TIPO_COMPOSTO,int quantidade,Celula* emissor);
 
-    void aumentaRaio(short tam);
+    short aumentaRaio(short tam);
 
     TIPO_COMPOSTO getTipo();
     short getRaio();
