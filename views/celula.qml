@@ -18,7 +18,7 @@ Image {
             var t;
             switch(tipo){
                 case 0: t = "comum"; break;
-                case 1: t = "neutrofilo"; break;
+                case 3: t = "neutrofilo"; break;
                 case 2: t = "macrofago"; break;
             }
 
