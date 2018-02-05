@@ -24,5 +24,6 @@
         <file>views/sobre.qml</file>
         <file>parametros.xml</file>
         <file>views/composto.qml</file>
+        <file>views/estatisticas.qml</file>
     </qresource>
 </RCC>
