@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QtWidgets/QApplication>
 #include <QObject>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     #endif
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     SistemaImunologico* sistema = SistemaImunologico::getInstancia();
 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]){
     engine.load(QUrl(QStringLiteral("qrc:/views/terminal.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
 
-//    QObject::connect(engine.rootContext(), SIGNAL(quit()), app, SLOT(quit()));
+//    QObject::connect(&engine, &QQmlApplicationEngine::quit, &app, &QGuiApplication::quit);
 
     for(int a = 1; a < QCoreApplication::arguments().length();a++){
         if(QCoreApplication::arguments().at(a) == QString("gerador")) {
