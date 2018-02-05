@@ -13,22 +13,13 @@ CompostoQuimico::CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,Celula* emiss
     y = emissor->y;
 }
 
-short CompostoQuimico::aumentaRaio(short tam){
-    //if(this == 0x0) {  return;}
-    //try {
-        raio += tam;
-    //}/* catch (...) {
-        SistemaImunologico::getInstancia()->getQuimica()->remove(this);
-        //re/*t*/urn;
-    //}*/
-
+void CompostoQuimico::aumentaRaio(short tam){
+    raio += tam;
     concentracao--;
     emit SistemaImunologico::getInstancia()->mudaComposto(id,tam,concentracao);
     if(concentracao == 1){
-//return 1;
         SistemaImunologico::getInstancia()->getQuimica()->remove(this);
-        return 1;
-    } else { return 0; }
+    }
 }
 
 CompostoQuimico::TIPO_COMPOSTO CompostoQuimico::getTipo(){

@@ -9,16 +9,12 @@ CamadaQuimica::CamadaQuimica() : QThread(nullptr){
 }
 
 void CamadaQuimica::run(){
-    msleep(2100);
     while(true){
         while(sistema->pausado) msleep(5);
-//        QList<CompostoQuimico*>::iterator i = compostos->begin();
         for (int i = 0; i < compostos->length(); i++){
-//            if(i == compostos->end()) break;
-//            (*i)->aumentaRaio(4);
-                compostos->at(i)->aumentaRaio(10);
+            compostos->at(i)->aumentaRaio(5);
         }
-        msleep(400 * sistema->velocidade);
+        msleep(90 * sistema->velocidade);
     }
 }
 
