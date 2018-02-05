@@ -1,4 +1,4 @@
-var viewCelula, viewComposto, viewNovoSistema, viewSobre;
+var viewCelula, viewComposto, viewNovoSistema, viewEstatisticas;
 var celulas = [];
 var compostos = {};
 
@@ -11,15 +11,15 @@ var tipoCelula = {
 function inicia(){
     viewCelula = Qt.createComponent("../views/celula.qml");
     viewComposto = Qt.createComponent("../views/composto.qml");
-    viewNovoSistema =Qt.createComponent("../views/celula.qml");
-    viewSobre = Qt.createComponent("../views/sobre.qml");
+    viewNovoSistema = Qt.createComponent("../views/celula.qml");
+    viewEstatisticas = Qt.createComponent("../views/estatisticas.qml");
 }
 
 function cria(id,parente,imagem,x,y) {
     var tmp;
 
     switch(imagem){
-        case 1: tmp = "neutrofilo.png"; break;
+        case 1: tmp = "celula.png"; break;
         case 2: tmp = "macro.png"; break;
         case 3: tmp = "neutrofilo.png"; break;
         case 4: tmp = "Linfocito.png"; break;
@@ -49,8 +49,4 @@ function mudaVisibilidade(tipo){
 
 function novoSistema(){
     viewNovoSistema.createObject();
-}
-
-function exibeSobre(){
-    viewSobre.createObject(janela,{});
 }
