@@ -14,6 +14,16 @@ ApplicationWindow {
     color: "#c6c6c6"
     title: "Sistema imunológico artificial C++"
 
+    Shortcut {
+        sequences: ["Ctrl++","A"]
+        onActivated: celulas.scale += 0.2
+    }
+
+    Shortcut {
+        sequences: ["Ctrl+-","S"]
+        onActivated: if(celulas.scale > 1) celulas.scale -= 0.2
+    }
+
     Component.onCompleted: {
         Script.inicia();
         setX(Screen.width / 2 - width / 2);
@@ -22,6 +32,7 @@ ApplicationWindow {
 
     Component.onDestruction:  {
         sistema.encerra();
+        Qt.quit();
     }
 
     onWidthChanged: {
@@ -72,10 +83,12 @@ ApplicationWindow {
         anchors.fill: parent
         fillMode: Image.Stretch
         source: "../imagens/blood.jpg"
+
         Flickable{
             contentWidth: 1600 * celulas.scale
             contentHeight: 900 * celulas.scale
             anchors.fill: parent
+
             Frame{
                 id: celulas
                 transformOrigin: Item.TopLeft
@@ -134,12 +147,20 @@ ApplicationWindow {
         Menu{
             id: menuEstatisticas
             title: "Estatísticas"
+
+            MenuItem{
+                text: "Estatisticas gerais"
+                onClicked: {
+                    Script.viewEstatisticas.createObject(janela,{});
+                }
+            }
         }
 
         MenuBarItem{
             text: "Sobre"
             onClicked: {
-                Script.exibeSobre();
+                var tmp = Qt.createComponent("../views/sobre.qml");
+                tmp.createObject(janela,{});
             }
         }
     }
