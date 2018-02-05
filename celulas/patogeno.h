@@ -11,11 +11,17 @@ public:
 
     void loop();
 
+    void clona();
+
 private:
+    void inicia();
+
     Virus* virus;
 
     Celula* prox = nullptr;
     bool processando = false;
+
+
 };
 
 #endif // PATOGENO_H

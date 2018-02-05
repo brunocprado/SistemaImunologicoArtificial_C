@@ -1,17 +1,27 @@
+#include <QTimer>
+
 #include "patogeno.h"
 #include "quimica/compostoquimico.h"
 #include "sistemaimunologico.h"
 
 Patogeno::Patogeno() : Celula(PATOGENO){
     this->virus = new Virus("TESTE");
-    virus->add();
-    emiteQuimica(CompostoQuimico::TIPO_COMPOSTO::PAMP,8);
+    this->inicia();
 }
 
 Patogeno::Patogeno(Virus *virus) : Celula(PATOGENO){
     this->virus = virus;
+    this->inicia();
+}
+
+void Patogeno::inicia(){
     virus->add();
     emiteQuimica(CompostoQuimico::PAMP,10);
+}
+
+void Patogeno::clona(){
+    Patogeno *tmp = new Patogeno(virus);
+    SistemaImunologico::getInstancia()->renderizaCelula(tmp);
 }
 
 void Patogeno::loop(){
