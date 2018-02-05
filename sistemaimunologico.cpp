@@ -14,7 +14,7 @@ SistemaImunologico::SistemaImunologico() : QThread(nullptr){
     GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
-    mutex = new QMutex();
+//    mutex = new QMutex();
     carregaParametros();
 }
 
@@ -84,7 +84,6 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 
 QList<Celula*>::iterator i;
 void SistemaImunologico::run(){
-    msleep(2000);
     while(true){
         while(pausado) msleep(5);
         for (i = celulas->begin(); i != celulas->end(); ++i){
@@ -118,14 +117,14 @@ void SistemaImunologico::resumir(){
 }
 
 void SistemaImunologico::encerra(){
-
-
+    delete this;
 }
 
 void SistemaImunologico::addPatogeno(){
-    printf("DEBUG");
-    celulas->append(new Patogeno());
-    renderizaCelula(celulas->last());
+    for(int i = 0;i<5;i++){
+        celulas->append(new Patogeno());
+        renderizaCelula(celulas->last());
+    }
 }
 
 double SistemaImunologico::getParametro(std::string parametro){
