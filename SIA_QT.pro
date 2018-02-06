@@ -17,6 +17,7 @@ SOURCES += main.cpp \
     celulas/celula.cpp \
     celulas/macrofago.cpp \
     celulas/patogeno.cpp \
+    celulas/neutrofilo.cpp \
     quimica/camadaquimica.cpp \
     quimica/compostoquimico.cpp \
     estatisticas/virus.cpp
@@ -37,6 +38,7 @@ HEADERS += \
     celulas/celula.h \
     celulas/macrofago.h \
     celulas/patogeno.h \
+    celulas/neutrofilo.h \
     quimica/camadaquimica.h \
     quimica/compostoquimico.h \
     estatisticas/virus.h
