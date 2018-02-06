@@ -7,12 +7,12 @@ import "../script/script.js" as Script
 ApplicationWindow {
     id: janela
     visible: true
-    width: 1600
-    height: 900
+    width: 1400
+    height: 800
     minimumHeight: 600
     minimumWidth: 1000
     color: "#c6c6c6"
-    title: "Sistema imunológico artificial C++"
+    title: "Sistema imunológico artificial C++ " + temporizador.segundos
 
     Shortcut {
         sequences: ["Ctrl++","A"]
@@ -67,15 +67,14 @@ ApplicationWindow {
     }
 
     Timer{
+        id: temporizador
         running: true
         repeat: true
         interval: 1000
         property int segundos: 0
         onTriggered: {
             segundos++;
-            janela.title = "Sistema imunológico artificial C++ " + segundos;
         }
-
     }
 
     Image {
@@ -99,10 +98,8 @@ ApplicationWindow {
 
     menuBar: MenuBar {
         id: menu
-        opacity: 1
         Menu {
             title: "Novo"
-            z: 999
 
             MenuItem {
                 text: "Sistema"
@@ -113,6 +110,7 @@ ApplicationWindow {
 
             MenuItem {
                 text: "Patogeno"
+
                 onClicked: {
                     sistema.addPatogeno();
                 }
