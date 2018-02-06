@@ -1,4 +1,4 @@
-QT += quick
+QT += quick charts
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -48,4 +48,4 @@ SUBDIRS += \
 RESOURCES += \
     qml.qrc
 
-ICON = icone.icns
+RC_ICONS = icone.ico
