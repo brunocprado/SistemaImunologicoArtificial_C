@@ -45,7 +45,7 @@ void SistemaImunologico::carregaParametros() {
 
     log("#f00","Carregando parametros");
 
-    QFile arquivo("/home/bruno/SistemaImunologicoArtificial_C/parametros.xml");
+    QFile arquivo("/parametros.xml");
     arquivo.open(QIODevice::ReadOnly | QIODevice::Text);
 
     QXmlStreamReader leitor;
@@ -70,10 +70,10 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){
-        renderizaCelula(new Neutrofilo());
+        //renderizaCelula(new Neutrofilo());
     }
 
-    for(int i =0;i<(nInicial * parametros->value("MACROFAGOS"));i++){
+    for(int i =0;i<(nInicial * 1);i++){ // parametros->value("MACROFAGOS")
         renderizaCelula(new Macrofago());
     }
 
@@ -127,8 +127,18 @@ void SistemaImunologico::addPatogeno(){
     }
 }
 
+void SistemaImunologico::setGerador(int g){
+    this->GERADOR = g;
+    srand(GERADOR);
+}
+
 double SistemaImunologico::getParametro(std::string parametro){
     return parametros->value(parametro);
+}
+
+void SistemaImunologico::mudaParametro(QString parametro, double valor){
+    parametros->insert(parametro.toStdString(),valor);
+    log("[ " + parametro + " ] ALTERADO PARA : " + QString::number(valor));
 }
 
 CamadaQuimica* SistemaImunologico::getQuimica(){
@@ -137,9 +147,4 @@ CamadaQuimica* SistemaImunologico::getQuimica(){
 
 QList<Celula*>* SistemaImunologico::getCelulas(){
     return celulas;
-}
-
-void SistemaImunologico::setGerador(int g){
-    this->GERADOR = g;
-    srand(GERADOR);
 }

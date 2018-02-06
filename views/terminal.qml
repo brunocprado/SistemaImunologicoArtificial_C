@@ -1,5 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 
 ApplicationWindow {
     id: terminal
@@ -44,22 +45,45 @@ ApplicationWindow {
     Rectangle {
         y: 353
         height: 50
-        color: "#ccc"
+        color: "#eee"
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: parent.bottom
 
-        TextField {
+//        TextField {
+//            id: txtComando
+//            text: ""
+//            placeholderText: "Comando"
+//            anchors.right: parent.right
+//            anchors.rightMargin: 105
+//            anchors.left: parent.left
+//            anchors.leftMargin: 10
+//            y: 5
+//            height: 40
+//            font.pixelSize: 12
+
+//        }
+
+        ComboBox {
             id: txtComando
-            text: ""
-            placeholderText: "Comando"
+//            editText: editText.toUpperCase()
+            currentIndex: -1
+            y: 5
+            height: 40
+            font.pixelSize: 12
+            editable: true
+            model: ["MACROFAGOS","DELAY_PROPAGACAO"]
             anchors.right: parent.right
             anchors.rightMargin: 105
             anchors.left: parent.left
             anchors.leftMargin: 10
-            y: 5
-            height: 40
-            font.pixelSize: 12
+
+            Shortcut{
+                sequence: "Enter"
+                onActivated: {
+                    btnComando.executaCmd();
+                }
+            }
         }
 
         Button {
@@ -70,6 +94,19 @@ ApplicationWindow {
             text: qsTr("OK")
             anchors.right: parent.right
             anchors.rightMargin: 15
+            Material.background: Material.Green
+            highlighted: true
+
+            function executaCmd(){
+                var tmp = txtComando.editText.split(" ");
+                if(tmp.length < 2) return;
+                sistema.mudaParametro(tmp[0],tmp[1]);
+                txtComando.editText = ""; txtComando.currentIndex = -1;
+            }
+
+            onClicked: {
+                executaCmd();
+            }
         }
     }
 }

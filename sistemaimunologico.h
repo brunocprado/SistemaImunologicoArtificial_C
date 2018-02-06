@@ -28,6 +28,8 @@ public:
 
     void geraPrimeiraGeracao();
     void renderizaCelula(Celula* celula);
+    void eliminaCelula(Celula* celula);
+
     void log(QString texto);
     void log(QString cor,QString texto);
 
@@ -35,6 +37,8 @@ public:
     Q_INVOKABLE void resumir();
     Q_INVOKABLE void encerra();
     Q_INVOKABLE void addPatogeno(); //DEBUG
+
+    Q_INVOKABLE void mudaParametro(QString parametro,double valor);
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();
