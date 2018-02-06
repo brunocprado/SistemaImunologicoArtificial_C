@@ -6,12 +6,10 @@
         <file>imagens/celula.png</file>
         <file>imagens/estatisticas.png</file>
         <file>imagens/icone.png</file>
-        <file>imagens/immune-system-cells.jpg</file>
         <file>imagens/Linfocito.png</file>
         <file>imagens/macro.png</file>
         <file>imagens/neutrofilo.png</file>
         <file>imagens/opcoes.png</file>
-        <file>imagens/PAMP.png</file>
         <file>imagens/sangue.png</file>
         <file>imagens/terminal.png</file>
         <file>imagens/ufrrjLogo.png</file>
@@ -25,5 +23,6 @@
         <file>parametros.xml</file>
         <file>views/composto.qml</file>
         <file>views/estatisticas.qml</file>
+        <file>views/novoVirus.qml</file>
     </qresource>
 </RCC>
