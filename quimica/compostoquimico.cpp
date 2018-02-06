@@ -26,7 +26,7 @@ CompostoQuimico::TIPO_COMPOSTO CompostoQuimico::getTipo(){
     return tipo;
 }
 
-short CompostoQuimico::getRaio(){
+int CompostoQuimico::getRaio(){
     return raio;
 }
 

@@ -9,14 +9,14 @@ public:
 
     CompostoQuimico(TIPO_COMPOSTO,int quantidade,Celula* emissor);
 
-    short aumentaRaio(short tam);
+    void aumentaRaio(short tam);
 
     TIPO_COMPOSTO getTipo();
-    short getRaio();
+    int getRaio();
     int getId();
     Celula* getEmissor();
 
-    short x,y;  //CENTRO
+    int x,y;  //CENTRO
 private:
     int id;
 
