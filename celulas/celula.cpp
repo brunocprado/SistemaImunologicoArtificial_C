@@ -7,18 +7,17 @@
 
 static int contador = 0;
 
-Celula::Celula(){
-    contador++; id=contador;
-    tipo = COMUM;
-    x = rand() % 1600 + 1;
-    y = rand() % 900 + 1;
-}
-
 Celula::Celula(TIPO_CELULA t) {
     id=contador; contador++;
     tipo = t;
     x = rand() % 1600 + 1;
     y = rand() % 900 + 1;
+}
+
+Celula::Celula(TIPO_CELULA t, int x, int y){
+    id=contador; contador++;
+    tipo = t;
+    this->x = x; this->y = y;
 }
 
 void Celula::move(Celula* c){
@@ -28,7 +27,7 @@ void Celula::move(Celula* c){
     emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
 }
 
-double Celula:: calculaDistancia(short x, short y){
+double Celula::calculaDistancia(short x, short y){
     int deltaX = this->x - x;
     int deltaY = this->y - y;
     return sqrt(pow(deltaX,2) + pow(deltaY,2));
