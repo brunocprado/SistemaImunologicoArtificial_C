@@ -3,9 +3,7 @@
 
 #include <QDateTime>
 #include <QThread>
-#include <QMutex>
 #include <QString>
-#include <QColor>
 #include <QList>
 #include <QMap>
 
@@ -56,8 +54,6 @@ private:
 
     QDateTime INICIO_SISTEMA;
 
-    QMutex* mutex;
-
     QList<Celula*>* celulas;
     CamadaQuimica* quimica;
     QMap<std::string,double>* parametros;
@@ -72,6 +68,7 @@ signals:
     void mudaComposto(short id,short varRaio,short concentracao);
     void eliminaComposto(short id);
     void escreveLog(QString cor,QString texto);
+    void addParametro(QString parametro);
 
 public slots:
 };

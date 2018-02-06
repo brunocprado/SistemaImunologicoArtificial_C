@@ -14,8 +14,6 @@ SistemaImunologico::SistemaImunologico() : QThread(nullptr){
     GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
-//    mutex = new QMutex();
-    carregaParametros();
 }
 
 SistemaImunologico::~SistemaImunologico(){
@@ -25,6 +23,7 @@ SistemaImunologico::~SistemaImunologico(){
 }
 
 void SistemaImunologico::inicia(){
+    log("Sistema iniciado em : " + INICIO_SISTEMA.toString());
     carregaParametros();
     quimica = new CamadaQuimica();
     geraPrimeiraGeracao();
@@ -58,6 +57,7 @@ void SistemaImunologico::carregaParametros() {
             QString tmp = leitor.readElementText(); QString nome = leitor.name().toString();
             log("[ " + nome + " ] = " + tmp);
             parametros->insert(nome.toStdString(),tmp.toDouble());
+            emit addParametro(nome);
         }
     }
 
@@ -66,7 +66,7 @@ void SistemaImunologico::carregaParametros() {
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
-    int nInicial = rand() % 700 + 400;
+    int nInicial = rand() % (int)(parametros->value("TAM_MEDIO_SUPERIOR") - parametros->value("TAM_MEDIO_INFERIOR")) + parametros->value("TAM_MEDIO_INFERIOR");
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){

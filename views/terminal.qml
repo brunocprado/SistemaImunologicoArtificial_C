@@ -23,6 +23,9 @@ ApplicationWindow {
                 log.text += texto + "<br>";
             }
         }
+        onAddParametro:{
+            listaParametros.append({"name": parametro});
+        }
     }
 
     Flickable {
@@ -50,20 +53,6 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
 
-//        TextField {
-//            id: txtComando
-//            text: ""
-//            placeholderText: "Comando"
-//            anchors.right: parent.right
-//            anchors.rightMargin: 105
-//            anchors.left: parent.left
-//            anchors.leftMargin: 10
-//            y: 5
-//            height: 40
-//            font.pixelSize: 12
-
-//        }
-
         ComboBox {
             id: txtComando
 //            editText: editText.toUpperCase()
@@ -72,7 +61,10 @@ ApplicationWindow {
             height: 40
             font.pixelSize: 12
             editable: true
-            model: ["MACROFAGOS","DELAY_PROPAGACAO"]
+            model: ListModel{
+                id: listaParametros
+            }
+
             anchors.right: parent.right
             anchors.rightMargin: 105
             anchors.left: parent.left
