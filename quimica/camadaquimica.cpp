@@ -3,7 +3,7 @@
 
 SistemaImunologico* sistema = SistemaImunologico::getInstancia();
 
-CamadaQuimica::CamadaQuimica() : QThread(nullptr){
+CamadaQuimica::CamadaQuimica() : QThread(){
     this->compostos = new QList<CompostoQuimico*>();
     this->start(QThread::NormalPriority);
 }
@@ -14,7 +14,7 @@ void CamadaQuimica::run(){
         for (int i = 0; i < compostos->length(); i++){
             compostos->at(i)->aumentaRaio(5);
         }
-        msleep(90 * sistema->velocidade);
+        msleep(sistema->getParametro("TEMPO_PROPAGACAO_QUIMICOS") * sistema->velocidade);
     }
 }
 
