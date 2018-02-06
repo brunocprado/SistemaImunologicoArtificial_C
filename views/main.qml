@@ -1,5 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 import QtQuick.Window 2.3
 
 import "../script/script.js" as Script
@@ -104,7 +105,10 @@ ApplicationWindow {
             MenuItem {
                 text: "Sistema"
                 onClicked: {
-                    Script.novoSistema();
+                    //Script.novoSistema();
+                    var tmp = Qt.createComponent("novoVirus.qml");
+                    tmp.createObject(janela,{});
+
                 }
             }
 
@@ -168,6 +172,8 @@ ApplicationWindow {
         width: 320
         height: janela.height
         y: menu.height
+        Material.foreground: "#fff"
+        Material.accent: Material.Green
         background: Rectangle {
             color: "#8f4f4f"
             Rectangle {
@@ -189,17 +195,14 @@ ApplicationWindow {
                 width: 260
                 height: 60
                 Column {
-                    width: 180
-                    height: 50
+                    width: 182
                     spacing: 10
 
                     Text {
                         color: "#ffffff"
                         text: qsTr("CAMADA QUÍMICA")
                         font.bold: true
-                        font.family: "Arial"
-                        verticalAlignment: Text.AlignTop
-                        fontSizeMode: Text.Fit
+                        font.family: "Roboto"
                         font.pixelSize: 15
                     }
 
@@ -218,22 +221,18 @@ ApplicationWindow {
                 }
             }
 
-            //SEGUNDO SLIDER
+            //DEBUG
             Row {
                 width: 260
                 height: 60
                 Column {
-                    width: 180
-                    height: 50
+                    width: 182
                     spacing: 10
-
                     Text {
                         color: "#ffffff"
                         text: qsTr("DEBUG")
+                        font.family: "Roboto"
                         font.bold: true
-                        font.family: "Arial"
-                        verticalAlignment: Text.AlignTop
-                        fontSizeMode: Text.Fit
                         font.pixelSize: 15
                     }
 
@@ -248,38 +247,57 @@ ApplicationWindow {
                 Switch {
                     height: 30
                     text: qsTr("Sim")
-                    checked: true
+                    checked: false
                 }
+            }
+
+            Rectangle {
+                width: 260
+                height: 2
+                color: "#ffffff"
             }
 
             //TERCEIRO SLIDER
 
             Row {
                 width: 260
-                height: 60
-                Column {
+                height: 30
+                Text {
                     width: 180
-                    height: 50
-                    spacing: 10
-                    Text {
-                        color: "#ffffff"
-                        text: qsTr("MACROFAGOS")
-                        verticalAlignment: Text.AlignTop
-                        fontSizeMode: Text.Fit
-                        font.bold: true
-                        font.pixelSize: 15
-                        font.family: "Arial"
-                    }
-
-                    Text {
-                        width: 200
-                        color: "#ffffff"
-                        text: qsTr("Imprime informações de desenvolvedor")
-                        wrapMode: Text.WordWrap
-                        font.pixelSize: 12
+                    height: 25
+                    color: "#ffffff"
+                    text: qsTr("EXIBIR MACROFAGOS")
+                    font.family: "Roboto"
+                    topPadding: 5
+                    font.bold: true
+                    font.pixelSize: 15
+                }
+                Switch {
+                    x: 0
+                    height: 30
+                    text: qsTr("Sim")
+                    checked: true
+                    onClicked: {
+                        Script.mudaVisibilidade(2);
                     }
                 }
+            }
 
+            //QUARTO SLIDER
+
+            Row {
+                width: 260
+                height: 30
+                Text {
+                    width: 180
+                    height: 25
+                    color: "#ffffff"
+                    text: qsTr("EXIBIR LINFOCITOS")
+                    font.family: "Roboto"
+                    topPadding: 5
+                    font.bold: true
+                    font.pixelSize: 15
+                }
                 Switch {
                     height: 30
                     text: qsTr("Sim")
@@ -290,6 +308,91 @@ ApplicationWindow {
                 }
             }
 
+            //QUINTO SLIDER
+
+            Row {
+                width: 260
+                height: 30
+                Text {
+                    width: 180
+                    height: 25
+                    color: "#ffffff"
+                    text: qsTr("EXIBIR NEUTROFILOS")
+                    font.family: "Roboto"
+                    topPadding: 5
+                    font.bold: true
+                    font.pixelSize: 15
+                }
+                Switch {
+                    height: 30
+                    text: qsTr("Sim")
+                    checked: true
+                    onClicked: {
+                        Script.mudaVisibilidade(2);
+                    }
+                }
+            }
+
+            //PATOGENOS
+
+            Row {
+                width: 260
+                height: 30
+                Text {
+                    width: 180
+                    height: 25
+                    color: "#ffffff"
+                    text: qsTr("EXIBIR PATOGENOS")
+                    font.family: "Roboto"
+                    topPadding: 5
+                    font.bold: true
+                    font.pixelSize: 15
+                }
+                Switch {
+                    height: 30
+                    text: qsTr("Sim")
+                    checked: true
+                    onClicked: {
+                        Script.mudaVisibilidade(2);
+                    }
+                }
+            }
+
+            Rectangle {
+                width: 260
+                height: 2
+                color: "#ffffff"
+            }
+
+            Column{
+                width: 260
+                height: 85
+                spacing: 10
+
+                Text {
+                    color: "#ffffff"
+                    text: qsTr("VELOCIDADE")
+                    font.family: "Roboto"
+                    font.pixelSize: 15
+                    font.bold: true
+                }
+
+                Text {
+                    color: "#ffffff"
+                    text: qsTr("Muda velocidade da simulação")
+                    font.pixelSize: 10
+                }
+
+                Slider {
+                    id: slider
+                    x: -5
+                    width: 265
+                    height: 35
+                    live: true
+                    value: 0.5
+                }
+
+            }
 
         }
     }
