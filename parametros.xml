@@ -7,11 +7,6 @@
 -->
 
 <parametros>
-    <!-- Visualizacao -->
-    <LIMITE_FPS>60</LIMITE_FPS>
-    <LARGURA>1280</LARGURA>
-    <ALTURA>720</ALTURA>
-    
     <!-- Simulacao -->
     <TAMX>1600</TAMX>
     <TAMY>900</TAMY>
@@ -24,7 +19,8 @@
         Adult	3.5 3.9 4.1 4.5	  9.0 10.0 10.9 11    - x109/L
     -->
     
-    <!-- Temporizacao -->   
+    <!-- Temporizacao -->
+    <TEMPO_PROCESSAMENTO>30</TEMPO_PROCESSAMENTO>
     <TEMPO_PROPAGACAO_QUIMICOS>90</TEMPO_PROPAGACAO_QUIMICOS>
     <TEMPO_FAGOCITACAO>300</TEMPO_FAGOCITACAO>
     <DELAY_PROPAGACAO>800</DELAY_PROPAGACAO>
