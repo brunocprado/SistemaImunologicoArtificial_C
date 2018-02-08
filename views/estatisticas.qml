@@ -17,19 +17,27 @@ ApplicationWindow {
 
     ChartView {
         id: chart
-        animationDuration: 100
-        animationOptions: ChartView.AllAnimations
-        title: "Line"
+        title: "Estatisticas"
         anchors.fill: parent
         antialiasing: true
+        animationDuration: 200
+        animationOptions: ChartView.AllAnimations
 
+        ValueAxis {
+            id: x
+            max: 5
+        }
 
-        LineSeries {
-            id:pieSeries
-            name: "LineSeries"
-            XYPoint { x: 0; y: 0 }
-            XYPoint { x: 1; y: 2.1 }
-            XYPoint { x: 2; y: 3.3 }
+        ValueAxis {
+            id: y
+            max: 15
+        }
+
+        SplineSeries {
+            id:qtAntigenos
+            name: "Antigenos"
+            axisX: x
+            axisY: y
         }
     }
 
@@ -38,8 +46,8 @@ ApplicationWindow {
         interval: 1000
         repeat: true
         onTriggered: {
-            pieSeries.append(pieSeries.count + 1, 4.0);
-//            chart.r
+            if(x.max <= qtAntigenos.count) x.max++;
+            qtAntigenos.append(qtAntigenos.count, Math.floor(Math.random()*15));
         }
     }
 

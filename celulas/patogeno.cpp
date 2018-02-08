@@ -19,7 +19,7 @@ void Patogeno::inicia(){
     emiteQuimica(CompostoQuimico::PAMP,20);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(subThread()));
-    timer->start(200);
+    timer->start(600);
 }
 
 void Patogeno::clona(){
@@ -28,7 +28,7 @@ void Patogeno::clona(){
 }
 
 void Patogeno::subThread(){
-    if(!SistemaImunologico::getInstancia()->getCelulas()->contains(this)) {timer->stop(); return;}
+    if(!SistemaImunologico::getInstancia()->getCelulas()->contains(this)) {timer->stop(); virus->sub(); return;}
     emiteQuimica(CompostoQuimico::PAMP,20);
 }
 

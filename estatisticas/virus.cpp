@@ -8,7 +8,7 @@ void Virus::add(){
     quantidade++;
 }
 
-void Virus::remove(){
+void Virus::sub(){
     quantidade--;
 }
 

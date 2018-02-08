@@ -8,7 +8,7 @@ public:
     Virus(QString identificador);
 
     void add();
-    void remove();
+    void sub();
 
     int getEpitopo();
     short getQuantidade();
@@ -17,6 +17,10 @@ private:
     short quantidade = 0;
     QString identificador;
     unsigned int epitopo;
+
+    //====| Estatisticas |====//
+    double tempoMedio = 0;
+    short qtTempo = 0;
 };
 
 #endif // VIRUS_H
