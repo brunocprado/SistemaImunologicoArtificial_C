@@ -11,6 +11,15 @@ ToolTip {
     width: 200
     height: 120
 
+    Timer{
+        running: parent.visible
+        repeat: true
+        interval: 200
+        onTriggered: {
+            txtPosicao.text = "Posição : " + sistema.getX(id) + " x " + sistema.getY(id);
+        }
+    }
+
     Text{
         color: "#fff"
         width: parent.width
@@ -30,9 +39,16 @@ ToolTip {
     Column{
         x: 80
         y: 35
+        spacing: 5
         Text{
             color: "#fff"
             text: "ID : " + id
+        }
+
+        Text{
+            id: txtPosicao
+            color: "#fff"
+            text: "Posição : " + sistema.getX(id) + " x " + sistema.getY(id)
         }
     }
 }
