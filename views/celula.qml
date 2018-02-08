@@ -13,7 +13,9 @@ Image {
     MouseArea{
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
+        property var tooltip: 0
         onClicked: {
+            if(tooltip != 0) { tooltip.visible = true; return; }
             var tmp = Qt.createComponent("tooltip.qml");
             var t;
             switch(tipo){
@@ -24,7 +26,7 @@ Image {
                 case 4: t = "linfócito"; break;
             }
 
-            tmp.createObject(this,{"id":id,"tipo": t,"imagem":parent.source});
+            tooltip = tmp.createObject(this,{"id":id,"tipo": t,"imagem":parent.source});
         }
     }
 }
