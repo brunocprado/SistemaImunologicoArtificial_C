@@ -8,13 +8,19 @@ CamadaQuimica::CamadaQuimica() : QThread(){
     this->start(QThread::NormalPriority);
 }
 
+CamadaQuimica::~CamadaQuimica(){
+    printf("Encerrando a Thread %d [Quimica (Logica)]\n",thread());
+    free(compostos);
+    this->terminate();
+}
+
 void CamadaQuimica::run(){
     while(true){
         while(sistema->pausado) msleep(5);
         for (int i = 0; i < compostos->length(); i++){
             compostos->at(i)->aumentaRaio(5);
         }
-        msleep(sistema->getParametro("TEMPO_PROPAGACAO_QUIMICOS") * sistema->velocidade);
+        msleep(80 * sistema->velocidade); //sistema->getParametro("TEMPO_PROPAGACAO_QUIMICOS")
     }
 }
 

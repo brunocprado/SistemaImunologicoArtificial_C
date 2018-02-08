@@ -8,7 +8,7 @@ CompostoQuimico::CompostoQuimico(TIPO_COMPOSTO tipo,int quantidade,Celula* emiss
     this->tipo = tipo;
     this->emissor = emissor;
     concentracao = quantidade;
-    raio = 10 * quantidade;
+    raio = quantidade; //2 * quantidade
     x = emissor->x;
     y = emissor->y;
 }

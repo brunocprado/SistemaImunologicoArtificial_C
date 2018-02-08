@@ -9,6 +9,7 @@
 class CamadaQuimica : public QThread{
 public:
     CamadaQuimica();
+    ~CamadaQuimica();
 
     void run();
 
