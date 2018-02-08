@@ -1,10 +1,14 @@
 #ifndef PATOGENO_H
 #define PATOGENO_H
 
+#include <QObject>
+#include <QTimer>
+
 #include "celulas/celula.h"
 #include "estatisticas/virus.h"
 
-class Patogeno : public Celula{
+class Patogeno : public QObject , public Celula{
+    Q_OBJECT
 public:
     Patogeno();
     Patogeno(Virus* virus);
@@ -14,6 +18,8 @@ public:
     void clona();
 
 private:
+    QTimer* timer;
+
     void inicia();
 
     Virus* virus;
@@ -21,6 +27,8 @@ private:
     Celula* prox = nullptr;
     bool processando = false;
 
+public slots:
+    void subThread();
 
 };
 
