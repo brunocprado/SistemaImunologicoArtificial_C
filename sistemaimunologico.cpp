@@ -46,7 +46,7 @@ void SistemaImunologico::carregaParametros() {
 
     log("#f00","Carregando parametros");
 
-    QFile arquivo("/parametros.xml");
+    QFile arquivo(":/parametros.xml");
     arquivo.open(QIODevice::ReadOnly | QIODevice::Text);
 
     QXmlStreamReader leitor;
