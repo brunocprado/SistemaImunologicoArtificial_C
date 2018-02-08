@@ -30,15 +30,15 @@ void Celula::remove(){
 
 void Celula::move(Celula* c){
     double angulo = atan2(c->y - y,c->x - x);
-    x += 2 * cos(angulo);
-    y += 2 * sin(angulo);
+    x += cos(angulo);
+    y += sin(angulo);
     emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
 }
 
 void Celula::move(short xx, short yy){
     double angulo = atan2(yy - y,xx - x);
-    x += 2 * cos(angulo);
-    y += 2 * sin(angulo);
+    x += cos(angulo);
+    y += sin(angulo);
     emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
 }
 
@@ -49,9 +49,7 @@ double Celula::calculaDistancia(short x, short y){
 }
 
 double Celula::calculaDistancia(Celula *c){
-    int deltaX = x - c->x;
-    int deltaY = y - c->y;
-    return sqrt(pow(deltaX,2) + pow(deltaY,2));
+    return sqrt(pow(x - c->x,2) + pow(y - c->y,2));
 }
 
 void Celula::emiteQuimica(short tipo, int qt){

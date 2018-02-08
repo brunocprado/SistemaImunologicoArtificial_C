@@ -26,7 +26,7 @@ public:
 
     virtual void loop() = 0;
 
-    int x,y;
+    double x,y;
 
 protected:
     TIPO_CELULA tipo;
