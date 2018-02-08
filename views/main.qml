@@ -8,8 +8,8 @@ import "../script/script.js" as Script
 ApplicationWindow {
     id: janela
     visible: true
-    width: 1280
-    height: 720
+    width: 1400
+    height: 800
     minimumHeight: 600
     minimumWidth: 1000
     color: "#c6c6c6"
@@ -56,8 +56,8 @@ ApplicationWindow {
         }
         onMovimentaCelula: {
             if(Script.celulas[id] === undefined) return;
-            Script.celulas[id].x = mx;
-            Script.celulas[id].y = my;
+            Script.celulas[id].x = mx - 5;
+            Script.celulas[id].y = my - 5;
         }
         onEliminaCelula: {
             if(Script.celulas[id] === undefined) return;

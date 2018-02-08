@@ -19,7 +19,7 @@ function cria(id,parente,imagem,x,y) {
     var tmp;
 
     switch(imagem){
-        case 1: tmp = "celula.png"; break;
+        case 1: tmp = "opcoes.png"; break;
         case 2: tmp = "macro.png"; break;
         case 3: tmp = "neutrofilo.png"; break;
         case 4: tmp = "Linfocito.png"; break;
@@ -27,7 +27,7 @@ function cria(id,parente,imagem,x,y) {
 
     tmp = "../imagens/" + tmp;
 
-    celulas[id] = viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x,"y":y,"imagem":tmp});
+    celulas[id] = viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x-5,"y":y-5,"imagem":tmp});
 }
 
 function addComposto(parente,id,cor,raio,x,y){
