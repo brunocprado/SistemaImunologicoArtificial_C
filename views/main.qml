@@ -228,6 +228,9 @@ ApplicationWindow {
                     height: 30
                     text: qsTr("Sim")
                     checked: true
+                    onToggled: {
+                        Script.mudaVisibilidadeQuimica();
+                    }
                 }
             }
 
