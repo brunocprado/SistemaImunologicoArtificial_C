@@ -18,7 +18,7 @@ private:
     ESTADO estado;
 
     //====| RUNTIME |====//
-    Celula* alvo;
+    Celula* alvo = nullptr;
     QDateTime tempoDetectado;
 };
 
