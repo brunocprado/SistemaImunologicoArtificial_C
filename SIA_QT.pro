@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     celulas/neutrofilo.cpp \
     quimica/camadaquimica.cpp \
     quimica/compostoquimico.cpp \
-    estatisticas/virus.cpp
+    estatisticas/virus.cpp \
+    celulas/linfocito.cpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -41,7 +42,8 @@ HEADERS += \
     celulas/neutrofilo.h \
     quimica/camadaquimica.h \
     quimica/compostoquimico.h \
-    estatisticas/virus.h
+    estatisticas/virus.h \
+    celulas/linfocito.h
 
 
 SUBDIRS += \
@@ -51,3 +53,6 @@ RESOURCES += \
     qml.qrc
 
 RC_ICONS = icone.ico
+
+DISTFILES += \
+    qtquickcontrols2.conf
