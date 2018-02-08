@@ -1,5 +1,8 @@
 var viewCelula, viewComposto, viewNovoSistema, viewEstatisticas;
-var celulas = [];
+
+var exibeQuimica = true;
+
+var celulas = {};
 var compostos = {};
 
 var tipoCelula = {
@@ -37,16 +40,19 @@ function addComposto(parente,id,cor,raio,x,y){
         case 2: cor = "#afa"; break;
         case 3: cor = "#aaa"; break;
     }
-    compostos[id] = viewComposto.createObject(parente,{"x":x-raio,"y":y-raio,"width":raio*2,"color":cor});
+    compostos[id] = viewComposto.createObject(parente,{"x":x-raio,"y":y-raio,"width":raio*2,"color":cor,"visible":exibeQuimica});
 }
 
 function mudaVisibilidade(tipo){
-    for(var i = 0;i<celulas.length;i++){
-        if(celulas[i].tipo === tipo)
-            celulas[i].visible = !celulas[i].visible;
+    for(var id in celulas){
+        if(celulas[id].tipo === tipo)
+            celulas[id].visible = !celulas[id].visible;
     }
 }
 
-function novoSistema(){
-    viewNovoSistema.createObject();
+function mudaVisibilidadeQuimica(){
+    exibeQuimica = !exibeQuimica;
+    for(var id in compostos){
+        compostos[id].visible = exibeQuimica;
+    }
 }
