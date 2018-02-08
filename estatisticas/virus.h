@@ -16,7 +16,7 @@ public:
 private:
     short quantidade = 0;
     QString identificador;
-    int epitopo;
+    unsigned int epitopo;
 };
 
 #endif // VIRUS_H
