@@ -10,8 +10,6 @@
 #include "quimica/camadaquimica.h"
 #include "celulas/celula.h"
 
-#define INTERVALO_PROCESSAMENTO 30
-
 class SistemaImunologico : public QThread{
     Q_OBJECT
 public:
@@ -67,6 +65,7 @@ signals:
     void adicionaComposto(int id,int tipo,int raio,int x,int y);
     void mudaComposto(short id,short varRaio,short concentracao);
     void eliminaComposto(short id);
+    void eliminaCelula(int id);
     void escreveLog(QString cor,QString texto);
     void addParametro(QString parametro);
 

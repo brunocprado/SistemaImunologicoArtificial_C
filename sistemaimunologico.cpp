@@ -6,19 +6,21 @@
 #include "quimica/camadaquimica.h"
 #include "celulas/macrofago.h"
 #include "celulas/neutrofilo.h"
+#include "celulas/linfocito.h"
 #include "celulas/patogeno.h"
 
 SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 
-SistemaImunologico::SistemaImunologico() : QThread(nullptr){
+SistemaImunologico::SistemaImunologico() : QThread(){
     GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
 }
 
 SistemaImunologico::~SistemaImunologico(){
-    printf("Encerrando a Thread %d [Sistema imunologico (Logica)]",QThread::currentThreadId());
+    printf("Encerrando a Thread %d [Sistema imunologico (Logica)]\n",QThread::currentThreadId());
     free(celulas);
+    delete quimica;
     this->terminate();
 }
 
@@ -70,26 +72,25 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){
-        //renderizaCelula(new Neutrofilo());
+//        renderizaCelula(new Neutrofilo());
     }
 
-    for(int i =0;i<(nInicial * 1);i++){ // parametros->value("MACROFAGOS")
+    for(int i =0;i<(nInicial * parametros->value("MACROFAGOS") * 5);i++){
         renderizaCelula(new Macrofago());
     }
 
     for(int i =0;i<(nInicial * parametros->value("LINFOCITOS"));i++){
-//        renderizaCelula(new Macrofago());
+//        renderizaCelula(new Linfocito());
     }
 }
 
-QList<Celula*>::iterator i;
 void SistemaImunologico::run(){
     while(true){
         while(pausado) msleep(5);
-        for (i = celulas->begin(); i != celulas->end(); ++i){
-            (*i)->loop();
+        for (int i = 0;i < celulas->length(); i++){
+            celulas->at(i)->loop();
         }
-        msleep(INTERVALO_PROCESSAMENTO * velocidade);
+        msleep(30 * velocidade);
     }
 }
 
@@ -121,7 +122,7 @@ void SistemaImunologico::encerra(){
 }
 
 void SistemaImunologico::addPatogeno(){
-    for(int i = 0;i<5;i++){
+    for(int i = 0;i<2;i++){
         celulas->append(new Patogeno());
         renderizaCelula(celulas->last());
     }
