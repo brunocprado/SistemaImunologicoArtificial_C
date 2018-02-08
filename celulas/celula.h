@@ -18,7 +18,7 @@ public:
 
     //=======| Funções |========// TODO : Get/Set
     void move(Celula* celula);
-    void move(short x,short y);
+    void move(short xx,short yy);
     double calculaDistancia(short int x,short int y);
     double calculaDistancia(Celula* c);
     void emiteQuimica(short tipo,int qt);
@@ -26,7 +26,7 @@ public:
 
     virtual void loop() = 0;
 
-    short x,y;
+    int x,y;
 
 protected:
     TIPO_CELULA tipo;

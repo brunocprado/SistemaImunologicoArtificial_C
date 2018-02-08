@@ -3,11 +3,12 @@
 
 #include "sistemaimunologico.h"
 #include "celula.h"
+#include "celulas/patogeno.h"
 #include "quimica/compostoquimico.h"
 
 static int contador = 0;
 
-Celula::Celula(TIPO_CELULA t) {
+Celula::Celula(TIPO_CELULA t){
     id=contador; contador++;
     tipo = t;
     x = rand() % 1600 + 1;
@@ -23,11 +24,19 @@ Celula::Celula(TIPO_CELULA t, int x, int y){
 void Celula::remove(){
     SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
     emit SistemaImunologico::getInstancia()->eliminaCelula(id);
+//    if(tipo == PATOGENO) { delete this; }
 //    delete this;
 }
 
 void Celula::move(Celula* c){
     double angulo = atan2(c->y - y,c->x - x);
+    x += 2 * cos(angulo);
+    y += 2 * sin(angulo);
+    emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
+}
+
+void Celula::move(short xx, short yy){
+    double angulo = atan2(yy - y,xx - x);
     x += 2 * cos(angulo);
     y += 2 * sin(angulo);
     emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
