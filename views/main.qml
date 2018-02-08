@@ -8,8 +8,8 @@ import "../script/script.js" as Script
 ApplicationWindow {
     id: janela
     visible: true
-    width: 1400
-    height: 800
+    width: 1280
+    height: 720
     minimumHeight: 600
     minimumWidth: 1000
     color: "#c6c6c6"
@@ -23,6 +23,13 @@ ApplicationWindow {
     Shortcut {
         sequences: ["Ctrl+-","S"]
         onActivated: if(celulas.scale > 1) celulas.scale -= 0.2
+    }
+
+    Shortcut{
+        sequence: "Ctrl+N"
+        onActivated: {
+            sistema.addPatogeno();
+        }
     }
 
     Component.onCompleted: {
@@ -52,6 +59,11 @@ ApplicationWindow {
             Script.celulas[id].x = mx;
             Script.celulas[id].y = my;
         }
+        onEliminaCelula: {
+            if(Script.celulas[id] === undefined) return;
+            Script.celulas[id].destroy();
+            delete Script.celulas[id];
+        }
         onAdicionaComposto: {
             Script.addComposto(celulas,id,tipo,raio,x,y);
         }
@@ -59,9 +71,10 @@ ApplicationWindow {
             Script.compostos[id].x -= varRaio;
             Script.compostos[id].y -= varRaio;
             Script.compostos[id].width += varRaio * 2;
-            Script.compostos[id].opacity -= 0.1;
+            Script.compostos[id].opacity -= 0.05;
         }
         onEliminaComposto: {
+            if(Script.compostos[id] === undefined) return;
             Script.compostos[id].destroy();
             delete Script.compostos[id];
         }
@@ -101,20 +114,16 @@ ApplicationWindow {
         id: menu
         Menu {
             title: "Novo"
-
             MenuItem {
                 text: "Sistema"
                 onClicked: {
-                    //Script.novoSistema();
                     var tmp = Qt.createComponent("novoVirus.qml");
                     tmp.createObject(janela,{});
-
                 }
             }
 
             MenuItem {
-                text: "Patogeno"
-
+                text: "Patogeno       [Ctrl+N]"
                 onClicked: {
                     sistema.addPatogeno();
                 }
@@ -186,6 +195,7 @@ ApplicationWindow {
 
         Column {
             id: column
+            y:10
             width: 300
             padding: 20
             height: parent.height
@@ -303,7 +313,7 @@ ApplicationWindow {
                     text: qsTr("Sim")
                     checked: true
                     onClicked: {
-                        Script.mudaVisibilidade(2);
+                        Script.mudaVisibilidade(4);
                     }
                 }
             }
@@ -328,7 +338,7 @@ ApplicationWindow {
                     text: qsTr("Sim")
                     checked: true
                     onClicked: {
-                        Script.mudaVisibilidade(2);
+                        Script.mudaVisibilidade(3);
                     }
                 }
             }
@@ -353,7 +363,7 @@ ApplicationWindow {
                     text: qsTr("Sim")
                     checked: true
                     onClicked: {
-                        Script.mudaVisibilidade(2);
+                        Script.mudaVisibilidade(1);
                     }
                 }
             }
