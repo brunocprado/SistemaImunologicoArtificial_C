@@ -32,14 +32,17 @@ void Macrofago::loop(){
             tempoDetectado = QDateTime::currentDateTime();
 
 //            if(dist <= 4) fagocita();
-//            if(estado == REPOUSO) {
+            if(estado == REPOUSO) {
                 emiteQuimica(CompostoQuimico::CITOCINA,10);
-//                estado = ATIVO;
-//            }
+                estado = ATIVO;
+            }
             move(alvo);
             break;
         }
     }
+
+    if(alvo == nullptr) move(x + (rand() % 3 - 1),y + (rand() % 3 -1));
+
 }
 
 Macrofago::ESTADO Macrofago::getEstado(){
