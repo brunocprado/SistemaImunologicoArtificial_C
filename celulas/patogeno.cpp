@@ -16,7 +16,7 @@ Patogeno::Patogeno(Virus *virus) : Celula(PATOGENO){
 
 void Patogeno::inicia(){
     virus->add();
-    emiteQuimica(CompostoQuimico::PAMP,10);
+    emiteQuimica(CompostoQuimico::PAMP,20);
 }
 
 void Patogeno::clona(){
@@ -28,8 +28,9 @@ void Patogeno::loop(){
 
     if(prox != nullptr){
         if(calculaDistancia(prox) < 6){
-            processando = true;
-            //printf("FIM (x,y) = %d %d \n",x,y);
+            //processando = true;
+            prox->remove();
+            prox = nullptr;
         } else {
             move(prox);
         }
@@ -39,18 +40,16 @@ void Patogeno::loop(){
     double maisProx = INT16_MAX;
     double dist = 0;
 
-    QList<Celula*>::iterator i = SistemaImunologico::getInstancia()->getCelulas()->begin();
-    for (; i != SistemaImunologico::getInstancia()->getCelulas()->end(); ++i){
-        if((*i)->getTipo() == PATOGENO) continue;
-        dist = calculaDistancia(*i);
+   QList<Celula*>* tmp = SistemaImunologico::getInstancia()->getCelulas();
+    for (int i = 0; i < tmp->length(); i++){
+        Celula* celula = tmp->at(i);
+        if(celula->getTipo() != LINFOCITO) continue;
+        dist = calculaDistancia(celula);
         if(maisProx > dist){
             maisProx = dist;
-            prox = *i;
+            prox = celula;
         }
     }
 
-    //printf("PATOGENO (x,y) = %d %d \n",x,y);
-    //printf("ALVO (x,y) = %d %d \n",prox->x,prox->y);
-
-    move(prox);
+    if(prox != nullptr) move(prox);
 }
