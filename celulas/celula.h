@@ -22,6 +22,7 @@ public:
     double calculaDistancia(short int x,short int y);
     double calculaDistancia(Celula* c);
     void emiteQuimica(short tipo,int qt);
+    void remove();
 
     virtual void loop() = 0;
 

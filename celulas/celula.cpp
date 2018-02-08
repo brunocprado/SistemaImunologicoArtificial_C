@@ -20,6 +20,12 @@ Celula::Celula(TIPO_CELULA t, int x, int y){
     this->x = x; this->y = y;
 }
 
+void Celula::remove(){
+    SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
+    emit SistemaImunologico::getInstancia()->eliminaCelula(id);
+//    delete this;
+}
+
 void Celula::move(Celula* c){
     double angulo = atan2(c->y - y,c->x - x);
     x += 2 * cos(angulo);
