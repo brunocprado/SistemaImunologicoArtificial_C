@@ -1,5 +1,5 @@
 import QtQuick 2.10
-import QtQuick.Controls 2.3
+//import QtQuick.Controls 2.3
 
 Image {
     property int id: 0
@@ -18,8 +18,10 @@ Image {
             var t;
             switch(tipo){
                 case 0: t = "comum"; break;
-                case 3: t = "neutrofilo"; break;
-                case 2: t = "macrofago"; break;
+                case 1: t = "patógeno"; break;
+                case 2: t = "macrófago"; break;
+                case 3: t = "neutrófilo"; break;
+                case 4: t = "linfócito"; break;
             }
 
             tmp.createObject(this,{"id":id,"tipo": t,"imagem":parent.source});
