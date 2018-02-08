@@ -33,8 +33,10 @@ public:
     Q_INVOKABLE void resumir();
     Q_INVOKABLE void encerra();
     Q_INVOKABLE void addPatogeno(); //DEBUG
-
     Q_INVOKABLE void mudaParametro(QString parametro,double valor);
+
+    Q_INVOKABLE int getX(int id);
+    Q_INVOKABLE int getY(int id);
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();
@@ -61,7 +63,7 @@ private:
 
 signals:
     void adicionaCelula(int id,int tipo,short x,short y);
-    void movimentaCelula(int id,short mx,short my);
+    void movimentaCelula(int id,double mx,double my);
     void adicionaComposto(int id,int tipo,int raio,int x,int y);
     void mudaComposto(short id,short varRaio,short concentracao);
     void eliminaComposto(short id);

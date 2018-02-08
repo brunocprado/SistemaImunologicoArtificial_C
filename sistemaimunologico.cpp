@@ -18,7 +18,7 @@ SistemaImunologico::SistemaImunologico() : QThread(){
 }
 
 SistemaImunologico::~SistemaImunologico(){
-    printf("Encerrando a Thread %d [Sistema imunologico (Logica)]\n",QThread::currentThreadId());
+    printf("Encerrando a Thread %d [Sistema imunologico (Logica)]\n",thread());
     free(celulas);
     delete quimica;
     this->terminate();
@@ -80,7 +80,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     }
 
     for(int i =0;i<(nInicial * parametros->value("LINFOCITOS"));i++){
-//        renderizaCelula(new Linfocito());
+        renderizaCelula(new Linfocito());
     }
 }
 
@@ -122,7 +122,7 @@ void SistemaImunologico::encerra(){
 }
 
 void SistemaImunologico::addPatogeno(){
-    for(int i = 0;i<2;i++){
+    for(int i = 0;i<8;i++){
         celulas->append(new Patogeno());
         renderizaCelula(celulas->last());
     }
@@ -148,4 +148,12 @@ CamadaQuimica* SistemaImunologico::getQuimica(){
 
 QList<Celula*>* SistemaImunologico::getCelulas(){
     return celulas;
+}
+
+int SistemaImunologico::getX(int id){
+    return celulas->at(id)->x;
+}
+
+int SistemaImunologico::getY(int id){
+    return celulas->at(id)->y;
 }
