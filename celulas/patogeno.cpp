@@ -14,6 +14,11 @@ Patogeno::Patogeno(Virus *virus) : Celula(PATOGENO){
     this->inicia();
 }
 
+Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(PATOGENO,x,y){
+    this->virus = virus;
+    this->inicia();
+}
+
 void Patogeno::inicia(){
     virus->add();
     emiteQuimica(CompostoQuimico::PAMP,20);
@@ -23,7 +28,7 @@ void Patogeno::inicia(){
 }
 
 void Patogeno::clona(){
-    Patogeno *tmp = new Patogeno(virus);
+    Patogeno *tmp = new Patogeno(virus,x,y);
     SistemaImunologico::getInstancia()->renderizaCelula(tmp);
 }
 
@@ -37,6 +42,7 @@ void Patogeno::loop(){
     if(prox != nullptr){
         if(calculaDistancia(prox) < 6){
             //processando = true;
+//            clona();
             prox->remove();
             prox = nullptr;
         } else {
