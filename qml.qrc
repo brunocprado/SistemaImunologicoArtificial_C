@@ -24,5 +24,6 @@
         <file>views/composto.qml</file>
         <file>views/estatisticas.qml</file>
         <file>views/novoVirus.qml</file>
+        <file>imagens/logoBranca.png</file>
     </qresource>
 </RCC>

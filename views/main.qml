@@ -2,15 +2,16 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Window 2.3
+//import QtQuick.Layouts 1.1
 
 import "../script/script.js" as Script
 
 ApplicationWindow {
     id: janela
     visible: true
-    width: 1400
-    height: 800
-    minimumHeight: 600
+    width: 1280
+    height: 720
+    minimumHeight: 700
     minimumWidth: 1000
     color: "#c6c6c6"
     title: "Sistema imunológico artificial C++ " + temporizador.segundos
@@ -47,6 +48,10 @@ ApplicationWindow {
         if(width > 1600 && celulas.scale == 1){
             celulas.scale = width/1600;
         }
+    }
+
+    onHeightChanged: {
+        if(height > 850) logoBranca.visible = true; else logoBranca.visible = false;
     }
 
     Connections {
@@ -191,6 +196,17 @@ ApplicationWindow {
                 height: parent.height
                 color: "#555"
             }
+        }
+
+        Image {
+            id: logoBranca
+            visible: false
+            source: "../imagens/logoBranca.png"
+            opacity: 0.2
+            x: 57
+            y: parent.height - 250
+            width: 170
+            height: 180
         }
 
         Column {
@@ -406,7 +422,6 @@ ApplicationWindow {
                 }
 
             }
-
         }
     }
 }
