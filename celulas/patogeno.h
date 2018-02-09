@@ -12,6 +12,7 @@ class Patogeno : public QObject , public Celula{
 public:
     Patogeno();
     Patogeno(Virus* virus);
+    Patogeno(Virus *virus,double x,double y);
 
     void loop();
 
