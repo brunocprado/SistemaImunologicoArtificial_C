@@ -15,7 +15,7 @@ Celula::Celula(TIPO_CELULA t){
     y = rand() % 900 + 1;
 }
 
-Celula::Celula(TIPO_CELULA t, int x, int y){
+Celula::Celula(TIPO_CELULA t, double x, double y){
     id=contador; contador++;
     tipo = t;
     this->x = x; this->y = y;
@@ -24,7 +24,6 @@ Celula::Celula(TIPO_CELULA t, int x, int y){
 void Celula::remove(){
     SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
     emit SistemaImunologico::getInstancia()->eliminaCelula(id);
-//    if(tipo == PATOGENO) { delete this; }
 //    delete this;
 }
 

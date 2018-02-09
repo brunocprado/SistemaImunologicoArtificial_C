@@ -14,7 +14,7 @@ public:
 
     //=======| Construtores |======//
     Celula(TIPO_CELULA t = COMUM);
-    Celula(TIPO_CELULA t,int x,int y);
+    Celula(TIPO_CELULA t,double x,double y);
 
     //=======| Funções |========// TODO : Get/Set
     void move(Celula* celula);
@@ -30,6 +30,7 @@ public:
 
 protected:
     TIPO_CELULA tipo;
+    double velMovimento = 1.0;
 
 };
 
