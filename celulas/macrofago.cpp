@@ -23,8 +23,7 @@ void Macrofago::loop(){
         CompostoQuimico *composto = SistemaImunologico::getCompostos()->at(i);
 
         if(composto->getTipo() != CompostoQuimico::PAMP && composto->getTipo() != CompostoQuimico::CITOCINA) continue;
-        if(composto->getEmissor() == nullptr) continue;
-//        if(composto->getEmissor() == nullptr) continue; //REPENSAR SOBRE DPS !! if(composto.getEmissor() != null && !celulas.contains(composto.getEmissor())) continue;
+        if(composto->getEmissor() == nullptr) continue; //REPENSAR SOBRE DPS !! if(composto.getEmissor() != null && !celulas.contains(composto.getEmissor())) continue;
 
         double dist = calculaDistancia(composto->x,composto->y);
         if(dist <= composto->getRaio() + 5){
@@ -41,7 +40,7 @@ void Macrofago::loop(){
         }
     }
 
-    if(alvo == nullptr) move(x + (rand() % 3 - 1),y + (rand() % 3 -1));
+    if(alvo == nullptr) move(x + (rand() % 4 - 1),y + (rand() % 4 - 1));
 
 }
 
