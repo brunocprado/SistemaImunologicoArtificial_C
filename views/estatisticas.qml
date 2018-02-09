@@ -25,11 +25,13 @@ ApplicationWindow {
 
         ValueAxis {
             id: x
+            titleText: "Tempo"
             max: 5
         }
 
         ValueAxis {
             id: y
+            titleText: "Quantidade"
             max: 15
         }
 
