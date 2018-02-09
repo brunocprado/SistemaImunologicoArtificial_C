@@ -12,6 +12,11 @@ void Virus::sub(){
     quantidade--;
 }
 
+void Virus::addTemporizacao(int tempo){
+    tempoMedio = (tempoMedio * qtTempo) + tempo;
+    qtTempo++;
+}
+
 int Virus::getEpitopo(){
     return epitopo;
 }

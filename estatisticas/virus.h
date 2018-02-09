@@ -10,6 +10,8 @@ public:
     void add();
     void sub();
 
+    void addTemporizacao(int tempo);
+
     int getEpitopo();
     short getQuantidade();
 
