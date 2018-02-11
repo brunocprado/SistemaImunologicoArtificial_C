@@ -14,7 +14,7 @@ void CelulaB::inicia(){
     timer->start(600);
 }
 
-void loop(){
+void CelulaB::loop(){
     //TODO
 }
 
