@@ -9,6 +9,7 @@
 
 #include "quimica/camadaquimica.h"
 #include "celulas/celula.h"
+#include "estatisticas/virus.h"
 
 class SistemaImunologico : public QThread{
     Q_OBJECT
@@ -56,6 +57,7 @@ private:
 
     QList<Celula*>* celulas;
     CamadaQuimica* quimica;
+//    QList<Virus*>* simulacoes;
     QMap<std::string,double>* parametros;
 
     void carregaParametros();
@@ -64,12 +66,15 @@ private:
 signals:
     void adicionaCelula(int id,int tipo,short x,short y);
     void movimentaCelula(int id,double mx,double my);
+    void eliminaCelula(int id);
+
     void adicionaComposto(int id,int tipo,int raio,int x,int y);
     void mudaComposto(short id,short varRaio,short concentracao);
     void eliminaComposto(short id);
-    void eliminaCelula(int id);
+
     void escreveLog(QString cor,QString texto);
     void addParametro(QString parametro);
+//    void addVirus(QString identificador);
 
 public slots:
 };
