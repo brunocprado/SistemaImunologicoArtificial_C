@@ -7,10 +7,7 @@ class Celula {
 //    Q_GADGET
 //    Q_ENUMS(TIPO_CELULA)
 public:
-    enum TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO};
-    TIPO_CELULA getTipo();
-
-    int id;
+    enum TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO};
 
     //=======| Construtores |======//
     Celula(TIPO_CELULA t = COMUM);
@@ -26,6 +23,10 @@ public:
 
     virtual void loop() = 0;
 
+    TIPO_CELULA getTipo();
+    double getVelMovimento();
+
+    int id;
     double x,y;
 
 protected:
