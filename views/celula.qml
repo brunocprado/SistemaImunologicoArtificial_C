@@ -1,24 +1,30 @@
 import QtQuick 2.10
-//import QtQuick.Controls 2.3
+//import ufrrj.bruno 1.0
 
 Image {
-    property int id: 0
-    property int tipo: 0
-    property string imagem: ""
+    property var celula
 
-    source: imagem
     visible: true
     width: 10
     height: 10
+
+    x: celula.x - 5
+    y: celula.y - 5
+
+    function atualizaPos(){
+        x = celula.x - 5;
+        y = celula.y - 5;
+    }
+
     MouseArea{
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         property var tooltip: 0
         onClicked: {
-            if(tooltip != 0) { tooltip.visible = true; return; }
+            if(tooltip !== 0) { tooltip.visible = true; return; }
             var tmp = Qt.createComponent("tooltip.qml");
             var t;
-            switch(tipo){
+            switch(celula.tipo){
                 case 0: t = "comum"; break;
                 case 1: t = "patógeno"; break;
                 case 2: t = "macrófago"; break;
@@ -26,7 +32,7 @@ Image {
                 case 4: t = "linfócito"; break;
             }
 
-            tooltip = tmp.createObject(this,{"id":id,"tipo": t,"imagem":parent.source});
+            tooltip = tmp.createObject(this,{"celula": celula,"tipo": t,"imagem":parent.source});
         }
     }
 }

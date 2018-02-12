@@ -8,7 +8,6 @@ var compostos = {};
 var tipoCelula = {
     "NEUTROFILO" : 1,
     "MACROFAGO" : 2
-
 }
 
 function inicia(){
@@ -18,10 +17,10 @@ function inicia(){
     viewEstatisticas = Qt.createComponent("../views/estatisticas.qml");
 }
 
-function cria(id,parente,imagem,x,y) {
+function cria(parente,celula) {
     var tmp;
 
-    switch(imagem){
+    switch(celula.tipo){
         case 1: tmp = "opcoes.png"; break;
         case 2: tmp = "macro.png"; break;
         case 3: tmp = "neutrofilo.png"; break;
@@ -30,7 +29,7 @@ function cria(id,parente,imagem,x,y) {
 
     tmp = "../imagens/" + tmp;
 
-    celulas[id] = viewCelula.createObject(parente,{"id":id,"tipo":imagem,"x":x-5,"y":y-5,"imagem":tmp});
+    celulas[celula.id] = viewCelula.createObject(parente,{"celula":celula,"source":tmp});
 }
 
 function addComposto(parente,id,cor,raio,x,y){

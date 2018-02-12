@@ -2,7 +2,6 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Window 2.3
-//import QtQuick.Layouts 1.1
 
 import "../script/script.js" as Script
 
@@ -57,12 +56,11 @@ ApplicationWindow {
     Connections {
         target: sistema
         onAdicionaCelula: {
-            Script.cria(id,celulas,tipo,x,y);
+            Script.cria(celulas,celula);
         }
         onMovimentaCelula: {
             if(Script.celulas[id] === undefined) return;
-            Script.celulas[id].x = mx - 5;
-            Script.celulas[id].y = my - 5;
+            Script.celulas[id].atualizaPos();
         }
         onEliminaCelula: {
             if(Script.celulas[id] === undefined) return;
@@ -277,6 +275,11 @@ ApplicationWindow {
                     height: 30
                     text: qsTr("Sim")
                     checked: false
+                    onToggled: {
+                        var tmp = sistema.getVirus(0);
+                        console.log(tmp);
+                        console.log(tmp.getQuantidade());
+                    }
                 }
             }
 
