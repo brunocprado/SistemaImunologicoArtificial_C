@@ -31,14 +31,14 @@ void Celula::move(Celula* c){
     double angulo = atan2(c->y - y,c->x - x);
     x += cos(angulo);
     y += sin(angulo);
-    emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
+    emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 
 void Celula::move(short xx, short yy){
     double angulo = atan2(yy - y,xx - x);
     x += cos(angulo);
     y += sin(angulo);
-    emit SistemaImunologico::getInstancia()->movimentaCelula(this->id,x,y);
+    emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 
 double Celula::calculaDistancia(short x, short y){

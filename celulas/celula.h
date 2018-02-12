@@ -1,13 +1,17 @@
 #ifndef CELULA_H
 #define CELULA_H
 
-//#include <QtCore>
+#include <QtCore>
 
-class Celula {
-//    Q_GADGET
-//    Q_ENUMS(TIPO_CELULA)
+class Celula : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(int id READ getId NOTIFY idMudou)
+    Q_PROPERTY(double x READ getX NOTIFY posicaoMudou)
+    Q_PROPERTY(double y READ getY NOTIFY posicaoMudou)
+    Q_PROPERTY(TIPO_CELULA tipo READ getTipo)
 public:
     enum TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO};
+    Q_ENUM(TIPO_CELULA)
 
     //=======| Construtores |======//
     Celula(TIPO_CELULA t = COMUM);
@@ -29,9 +33,17 @@ public:
     int id;
     double x,y;
 
+    int getId(){ return id; }
+    double getX(){ return x; }
+    double getY(){ return y; }
+
 protected:
     TIPO_CELULA tipo;
     double velMovimento = 1.0;
+
+signals:
+    void idMudou(); //NUNCA VAI ROLAR, SÓ PRA NÃO DAR WARN
+    void posicaoMudou();
 
 };
 
