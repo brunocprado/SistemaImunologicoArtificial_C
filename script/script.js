@@ -1,4 +1,4 @@
-var viewCelula, viewComposto, viewNovoSistema, viewEstatisticas;
+var viewCelula, viewComposto, viewNovoSistema, viewEstatisticas, estatisticaGerais;
 
 var exibeQuimica = true;
 
@@ -15,6 +15,7 @@ function inicia(){
     viewComposto = Qt.createComponent("../views/composto.qml");
     viewNovoSistema = Qt.createComponent("../views/celula.qml");
     viewEstatisticas = Qt.createComponent("../views/estatisticas.qml");
+    estatisticaGerais = Qt.createComponent("../views/estatisticasGerais.qml").createObject(janela,{});
 }
 
 function cria(parente,celula) {
