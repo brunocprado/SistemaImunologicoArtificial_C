@@ -6,6 +6,7 @@
 
 class Virus : public QObject{
     Q_OBJECT
+    Q_PROPERTY(short quantidade READ getQuantidade)
 public:
     Virus(QString identificador);
 
