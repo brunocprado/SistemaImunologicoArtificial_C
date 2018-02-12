@@ -2,9 +2,9 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 
 ToolTip {
-    property int id: 0
     property string tipo: ""
     property string imagem: ""
+    property var celula: 0
 
     parent: parent
     visible: true
@@ -14,9 +14,9 @@ ToolTip {
     Timer{
         running: parent.visible
         repeat: true
-        interval: 200
+        interval: 500
         onTriggered: {
-            txtPosicao.text = "Posição : " + sistema.getX(id) + " x " + sistema.getY(id);
+            txtPosicao.text = "Posição : " + celula.x + " x " + celula.y;
         }
     }
 
@@ -42,13 +42,13 @@ ToolTip {
         spacing: 5
         Text{
             color: "#fff"
-            text: "ID : " + id
+            text: "ID : " + celula.id
         }
 
         Text{
             id: txtPosicao
             color: "#fff"
-            text: "Posição : " + sistema.getX(id) + " x " + sistema.getY(id)
+            text: "Posição : " + celula.x + " x " + celula.y
         }
     }
 }
