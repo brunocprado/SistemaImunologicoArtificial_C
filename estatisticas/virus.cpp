@@ -1,7 +1,9 @@
+#include "sistemaimunologico.h"
 #include "virus.h"
 
 Virus::Virus(QString identificador){
     this->epitopo = rand() % INT16_MAX;
+    SistemaImunologico::getInstancia()->getSimulacoes()->append(this);
 }
 
 void Virus::add(){

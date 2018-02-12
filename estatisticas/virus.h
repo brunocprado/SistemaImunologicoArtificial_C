@@ -2,8 +2,10 @@
 #define VIRUS_H
 
 #include <QString>
+#include <QtCore>
 
-class Virus{
+class Virus : public QObject{
+    Q_OBJECT
 public:
     Virus(QString identificador);
 
@@ -13,7 +15,7 @@ public:
     void addTemporizacao(int tempo);
 
     int getEpitopo();
-    short getQuantidade();
+    Q_INVOKABLE short getQuantidade();
 
 private:
     short quantidade = 0;
