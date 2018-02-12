@@ -13,6 +13,7 @@ ApplicationWindow {
     maximumHeight: 220
     minimumWidth: 410
     maximumWidth: 410
+    modality: Qt.ApplicationModal
 
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
