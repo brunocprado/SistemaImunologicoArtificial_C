@@ -15,6 +15,7 @@ SistemaImunologico::SistemaImunologico() : QThread(){
     GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
+    simulacoes = new QList<Virus*>();
 }
 
 SistemaImunologico::~SistemaImunologico(){
@@ -96,7 +97,8 @@ void SistemaImunologico::run(){
 
 void SistemaImunologico::renderizaCelula(Celula* celula){
     celulas->append(celula);
-    emit adicionaCelula(celula->id,celula->getTipo(),celula->x,celula->y);
+//    emit adicionaCelula(celula->id,celula->getTipo(),celula->x,celula->y);
+    emit adicionaCelula(celula);
 }
 
 void SistemaImunologico::log(QString texto){
@@ -150,10 +152,18 @@ QList<Celula*>* SistemaImunologico::getCelulas(){
     return celulas;
 }
 
-int SistemaImunologico::getX(int id){
-    return celulas->at(id)->x;
+QList<Virus*>* SistemaImunologico::getSimulacoes(){
+    return simulacoes;
 }
 
-int SistemaImunologico::getY(int id){
-    return celulas->at(id)->y;
+//int SistemaImunologico::getX(int id){
+//    return celulas->at(id)->x;
+//}
+
+//int SistemaImunologico::getY(int id){
+//    return celulas->at(id)->y;
+//}
+
+Virus* SistemaImunologico::getVirus(int id){
+    return (simulacoes->at(id));
 }

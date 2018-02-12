@@ -36,15 +36,16 @@ public:
     Q_INVOKABLE void addPatogeno(); //DEBUG
     Q_INVOKABLE void mudaParametro(QString parametro,double valor);
 
-    Q_INVOKABLE int getX(int id);
-    Q_INVOKABLE int getY(int id);
+    Q_INVOKABLE Virus* getVirus(int id);
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();
-
-    double getParametro(std::string parametro);
     QList<Celula*>* getCelulas();
     CamadaQuimica* getQuimica();
+    QList<Virus*>* getSimulacoes();
+
+    QDateTime getINICIO_SISTEMA();
+    double getParametro(std::string parametro);
 
     void setGerador(int g);
 
@@ -57,15 +58,15 @@ private:
 
     QList<Celula*>* celulas;
     CamadaQuimica* quimica;
-//    QList<Virus*>* simulacoes;
+    QList<Virus*>* simulacoes;
     QMap<std::string,double>* parametros;
 
     void carregaParametros();
     void run(); //Loop do QThread
 
 signals:
-    void adicionaCelula(int id,int tipo,short x,short y);
-    void movimentaCelula(int id,double mx,double my);
+    void adicionaCelula(Celula* celula);
+    void movimentaCelula(int id);
     void eliminaCelula(int id);
 
     void adicionaComposto(int id,int tipo,int raio,int x,int y);
@@ -74,9 +75,7 @@ signals:
 
     void escreveLog(QString cor,QString texto);
     void addParametro(QString parametro);
-//    void addVirus(QString identificador);
-
-public slots:
+    void addVirus(QString identificador);
 };
 
 #endif // SISTEMAIMUNOLOGICO_H
