@@ -7,7 +7,7 @@
 #include "celulas/celula.h"
 #include "estatisticas/virus.h"
 
-class Patogeno : public QObject , public Celula{
+class Patogeno : public Celula{
     Q_OBJECT
 public:
     Patogeno();

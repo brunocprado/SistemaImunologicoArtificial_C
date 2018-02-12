@@ -6,7 +6,7 @@
 #include "celulas/celula.h"
 #include "estatisticas/virus.h"
 
-class CelulaB : public QObject, public Celula {
+class CelulaB : public Celula {
     Q_OBJECT
 public:
     enum ESTADO { REPOUSO, ATIVO };
