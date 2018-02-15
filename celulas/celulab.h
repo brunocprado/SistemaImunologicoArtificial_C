@@ -9,8 +9,6 @@
 class CelulaB : public Celula {
     Q_OBJECT
 public:
-    enum ESTADO { REPOUSO, ATIVO };
-
     explicit CelulaB();
     CelulaB(double x,double y);
 
@@ -21,7 +19,7 @@ public:
 
 private:
     Virus* virus = nullptr;
-    ESTADO estado = REPOUSO;
+    ESTADO estado = ESTADO::REPOUSO;
     QTimer* timer;
 
     void inicia();

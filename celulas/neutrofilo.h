@@ -8,6 +8,7 @@ public:
     Neutrofilo();
 
     void loop();
+    QString extra(){return "";}
 
 };
 

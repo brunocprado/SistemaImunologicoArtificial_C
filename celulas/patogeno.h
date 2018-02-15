@@ -15,6 +15,7 @@ public:
     Patogeno(Virus *virus,double x,double y);
 
     void loop();
+    QString extra(){return "";}
 
     void clona();
 

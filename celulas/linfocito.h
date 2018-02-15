@@ -8,6 +8,7 @@ public:
     Linfocito();
 
     void loop();
+    QString extra(){return "";}
 };
 
 #endif // LINFOCITO_H
