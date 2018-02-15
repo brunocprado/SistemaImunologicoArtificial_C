@@ -76,7 +76,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 //        renderizaCelula(new Neutrofilo());
     }
 
-    for(int i =0;i<(nInicial * parametros->value("MACROFAGOS") * 5);i++){
+    for(int i =0;i<(nInicial * parametros->value("MACROFAGOS") * 3);i++){
         renderizaCelula(new Macrofago());
     }
 
@@ -124,8 +124,9 @@ void SistemaImunologico::encerra(){
 }
 
 void SistemaImunologico::addPatogeno(){
-    for(int i = 0;i<8;i++){
-        celulas->append(new Patogeno());
+    Virus* tmp = new Virus("SIMULAÇÃO TESTE");
+    for(int i = 0;i<6;i++){
+        celulas->append(new Patogeno(tmp));
         renderizaCelula(celulas->last());
     }
 }
