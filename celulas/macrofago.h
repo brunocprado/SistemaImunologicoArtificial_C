@@ -5,12 +5,20 @@
 
 #include "celula.h"
 
-class Macrofago : public virtual Celula{
+class Macrofago : public virtual Celula {
 public:
-    enum ESTADO {REPOUSO,ATIVO,FAGOCITANDO};
     explicit Macrofago();
 
     void loop();
+
+    QString extra(){
+        QJsonObject json;
+        json.insert("estado",QVariant::fromValue(estado).value<QString>());
+        if(alvo != nullptr) json.insert("alvo",alvo->id);
+
+        QJsonDocument tmp(json);
+        return tmp.toJson();
+    }
 
     ESTADO getEstado();
 
