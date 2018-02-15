@@ -5,9 +5,13 @@ var exibeQuimica = true;
 var celulas = {};
 var compostos = {};
 
+//enum class TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO};
+
 var tipoCelula = {
-    "NEUTROFILO" : 1,
-    "MACROFAGO" : 2
+    "COMUM" : 0,
+    "PATOGENO" : 1,
+    "MACROFAGO" : 2,
+    "NEUTROFILO" : 3
 }
 
 function inicia(){
@@ -15,7 +19,7 @@ function inicia(){
     viewComposto = Qt.createComponent("../views/composto.qml");
     viewNovoSistema = Qt.createComponent("../views/celula.qml");
     viewEstatisticas = Qt.createComponent("../views/estatisticas.qml");
-    estatisticaGerais = Qt.createComponent("../views/estatisticasGerais.qml").createObject(janela,{});
+//    estatisticaGerais = Qt.createComponent("../views/estatisticasGerais.qml").createObject(janela,{});
 }
 
 function cria(parente,celula) {
@@ -45,7 +49,7 @@ function addComposto(parente,id,cor,raio,x,y){
 
 function mudaVisibilidade(tipo){
     for(var id in celulas){
-        if(celulas[id].tipo === tipo)
+        if(celulas[id].celula.tipo === tipo)
             celulas[id].visible = !celulas[id].visible;
     }
 }
