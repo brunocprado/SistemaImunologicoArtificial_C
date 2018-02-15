@@ -4,11 +4,13 @@ import QtCharts 2.2
 import QtQuick.Window 2.3
 
 ApplicationWindow {
+    property var virus
+
     id: estatisticas
     visible: true
     width: 800
     height: 600
-    title: "Estatisticas da simulação"
+    title: "Estatisticas da simulação [ " + virus.identificador + " ]"
 
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
@@ -27,6 +29,7 @@ ApplicationWindow {
             id: x
             titleText: "Tempo"
             max: 5
+            shadesColor: "#faa"
         }
 
         ValueAxis {
@@ -40,6 +43,10 @@ ApplicationWindow {
             name: "Antigenos"
             axisX: x
             axisY: y
+            pointLabelsVisible: true
+            onClicked: {
+                console.log(point.x,point.y)
+            }
         }
     }
 
@@ -49,8 +56,8 @@ ApplicationWindow {
         repeat: true
         onTriggered: {
             if(x.max <= qtAntigenos.count) x.max++;
-            qtAntigenos.append(qtAntigenos.count, Math.floor(Math.random()*15));
+            qtAntigenos.append(qtAntigenos.count, virus.quantidade);
+            if(virus.quantidade == 0) running = false;
         }
     }
-
 }

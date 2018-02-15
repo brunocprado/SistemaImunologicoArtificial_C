@@ -4,8 +4,9 @@
 #include <QString>
 #include <QtCore>
 
-class Virus : public QObject{
+class Virus : public QObject {
     Q_OBJECT
+    Q_PROPERTY(QString identificador READ getIdentificador CONSTANT)
     Q_PROPERTY(short quantidade READ getQuantidade)
 public:
     Virus(QString identificador);
@@ -15,8 +16,9 @@ public:
 
     void addTemporizacao(int tempo);
 
+    QString getIdentificador();
     int getEpitopo();
-    Q_INVOKABLE short getQuantidade();
+    short getQuantidade();
 
 private:
     short quantidade = 0;
