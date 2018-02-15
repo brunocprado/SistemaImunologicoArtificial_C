@@ -5,7 +5,7 @@
 
 class Celula : public QObject {
     Q_OBJECT
-    Q_PROPERTY(int id READ getId NOTIFY idMudou)
+    Q_PROPERTY(int id READ getId CONSTANT)
     Q_PROPERTY(double x READ getX NOTIFY posicaoMudou)
     Q_PROPERTY(double y READ getY NOTIFY posicaoMudou)
     Q_PROPERTY(TIPO_CELULA tipo READ getTipo)
@@ -42,7 +42,6 @@ protected:
     double velMovimento = 1.0;
 
 signals:
-    void idMudou(); //NUNCA VAI ROLAR, SÓ PRA NÃO DAR WARN
     void posicaoMudou();
 
 };
