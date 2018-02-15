@@ -8,10 +8,14 @@ class Celula : public QObject {
     Q_PROPERTY(int id READ getId CONSTANT)
     Q_PROPERTY(double x READ getX NOTIFY posicaoMudou)
     Q_PROPERTY(double y READ getY NOTIFY posicaoMudou)
-    Q_PROPERTY(TIPO_CELULA tipo READ getTipo)
+    Q_PROPERTY(TIPO_CELULA tipo READ getTipo CONSTANT)
+    Q_PROPERTY(QString extra READ extra)
 public:
     enum TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO};
     Q_ENUM(TIPO_CELULA)
+
+    enum class ESTADO {REPOUSO,ATIVO,FAGOCITANDO};
+    Q_ENUM(ESTADO)
 
     //=======| Construtores |======//
     Celula(TIPO_CELULA t = COMUM);
@@ -26,6 +30,7 @@ public:
     void remove();
 
     virtual void loop() = 0;
+    virtual QString extra() = 0;
 
     TIPO_CELULA getTipo();
     double getVelMovimento();
