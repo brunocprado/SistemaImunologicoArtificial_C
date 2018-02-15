@@ -81,6 +81,9 @@ ApplicationWindow {
             Script.compostos[id].destroy();
             delete Script.compostos[id];
         }
+        onAddVirus: {
+            Script.viewEstatisticas.createObject(janela,{"virus":virus});
+        }
     }
 
     Timer{
@@ -422,8 +425,12 @@ ApplicationWindow {
                     height: 35
                     live: true
                     value: 0.5
+                    ToolTip {
+                        parent: slider.handle
+                        visible: slider.pressed
+                        text: slider.value.toFixed(1)
+                    }
                 }
-
             }
         }
     }
