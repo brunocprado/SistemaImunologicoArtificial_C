@@ -11,14 +11,14 @@ class Celula : public QObject {
     Q_PROPERTY(TIPO_CELULA tipo READ getTipo CONSTANT)
     Q_PROPERTY(QString extra READ extra)
 public:
-    enum TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO};
+    enum class TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO};
     Q_ENUM(TIPO_CELULA)
 
     enum class ESTADO {REPOUSO,ATIVO,FAGOCITANDO};
     Q_ENUM(ESTADO)
 
     //=======| Construtores |======//
-    Celula(TIPO_CELULA t = COMUM);
+    Celula(TIPO_CELULA t = TIPO_CELULA::COMUM);
     Celula(TIPO_CELULA t,double x,double y);
 
     //=======| Funções |========// TODO : Get/Set

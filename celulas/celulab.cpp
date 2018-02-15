@@ -1,10 +1,10 @@
 #include "celulab.h"
 
-CelulaB::CelulaB() : Celula(CELULA_B){
+CelulaB::CelulaB() : Celula(TIPO_CELULA::CELULA_B){
 
 }
 
-CelulaB::CelulaB(double x, double y) : Celula(CELULA_B,x,y){
+CelulaB::CelulaB(double x, double y) : Celula(TIPO_CELULA::CELULA_B,x,y){
 
 }
 

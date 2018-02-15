@@ -4,17 +4,17 @@
 #include "quimica/compostoquimico.h"
 #include "sistemaimunologico.h"
 
-Patogeno::Patogeno() : Celula(PATOGENO){
+Patogeno::Patogeno() : Celula(TIPO_CELULA::PATOGENO){
     this->virus = new Virus("TESTE");
     this->inicia();
 }
 
-Patogeno::Patogeno(Virus *virus) : Celula(PATOGENO){
+Patogeno::Patogeno(Virus *virus) : Celula(TIPO_CELULA::PATOGENO){
     this->virus = virus;
     this->inicia();
 }
 
-Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(PATOGENO,x,y){
+Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(TIPO_CELULA::PATOGENO,x,y){
     this->virus = virus;
     this->inicia();
 }
@@ -57,7 +57,7 @@ void Patogeno::loop(){
    QList<Celula*>* tmp = SistemaImunologico::getInstancia()->getCelulas();
     for (int i = 0; i < tmp->length(); i++){
         Celula* celula = tmp->at(i);
-        if(celula->getTipo() != LINFOCITO) continue;
+        if(celula->getTipo() != TIPO_CELULA::LINFOCITO) continue;
         dist = calculaDistancia(celula);
         if(maisProx > dist){
             maisProx = dist;

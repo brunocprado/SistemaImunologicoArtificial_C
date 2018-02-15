@@ -2,12 +2,12 @@
 
 #include "sistemaimunologico.h"
 
-Macrofago::Macrofago() : Celula(MACROFAGO){
-    estado = REPOUSO;
+Macrofago::Macrofago() : Celula(TIPO_CELULA::MACROFAGO){
+    estado = ESTADO::REPOUSO;
 }
 
 void Macrofago::loop(){
-    if(estado == FAGOCITANDO) return;
+    if(estado == ESTADO::FAGOCITANDO) return;
 
     if(alvo != nullptr){
         if(calculaDistancia(alvo) < 6){
@@ -31,9 +31,9 @@ void Macrofago::loop(){
             tempoDetectado = QDateTime::currentDateTime();
 
 //            if(dist <= 4) fagocita();
-            if(estado == REPOUSO) {
+            if(estado == ESTADO::REPOUSO) {
                 emiteQuimica(CompostoQuimico::CITOCINA,10);
-                estado = ATIVO;
+                estado = ESTADO::ATIVO;
             }
             move(alvo);
             break;

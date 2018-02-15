@@ -1,6 +1,6 @@
 #include "linfocito.h"
 
-Linfocito::Linfocito() : Celula(LINFOCITO){
+Linfocito::Linfocito() : Celula(TIPO_CELULA::LINFOCITO){
 
 }
 
