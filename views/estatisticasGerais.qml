@@ -9,6 +9,41 @@ ApplicationWindow {
     height: 500
     visible: true
 
+    Timer{
+        running: parent.visible
+        repeat: true
+        interval: 1000
+        onTriggered: {
+            if(x.max <= qtLinfocitos.count) x.max++;
+            qtLinfocitos.append(qtLinfocitos.count, janela.quantidade_celulas[4]);
+        }
+    }
 
+    ChartView {
+        title: "Estatisticas"
+        anchors.fill: parent
+        antialiasing: true
+        dropShadowEnabled: true
+        theme: ChartView.ChartThemeDark
+
+        ValueAxis {
+            id: x
+            titleText: "Tempo"
+            max: 5
+        }
+
+        ValueAxis {
+            id: y
+            titleText: "Quantidade"
+            max: 300
+        }
+
+        SplineSeries {
+            id:qtLinfocitos
+            name: "Linfocitos"
+            axisX: x
+            axisY: y
+        }
+    }
 
 }

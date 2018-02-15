@@ -15,6 +15,8 @@ ApplicationWindow {
     color: "#c6c6c6"
     title: "Sistema imunológico artificial C++ " + temporizador.segundos
 
+    property var quantidade_celulas : [0,0,0,0,0,0,0]
+
     Shortcut {
         sequences: ["Ctrl++","A"]
         onActivated: celulas.scale += 0.2
@@ -57,6 +59,7 @@ ApplicationWindow {
         target: sistema
         onAdicionaCelula: {
             Script.cria(celulas,celula);
+            janela.quantidade_celulas[celula.tipo] ++;
         }
         onMovimentaCelula: {
             if(Script.celulas[id] === undefined) return;
@@ -64,6 +67,7 @@ ApplicationWindow {
         }
         onEliminaCelula: {
             if(Script.celulas[id] === undefined) return;
+            janela.quantidade_celulas[Script.celulas[id].celula.tipo] --;
             Script.celulas[id].destroy();
             delete Script.celulas[id];
         }
