@@ -27,6 +27,14 @@ ApplicationWindow {
         onActivated: if(celulas.scale > 1) celulas.scale -= 0.2
     }
 
+    Shortcut {
+        sequence: "F1"
+        onActivated: {
+            var tmp = Qt.createComponent("../views/sobre.qml");
+            tmp.createObject(janela,{});
+        }
+    }
+
     Shortcut{
         sequence: "Ctrl+N"
         onActivated: {
@@ -123,6 +131,7 @@ ApplicationWindow {
 
     menuBar: MenuBar {
         id: menu
+//        Material.theme: Material.Dark
         Menu {
             title: "Novo"
             MenuItem {
