@@ -11,8 +11,8 @@ void Macrofago::loop(){
 
     if(alvo != nullptr){
         if(calculaDistancia(alvo) < 6){
-            alvo->remove();
-            alvo = nullptr;
+//            alvo->remove();
+//            alvo = nullptr;
         } else {
             move(alvo);
         }
@@ -46,4 +46,13 @@ void Macrofago::loop(){
 
 Macrofago::ESTADO Macrofago::getEstado(){
     return this->estado;
+}
+
+QString Macrofago::extra(){
+    QJsonObject json;
+    json.insert("estado",QVariant::fromValue(estado).value<QString>());
+    if(alvo != nullptr) json.insert("alvo",alvo->id);
+
+    QJsonDocument tmp(json);
+    return tmp.toJson();
 }

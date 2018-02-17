@@ -11,14 +11,7 @@ public:
 
     void loop();
 
-    QString extra(){
-        QJsonObject json;
-        json.insert("estado",QVariant::fromValue(estado).value<QString>());
-        if(alvo != nullptr) json.insert("alvo",alvo->id);
-
-        QJsonDocument tmp(json);
-        return tmp.toJson();
-    }
+    QString extra();
 
     ESTADO getEstado();
 
