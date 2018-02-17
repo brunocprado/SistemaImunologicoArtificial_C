@@ -7,7 +7,7 @@ ApplicationWindow {
     title: "Estatísticas Gerais"
     width: 900
     height: 500
-    visible: true
+    visible: false
 
     Timer{
         running: parent.visible

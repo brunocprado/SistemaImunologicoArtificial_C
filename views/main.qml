@@ -116,6 +116,7 @@ ApplicationWindow {
                 id: celulas
                 transformOrigin: Item.TopLeft
                 anchors.fill: parent
+                scale: 1.2
             }
         }
     }
@@ -172,7 +173,7 @@ ApplicationWindow {
             MenuItem{
                 text: "Estatisticas gerais"
                 onClicked: {
-                    Script.viewEstatisticas.createObject(janela,{});
+                    Script.estatisticaGerais.visible = true;
                 }
             }
         }
