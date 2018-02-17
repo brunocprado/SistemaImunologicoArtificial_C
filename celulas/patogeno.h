@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QTimer>
 
+#include <chrono>
+#include <QElapsedTimer>
+
 #include "celulas/celula.h"
 #include "estatisticas/virus.h"
 
@@ -15,19 +18,19 @@ public:
     Patogeno(Virus *virus,double x,double y);
 
     void loop();
-    QString extra(){return "";}
-
-    void clona();
+    QString extra();
 
 private:
     QTimer* timer;
 
     void inicia();
+    void clona();
 
     Virus* virus;
 
-    Celula* prox = nullptr;
+    Celula* alvo = nullptr;
     bool processando = false;
+    QElapsedTimer inicioProc;
 
 public slots:
     void subThread();

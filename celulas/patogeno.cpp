@@ -22,13 +22,14 @@ Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(TIPO_CELULA::PATOG
 void Patogeno::inicia(){
     virus->add();
     emiteQuimica(CompostoQuimico::PAMP,20);
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(subThread()));
-    timer->start(600);
+//    timer = new QTimer(this);
+//    connect(timer, SIGNAL(timeout()), this, SLOT(subThread()));
+//    timer->start(600);
 }
 
 void Patogeno::clona(){
-    Patogeno *tmp = new Patogeno(virus,x,y);
+    qDebug() << "TESTE";
+    Patogeno *tmp = new Patogeno(virus,x+10,y + 10);
     SistemaImunologico::getInstancia()->renderizaCelula(tmp);
 }
 
@@ -39,19 +40,27 @@ void Patogeno::subThread(){
 
 void Patogeno::loop(){
 
-    if(prox != nullptr){
-        if(calculaDistancia(prox) < 6){
-            //processando = true;
-//            clona();
-            prox->remove();
-            prox = nullptr;
+    if(processando) {
+        if(inicioProc.elapsed() >= 500){
+            processando = false;
+            alvo->remove();
+            alvo = nullptr;
+//            qDebug << "THREAD ATUAL" << thread();
+//            SistemaImunologico::getInstancia()->renderizaCelula(new Patogeno(virus,x+5,y+5));
+        } else return;
+    }
+
+    if(alvo != nullptr){
+        if(calculaDistancia(alvo) < 6){
+            processando = true;
+            inicioProc.start();
         } else {
-            move(prox);
+            move(alvo);
         }
         return;
     }
 
-    double maisProx = INT16_MAX;
+    double maisprox = INT16_MAX;
     double dist = 0;
 
    QList<Celula*>* tmp = SistemaImunologico::getInstancia()->getCelulas();
@@ -59,11 +68,20 @@ void Patogeno::loop(){
         Celula* celula = tmp->at(i);
         if(celula->getTipo() != TIPO_CELULA::LINFOCITO) continue;
         dist = calculaDistancia(celula);
-        if(maisProx > dist){
-            maisProx = dist;
-            prox = celula;
+        if(maisprox > dist){
+            maisprox = dist;
+            alvo = celula;
         }
     }
 
-    if(prox != nullptr) move(prox);
+    if(alvo != nullptr) move(alvo);
+}
+
+QString Patogeno::extra(){
+    QJsonObject json;
+    json.insert("virus",QVariant::fromValue(virus->getIdentificador()).value<QString>());
+    if(alvo != nullptr) json.insert("alvo",alvo->id);
+
+    QJsonDocument tmp(json);
+    return tmp.toJson();
 }
