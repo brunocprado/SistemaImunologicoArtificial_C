@@ -42,9 +42,7 @@ void Celula::move(short xx, short yy){
 }
 
 double Celula::calculaDistancia(short x, short y){
-    int deltaX = this->x - x;
-    int deltaY = this->y - y;
-    return sqrt(pow(deltaX,2) + pow(deltaY,2));
+    return sqrt(pow(this->x - x,2) + pow(this->y - y,2));
 }
 
 double Celula::calculaDistancia(Celula *c){
