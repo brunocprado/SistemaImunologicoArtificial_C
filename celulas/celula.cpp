@@ -24,7 +24,9 @@ Celula::Celula(TIPO_CELULA t, double x, double y){
 void Celula::remove(){
     SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
     emit SistemaImunologico::getInstancia()->eliminaCelula(id);
-//    delete this;
+    if(tipo == TIPO_CELULA::PATOGENO) {
+        ((Patogeno*)this)->getVirus()->sub();
+    }
 }
 
 void Celula::move(Celula* c){
