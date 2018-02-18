@@ -1,5 +1,3 @@
-#include <QTimer>
-
 #include "patogeno.h"
 #include "quimica/compostoquimico.h"
 #include "sistemaimunologico.h"
@@ -40,7 +38,12 @@ void Patogeno::subThread(){
 
 void Patogeno::loop(){
 
-    if(processando) {
+    if(processando && !SistemaImunologico::getInstancia()->getCelulas()->contains(alvo)){
+        processando = false;
+        alvo = nullptr;
+    }
+
+    if(processando) {   
         if(inicioProc.elapsed() >= 800){
             processando = false;
             alvo->remove();
