@@ -3,8 +3,6 @@
 
 #include <QObject>
 #include <QTimer>
-
-#include <chrono>
 #include <QElapsedTimer>
 
 #include "celulas/celula.h"
