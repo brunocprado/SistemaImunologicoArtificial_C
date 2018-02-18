@@ -22,14 +22,14 @@ Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(TIPO_CELULA::PATOG
 void Patogeno::inicia(){
     virus->add();
     emiteQuimica(CompostoQuimico::PAMP,20);
-//    timer = new QTimer(this);
-//    connect(timer, SIGNAL(timeout()), this, SLOT(subThread()));
-//    timer->start(600);
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(subThread()));
+    timer->start(600);
 }
 
 void Patogeno::clona(){
-    qDebug() << "TESTE";
     Patogeno *tmp = new Patogeno(virus,x+10,y + 10);
+    tmp->moveToThread(SistemaImunologico::getThread());
     SistemaImunologico::getInstancia()->renderizaCelula(tmp);
 }
 
@@ -41,13 +41,12 @@ void Patogeno::subThread(){
 void Patogeno::loop(){
 
     if(processando) {
-        if(inicioProc.elapsed() >= 500){
-            qDebug() << "FOI";
+        if(inicioProc.elapsed() >= 800){
             processando = false;
             alvo->remove();
             alvo = nullptr;
-//            qDebug << "THREAD ATUAL" << thread();
-//            SistemaImunologico::getInstancia()->renderizaCelula(new Patogeno(virus,x+5,y+5));
+
+            clona();
         } else return;
     }
 
