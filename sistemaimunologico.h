@@ -40,6 +40,8 @@ public:
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();
+    static QThread* getThread();
+
     QList<Celula*>* getCelulas();
     CamadaQuimica* getQuimica();
     QList<Virus*>* getSimulacoes();

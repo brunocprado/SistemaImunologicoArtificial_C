@@ -15,7 +15,7 @@ SistemaImunologico::SistemaImunologico() : QThread(){
     GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
-    simulacoes = new QList<Virus*>();
+//    simulacoes = new QList<Virus*>();
 }
 
 SistemaImunologico::~SistemaImunologico(){
@@ -40,6 +40,10 @@ SistemaImunologico* SistemaImunologico::getInstancia(){
 
 QList<CompostoQuimico*>* SistemaImunologico::getCompostos(){
     return INSTANCIA->getQuimica()->getCompostos();
+}
+
+QThread* SistemaImunologico::getThread(){
+    return INSTANCIA->thread();
 }
 
 void SistemaImunologico::carregaParametros() {
