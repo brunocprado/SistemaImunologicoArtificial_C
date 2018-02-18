@@ -42,6 +42,7 @@ void Patogeno::loop(){
 
     if(processando) {
         if(inicioProc.elapsed() >= 500){
+            qDebug() << "FOI";
             processando = false;
             alvo->remove();
             alvo = nullptr;
@@ -84,4 +85,8 @@ QString Patogeno::extra(){
 
     QJsonDocument tmp(json);
     return tmp.toJson();
+}
+
+Virus* Patogeno::getVirus(){
+    return virus;
 }

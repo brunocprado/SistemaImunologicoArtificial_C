@@ -20,6 +20,8 @@ public:
     void loop();
     QString extra();
 
+    Virus* getVirus();
+
 private:
     QTimer* timer;
 
