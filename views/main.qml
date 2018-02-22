@@ -95,6 +95,7 @@ ApplicationWindow {
         }
         onAddVirus: {
             Script.viewEstatisticas.createObject(janela,{"virus":virus});
+
         }
     }
 
@@ -168,9 +169,11 @@ ApplicationWindow {
                 if(menuPausar.text == "Pausar"){
                     menuPausar.text = "Resumir";
                     sistema.pausar();
+                    temporizador.running = false;
                 } else {
                     menuPausar.text = "Pausar";
                     sistema.resumir();
+                    temporizador.running = true;
                 }
             }
         }
