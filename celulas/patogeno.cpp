@@ -26,12 +26,13 @@ void Patogeno::inicia(){
 }
 
 void Patogeno::clona(){
-    Patogeno *tmp = new Patogeno(virus,x+10,y + 10);
+    Patogeno *tmp = new Patogeno(virus,x+5,y+5);
     tmp->moveToThread(SistemaImunologico::getThread());
     SistemaImunologico::getInstancia()->renderizaCelula(tmp);
 }
 
 void Patogeno::subThread(){
+    if(SistemaImunologico::getInstancia()->pausado) return;
     if(!SistemaImunologico::getInstancia()->getCelulas()->contains(this)) {timer->stop(); virus->sub(); return;}
     emiteQuimica(CompostoQuimico::PAMP,20);
 }
