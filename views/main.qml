@@ -94,8 +94,8 @@ ApplicationWindow {
             delete Script.compostos[id];
         }
         onAddVirus: {
-            Script.viewEstatisticas.createObject(janela,{"virus":virus});
-
+            var tmp = Script.viewEstatisticas.createObject(janela,{"virus":virus});
+            menuEstatisticas.addItem(menuLayout.createObject(menuEstatisticas,{"virus":tmp,"text":virus.identificador}));
         }
     }
 
@@ -186,6 +186,16 @@ ApplicationWindow {
                 text: "Estatisticas gerais"
                 onClicked: {
                     Script.estatisticaGerais.visible = true;
+                }
+            }
+
+            Component {
+                id: menuLayout
+                MenuItem {
+                    property var virus
+                    onClicked: {
+                        virus.visible = true;
+                    }
                 }
             }
         }
