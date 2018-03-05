@@ -1,4 +1,5 @@
 #include "macrofago.h"
+#include "patogeno.h"
 
 #include "sistemaimunologico.h"
 
@@ -11,8 +12,8 @@ void Macrofago::loop(){
 
     if(alvo != nullptr){
         if(calculaDistancia(alvo) < 6){
-//            alvo->remove();
-//            alvo = nullptr;
+            alvo->remove();
+            alvo = nullptr;
         } else {
             move(alvo);
         }
@@ -29,6 +30,9 @@ void Macrofago::loop(){
         if(dist <= composto->getRaio() + 5){
             alvo = composto->getEmissor();
             tempoDetectado = QDateTime::currentDateTime();
+
+            Patogeno* tmp = (Patogeno*)alvo;
+            tmp->getVirus()->addTemporizacao(tempoDetectado.toSecsSinceEpoch() - tmp->getInicio().toSecsSinceEpoch());
 
 //            if(dist <= 4) fagocita();
             if(estado == ESTADO::REPOUSO) {
