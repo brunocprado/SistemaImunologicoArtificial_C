@@ -2,6 +2,7 @@
 #define PATOGENO_H
 
 #include <QObject>
+#include <QDateTime>
 #include <QTimer>
 #include <QElapsedTimer>
 
@@ -19,6 +20,7 @@ public:
     QString extra();
 
     Virus* getVirus();
+    QDateTime getInicio();
 
 private:
     QTimer* timer;
@@ -28,6 +30,7 @@ private:
 
     Virus* virus;
 
+    QDateTime inicio;
     Celula* alvo = nullptr;
     bool processando = false;
     QElapsedTimer inicioProc;

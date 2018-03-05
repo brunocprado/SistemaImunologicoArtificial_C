@@ -18,6 +18,7 @@ Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(TIPO_CELULA::PATOG
 }
 
 void Patogeno::inicia(){
+    inicio = QDateTime::currentDateTime();
     virus->add();
     emiteQuimica(CompostoQuimico::PAMP,20);
     timer = new QTimer(this);
@@ -92,4 +93,8 @@ QString Patogeno::extra(){
 
 Virus* Patogeno::getVirus(){
     return virus;
+}
+
+QDateTime Patogeno::getInicio(){
+    return inicio;
 }
