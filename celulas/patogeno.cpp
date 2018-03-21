@@ -1,4 +1,5 @@
 #include "patogeno.h"
+#include "celulas/comum.h"
 #include "quimica/compostoquimico.h"
 #include "sistemaimunologico.h"
 
@@ -34,7 +35,7 @@ void Patogeno::clona(){
 
 void Patogeno::subThread(){
     if(SistemaImunologico::getInstancia()->pausado) return;
-    if(!SistemaImunologico::getInstancia()->getCelulas()->contains(this)) {timer->stop(); virus->sub(); return;}
+    if(!SistemaImunologico::getInstancia()->getCelulas()->contains(this)) {timer->stop(); return;}
     emiteQuimica(CompostoQuimico::PAMP,20);
 }
 
@@ -49,8 +50,13 @@ void Patogeno::loop(){
         if(inicioProc.elapsed() >= 800){
             processando = false;
             alvo->remove();
-            alvo = nullptr;
 
+
+//            Comum* tmp = (Comum*)alvo;
+//            tmp->setEstado(ESTADO::INFECTADA);
+
+
+            alvo = nullptr;
             clona();
         } else return;
     }
@@ -68,10 +74,10 @@ void Patogeno::loop(){
     double maisprox = INT16_MAX;
     double dist = 0;
 
-   QList<Celula*>* tmp = SistemaImunologico::getInstancia()->getCelulas();
+    QList<Celula*>* tmp = SistemaImunologico::getInstancia()->getCelulas();
     for (int i = 0; i < tmp->length(); i++){
         Celula* celula = tmp->at(i);
-        if(celula->getTipo() != TIPO_CELULA::LINFOCITO) continue;
+        if(celula->getTipo() != TIPO_CELULA::COMUM) continue;
         dist = calculaDistancia(celula);
         if(maisprox > dist){
             maisprox = dist;

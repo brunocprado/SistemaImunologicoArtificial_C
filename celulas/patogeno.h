@@ -21,9 +21,9 @@ public:
 
     Virus* getVirus();
     QDateTime getInicio();
-
+QTimer* timer;
 private:
-    QTimer* timer;
+
 
     void inicia();
     void clona();
