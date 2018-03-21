@@ -1,4 +1,4 @@
-var viewCelula, viewComposto, viewNovoSistema, viewEstatisticas, estatisticaGerais;
+var viewCelula, viewComposto, viewEstatisticas, estatisticaGerais;
 
 var exibeQuimica = true;
 
@@ -17,15 +17,15 @@ var tipoCelula = {
 function inicia(){
     viewCelula = Qt.createComponent("../views/celula.qml");
     viewComposto = Qt.createComponent("../views/composto.qml");
-    viewNovoSistema = Qt.createComponent("../views/celula.qml");
     viewEstatisticas = Qt.createComponent("../views/estatisticas.qml");
-//    estatisticaGerais = Qt.createComponent("../views/estatisticasGerais.qml").createObject(janela,{});
+    estatisticaGerais = Qt.createComponent("../views/estatisticasGerais.qml").createObject(janela,{});
 }
 
 function cria(parente,celula) {
     var tmp;
 
     switch(celula.tipo){
+        case 0: tmp = "celula.png"; break;
         case 1: tmp = "opcoes.png"; break;
         case 2: tmp = "macro.png"; break;
         case 3: tmp = "neutrofilo.png"; break;
