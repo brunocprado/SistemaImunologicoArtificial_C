@@ -12,7 +12,7 @@ void Macrofago::loop(){
 
     if(alvo != nullptr){
         if(calculaDistancia(alvo) < 6){
-            alvo->remove();
+            if(SistemaImunologico::getInstancia()->getCelulas()->contains(alvo)) alvo->remove();
             alvo = nullptr;
         } else {
             move(alvo);
@@ -32,7 +32,7 @@ void Macrofago::loop(){
             tempoDetectado = QDateTime::currentDateTime();
 
             Patogeno* tmp = (Patogeno*)alvo;
-            tmp->getVirus()->addTemporizacao(tempoDetectado.toSecsSinceEpoch() - tmp->getInicio().toSecsSinceEpoch());
+//            tmp->getVirus()->addTemporizacao(tempoDetectado.toSecsSinceEpoch() - tmp->getInicio().toSecsSinceEpoch());
 
 //            if(dist <= 4) fagocita();
             if(estado == ESTADO::REPOUSO) {
