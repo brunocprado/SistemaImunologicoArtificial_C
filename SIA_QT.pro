@@ -23,7 +23,9 @@ SOURCES += main.cpp \
     estatisticas/virus.cpp \
     celulas/linfocito.cpp \
     celulas/celulab.cpp \
-    celulas/anticorpo.cpp
+    celulas/anticorpo.cpp \
+    celulas/dendridica.cpp \
+    celulas/comum.cpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -47,7 +49,9 @@ HEADERS += \
     estatisticas/virus.h \
     celulas/linfocito.h \
     celulas/celulab.h \
-    celulas/anticorpo.h
+    celulas/anticorpo.h \
+    celulas/dendridica.h \
+    celulas/comum.h
 
 
 SUBDIRS += \
