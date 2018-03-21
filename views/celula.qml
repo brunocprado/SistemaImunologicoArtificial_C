@@ -1,5 +1,4 @@
 import QtQuick 2.10
-//import ufrrj.bruno 1.0
 
 Image {
     property var celula

@@ -139,7 +139,7 @@ ApplicationWindow {
             MenuItem {
                 text: "Sistema"
                 onClicked: {
-                    var tmp = Qt.createComponent("novoVirus.qml");
+                    var tmp = Qt.createComponent("novoSistema.qml");
                     tmp.createObject(janela,{});
                 }
             }

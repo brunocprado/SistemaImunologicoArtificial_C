@@ -18,24 +18,22 @@ ApplicationWindow {
     }
 
     ChartView {
-        id: chart
         title: "Estatisticas"
         anchors.fill: parent
         antialiasing: true
-        animationDuration: 200
-        animationOptions: ChartView.AllAnimations
+        dropShadowEnabled: true
 
         ValueAxis {
             id: x
             titleText: "Tempo"
             max: 5
-            shadesColor: "#faa"
+            labelsVisible: false
         }
 
         ValueAxis {
             id: y
             titleText: "Quantidade"
-            max: 15
+            max: 40
         }
 
         SplineSeries {
@@ -43,7 +41,6 @@ ApplicationWindow {
             name: "Antigenos"
             axisX: x
             axisY: y
-            pointLabelsVisible: true
             onClicked: {
                 console.log(point.x,point.y)
             }
@@ -51,13 +48,13 @@ ApplicationWindow {
     }
 
     Timer{
-        running: true
-        interval: 1000
+        running: parent.visible
+        interval: 200
         repeat: true
         onTriggered: {
-            if(x.max <= qtAntigenos.count) x.max++;
+            if(x.max <= qtAntigenos.count) x.max++;      
             qtAntigenos.append(qtAntigenos.count, virus.quantidade);
-            if(virus.quantidade == 0) running = false;
+            if(virus.quantidade <= 0) running = false;
         }
     }
 }

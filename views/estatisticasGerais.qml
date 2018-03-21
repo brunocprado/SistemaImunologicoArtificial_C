@@ -12,9 +12,10 @@ ApplicationWindow {
     Timer{
         running: parent.visible
         repeat: true
-        interval: 1000
+        interval: 2000
         onTriggered: {
             if(x.max <= qtLinfocitos.count) x.max++;
+            qtMacrofagos.append(qtMacrofagos.count,janela.quantidade_celulas[2]);
             qtLinfocitos.append(qtLinfocitos.count, janela.quantidade_celulas[4]);
         }
     }
@@ -36,6 +37,13 @@ ApplicationWindow {
             id: y
             titleText: "Quantidade"
             max: 300
+        }
+
+        SplineSeries {
+            id:qtMacrofagos
+            name: "Macrofagos"
+            axisX: x
+            axisY: y
         }
 
         SplineSeries {

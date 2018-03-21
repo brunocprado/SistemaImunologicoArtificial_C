@@ -6,7 +6,7 @@ ApplicationWindow {
     width: 400
     height: 450
     visible: true
-    color: "#888"
+    color: "#ccc"
 
     Component.onCompleted: {
         console.log("TESTE")
@@ -20,30 +20,29 @@ ApplicationWindow {
         height: 94
         title: qsTr("Group Box")
 
-        TextInput {
-            id: textInput
-            x: 0
-            y: 24
-            width: 261
-            height: 20
-            text: qsTr("")
-            font.pixelSize: 12
-        }
-
         Text {
             id: text1
             x: 0
-            y: 4
+            y: 0
             text: qsTr("Identificador")
             font.pixelSize: 12
+        }
+
+        TextField {
+            id: textField
+            x: 0
+            y: 16
+            width: 340
+            height: 43
+            text: qsTr("Text Field")
         }
     }
 
     Button {
-        x: 315
-        y: 400
+        x: 312
+        y: 393
         width: 78
-        height: 35
+        height: 46
         text: "Novo"
     }
 
