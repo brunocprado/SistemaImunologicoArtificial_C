@@ -36,7 +36,7 @@ public:
     Q_INVOKABLE void addPatogeno(); //DEBUG
     Q_INVOKABLE void mudaParametro(QString parametro,double valor);
 
-    Q_INVOKABLE Virus* getVirus(int id);
+//    Q_INVOKABLE Virus* getVirus(int id);
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();
@@ -44,7 +44,6 @@ public:
 
     QList<Celula*>* getCelulas();
     CamadaQuimica* getQuimica();
-    QList<Virus*>* getSimulacoes();
 
     QDateTime getINICIO_SISTEMA();
     double getParametro(std::string parametro);
@@ -60,7 +59,6 @@ private:
 
     QList<Celula*>* celulas;
     CamadaQuimica* quimica;
-    QList<Virus*>* simulacoes;
     QMap<std::string,double>* parametros;
 
     void carregaParametros();

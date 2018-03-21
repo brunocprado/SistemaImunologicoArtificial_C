@@ -1,9 +1,9 @@
-#include <QThread>
 #include <QtConcurrent/QtConcurrent>
 #include <stdlib.h>
 
 #include "sistemaimunologico.h"
 #include "quimica/camadaquimica.h"
+#include "celulas/comum.h"
 #include "celulas/macrofago.h"
 #include "celulas/neutrofilo.h"
 #include "celulas/linfocito.h"
@@ -11,11 +11,15 @@
 
 SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 
+/**
+ * Classe principal <br>
+ * @author Bruno Prado
+*/
+
 SistemaImunologico::SistemaImunologico() : QThread(){
     GERADOR = time(0); srand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
-//    simulacoes = new QList<Virus*>();
 }
 
 SistemaImunologico::~SistemaImunologico(){
@@ -87,6 +91,10 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     for(int i =0;i<(nInicial * parametros->value("LINFOCITOS"));i++){
         renderizaCelula(new Linfocito());
     }
+
+    for(int i=0;i< 80;i++){
+        renderizaCelula(new Comum());
+    }
 }
 
 void SistemaImunologico::run(){
@@ -129,7 +137,7 @@ void SistemaImunologico::encerra(){
 
 void SistemaImunologico::addPatogeno(){
     Virus* tmp = new Virus("SIMULAÇÃO TESTE");
-    for(int i = 0;i<6;i++){
+    for(int i = 0;i<10;i++){
         celulas->append(new Patogeno(tmp));
         renderizaCelula(celulas->last());
     }
@@ -157,18 +165,6 @@ QList<Celula*>* SistemaImunologico::getCelulas(){
     return celulas;
 }
 
-QList<Virus*>* SistemaImunologico::getSimulacoes(){
-    return simulacoes;
-}
-
-//int SistemaImunologico::getX(int id){
-//    return celulas->at(id)->x;
+//Virus* SistemaImunologico::getVirus(int id){
+//    return (simulacoes->at(id));
 //}
-
-//int SistemaImunologico::getY(int id){
-//    return celulas->at(id)->y;
-//}
-
-Virus* SistemaImunologico::getVirus(int id){
-    return (simulacoes->at(id));
-}
