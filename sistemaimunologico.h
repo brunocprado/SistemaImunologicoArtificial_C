@@ -30,13 +30,12 @@ public:
     void log(QString texto);
     void log(QString cor,QString texto);
 
+    Q_INVOKABLE void novoSistema(QString parametros);
     Q_INVOKABLE void pausar();
     Q_INVOKABLE void resumir();
     Q_INVOKABLE void encerra();
     Q_INVOKABLE void addPatogeno(); //DEBUG
     Q_INVOKABLE void mudaParametro(QString parametro,double valor);
-
-//    Q_INVOKABLE Virus* getVirus(int id);
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();

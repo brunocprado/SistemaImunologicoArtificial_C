@@ -11,8 +11,8 @@ static int contador = 0;
 Celula::Celula(TIPO_CELULA t){
     id=contador; contador++;
     tipo = t;
-    x = rand() % 1600 + 1;
-    y = rand() % 900 + 1;
+    x = qrand() % 1600 + 1;
+    y = qrand() % 900 + 1;
 }
 
 Celula::Celula(TIPO_CELULA t, double x, double y){

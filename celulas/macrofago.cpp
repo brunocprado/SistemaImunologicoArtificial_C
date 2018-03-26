@@ -44,7 +44,7 @@ void Macrofago::loop(){
         }
     }
 
-    if(alvo == nullptr) move(x + (rand() % 4 - 1),y + (rand() % 4 - 1));
+    if(alvo == nullptr) move(x + (qrand() % 4 - 1),y + (qrand() % 4 - 1));
 
 }
 

@@ -17,7 +17,7 @@ SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 */
 
 SistemaImunologico::SistemaImunologico() : QThread(){
-    GERADOR = time(0); srand(GERADOR);
+    GERADOR = time(0); qsrand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();
 }
@@ -40,14 +40,6 @@ void SistemaImunologico::inicia(){
 SistemaImunologico* SistemaImunologico::getInstancia(){
     if(INSTANCIA == 0) INSTANCIA = new SistemaImunologico();
     return INSTANCIA;
-}
-
-QList<CompostoQuimico*>* SistemaImunologico::getCompostos(){
-    return INSTANCIA->getQuimica()->getCompostos();
-}
-
-QThread* SistemaImunologico::getThread(){
-    return INSTANCIA->thread();
 }
 
 void SistemaImunologico::carregaParametros() {
@@ -77,7 +69,7 @@ void SistemaImunologico::carregaParametros() {
 }
 
 void SistemaImunologico::geraPrimeiraGeracao(){
-    int nInicial = rand() % (int)(parametros->value("TAM_MEDIO_SUPERIOR") - parametros->value("TAM_MEDIO_INFERIOR")) + parametros->value("TAM_MEDIO_INFERIOR");
+    int nInicial = qrand() % (int)(parametros->value("TAM_MEDIO_SUPERIOR") - parametros->value("TAM_MEDIO_INFERIOR")) + parametros->value("TAM_MEDIO_INFERIOR");
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){
@@ -109,7 +101,6 @@ void SistemaImunologico::run(){
 
 void SistemaImunologico::renderizaCelula(Celula* celula){
     celulas->append(celula);
-//    emit adicionaCelula(celula->id,celula->getTipo(),celula->x,celula->y);
     emit adicionaCelula(celula);
 }
 
@@ -121,6 +112,26 @@ void SistemaImunologico::log(QString texto){
 void SistemaImunologico::log(QString cor, QString texto){
     qDebug() << texto;
     emit escreveLog(cor,texto);
+}
+
+void SistemaImunologico::novoSistema(QString parametros){
+    CamadaQuimica* tmp = quimica;
+
+    this->GERADOR = parametros.toInt();
+    qsrand(GERADOR); //2X MESMO
+//    setGerador(parametros.toInt());
+
+    for(int i=0;i<celulas->length();i++){
+        emit eliminaCelula(celulas->at(i)->getId());
+    }
+    free(celulas);
+    this->celulas = new QList<Celula*>();
+
+    quimica->terminate();
+    quimica = new CamadaQuimica();
+    geraPrimeiraGeracao();
+
+    delete tmp;
 }
 
 void SistemaImunologico::pausar(){
@@ -145,7 +156,7 @@ void SistemaImunologico::addPatogeno(){
 
 void SistemaImunologico::setGerador(int g){
     this->GERADOR = g;
-    srand(GERADOR);
+    qsrand(GERADOR);
 }
 
 double SistemaImunologico::getParametro(std::string parametro){
@@ -165,6 +176,10 @@ QList<Celula*>* SistemaImunologico::getCelulas(){
     return celulas;
 }
 
-//Virus* SistemaImunologico::getVirus(int id){
-//    return (simulacoes->at(id));
-//}
+QList<CompostoQuimico*>* SistemaImunologico::getCompostos(){
+    return INSTANCIA->getQuimica()->getCompostos();
+}
+
+QThread* SistemaImunologico::getThread(){
+    return INSTANCIA->thread();
+}
