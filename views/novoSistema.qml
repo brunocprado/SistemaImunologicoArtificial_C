@@ -69,6 +69,9 @@ ApplicationWindow {
         y: 320
         text: qsTr("OK")
         Material.accent: Material.Red
+        onPressed: {
+            sistema.novoSistema(txtGerador.text)
+        }
     }
 
     Text {
@@ -81,7 +84,7 @@ ApplicationWindow {
     }
 
     TextField {
-        id: textField
+        id: txtGerador
         x: 17
         y: 56
         width: 258
