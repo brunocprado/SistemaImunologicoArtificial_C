@@ -13,7 +13,7 @@ ApplicationWindow {
     minimumHeight: 700
     minimumWidth: 1000
     color: "#c6c6c6"
-    title: if(temporizador.segundos != 0) "Sistema imunológico artificial C++ - Tempo de execução : " + temporizador.segundos + "segundos"; else "Sistema imunológico artificial C++";
+    title: if(temporizador.segundos != 0) "Sistema imunológico artificial C++ - Tempo de execução : " + temporizador.segundos + " segundos | " + temporizador.segundos/6 + " dia(s)"; else "Sistema imunológico artificial C++";
 
     property var quantidade_celulas : [0,0,0,0,0,0,0]
 
@@ -97,6 +97,10 @@ ApplicationWindow {
             temporizador.running = true;
             var tmp = Script.viewEstatisticas.createObject(janela,{"virus":virus});
             menuEstatisticas.addItem(menuLayout.createObject(menuEstatisticas,{"virus":tmp,"text":virus.identificador}));
+        }
+        onReseta: {
+            temporizador.segundos = 0;
+            temporizador.restart(); temporizador.stop();
         }
     }
 

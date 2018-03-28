@@ -117,9 +117,7 @@ void SistemaImunologico::log(QString cor, QString texto){
 void SistemaImunologico::novoSistema(QString parametros){
     CamadaQuimica* tmp = quimica;
 
-    this->GERADOR = parametros.toInt();
-    qsrand(GERADOR); //2X MESMO
-//    setGerador(parametros.toInt());
+    setGerador(parametros.toInt());
 
     for(int i=0;i<celulas->length();i++){
         emit eliminaCelula(celulas->at(i)->getId());
@@ -127,11 +125,16 @@ void SistemaImunologico::novoSistema(QString parametros){
     free(celulas);
     this->celulas = new QList<Celula*>();
 
+    for(int i=0;i<quimica->getCompostos()->length();i++){
+        emit eliminaComposto(quimica->getCompostos()->at(i)->getId());
+    }
     quimica->terminate();
     quimica = new CamadaQuimica();
     geraPrimeiraGeracao();
 
     delete tmp;
+
+    emit reseta();
 }
 
 void SistemaImunologico::pausar(){

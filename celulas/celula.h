@@ -44,6 +44,7 @@ public:
 
 protected:
     TIPO_CELULA tipo;
+    short tempoVida = 0;
     double velMovimento = 1.0;
 
 signals:

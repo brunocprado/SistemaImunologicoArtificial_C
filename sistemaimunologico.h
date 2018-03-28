@@ -75,6 +75,8 @@ signals:
     void escreveLog(QString cor,QString texto);
     void addParametro(QString parametro);
     void addVirus(Virus* virus);
+
+    void reseta();
 };
 
 #endif // SISTEMAIMUNOLOGICO_H
