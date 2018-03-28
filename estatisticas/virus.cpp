@@ -9,7 +9,6 @@
 Virus::Virus(QString identificador){
     this->identificador = identificador;
     this->epitopo = rand() % INT16_MAX;
-    SistemaImunologico::getInstancia()->getSimulacoes()->append(this);
     emit SistemaImunologico::getInstancia()->addVirus(this);
 }
 
