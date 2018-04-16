@@ -55,7 +55,6 @@ ApplicationWindow {
 
         ComboBox {
             id: txtComando
-//            editText: editText.toUpperCase()
             currentIndex: -1
             y: 5
             height: 40

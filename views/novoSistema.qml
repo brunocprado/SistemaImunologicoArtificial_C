@@ -6,76 +6,11 @@ ApplicationWindow {
     id: novoSistema
     width: 600
     height: 380
+    property alias toolTip: toolTip
     visible: true
-    //    color: "#6a3030"
     Material.accent: Material.Red
-    Component.onCompleted: {
-        console.log("TESTE")
-    }
-
-    GroupBox {
-        id: groupBox
-        x: 17
-        y: 120
-        width: 568
-        height: 182
-        title: qsTr("Leucócitos a serem simulados")
-        //Material.theme: Material.Dark
-
-        Column {
-            id: column
-            width: 225
-            height: 135
-            spacing: 5
-
-            RadioButton {
-                id: radioButton
-                width: 127
-                height: 30
-                text: qsTr("Macrófagos")
-                autoExclusive: false
-                checked: true
-            }
-
-            RadioButton {
-                id: radioButton1
-                height: 30
-                text: qsTr("Neutrófilos")
-                autoExclusive: false
-                checked: true
-            }
-
-            RadioButton {
-                id: radioButton2
-                height: 30
-                text: qsTr("Linfócitos")
-                checked: true
-                autoExclusive: false
-            }
-
-            RadioButton {
-                id: radioButton3
-                height: 30
-                text: qsTr("Radio Button")
-                checked: true
-                autoExclusive: false
-            }
-        }
-    }
-
-    Button {
-        id: button
-        x: 521
-        y: 320
-        text: qsTr("OK")
-        Material.accent: Material.Red
-        onPressed: {
-            sistema.novoSistema(txtGerador.text)
-        }
-    }
 
     Text {
-        id: text1
         x: 17
         y: 14
         text: qsTr("Novo sistema")
@@ -87,34 +22,140 @@ ApplicationWindow {
         id: txtGerador
         x: 17
         y: 56
-        width: 258
+        width: 260
         height: 36
         font.pixelSize: 14
         text: qsTr("")
         bottomPadding: 10
         placeholderText: "Gerador"
         Material.accent: Material.Red
+
     }
 
-    RoundButton {
-        id: roundButton
-        x: 286
-        y: 58
-        width: 30
-        height: 30
-        text: "?"
-        font.bold: true
-        font.pointSize: 10
+    GroupBox {
+        x: 17
+        y: 120
+        width: 568
+        height: 182
+        title: qsTr("Leucócitos a serem simulados")
+        //Material.theme: Material.Dark
 
-        ToolTip{
-            leftMargin: -0.3
-            parent: parent
-            visible: parent.activeFocus
-            Text{
-                text: "TESTE"
+        Column {
+            width: 197
+            height: 135
+            spacing: 5
+
+            Row {
+                width: 200
+                height: 30
+
+                RadioButton {
+                    id: radioButton
+                    y: 0
+                    width: 150
+                    height: 30
+                    text: qsTr("Macrófagos")
+                    autoExclusive: false
+                    checked: true
+                }
+
+                RoundButton {
+                    id: roundButton
+                    width: 30
+                    height: 30
+                    text: "+"
+                    ToolTip{
+                        id: toolTip
+                        visible: parent.activeFocus
+                        width:180
+                        height:120
+                        rightMargin: 0
+
+                        TextField {
+                            id: textField
+                            text: qsTr("Text Field")
+                        }
+
+
+                    }
+                }
             }
+
+            Row {
+                width: 200
+                height: 30
+                RadioButton {
+                    id: radioButton1
+                    y: 0
+                    width: 150
+                    height: 30
+                    text: qsTr("Neutrófilos")
+                    checked: true
+                    autoExclusive: false
+                }
+
+                RoundButton {
+                    id: roundButton1
+                    width: 30
+                    height: 30
+                    text: "+"
+                }
+            }
+
+            Row {
+                width: 200
+                height: 30
+                RadioButton {
+                    id: radioButton2
+                    y: 0
+                    width: 150
+                    height: 30
+                    text: qsTr("Macrófagos")
+                    checked: true
+                    autoExclusive: false
+                }
+
+                RoundButton {
+                    id: roundButton2
+                    width: 30
+                    height: 30
+                    text: "+"
+                }
+            }
+
+            Row {
+                width: 200
+                height: 30
+                RadioButton {
+                    id: radioButton3
+                    y: 0
+                    width: 150
+                    height: 30
+                    text: qsTr("Macrófagos")
+                    checked: true
+                    autoExclusive: false
+                }
+
+                RoundButton {
+                    id: roundButton3
+                    width: 30
+                    height: 30
+                    text: "+"
+                }
+            }
+
         }
     }
 
 
+    Button {
+        id: btnOk
+        x: 521
+        y: 320
+        text: qsTr("OK")
+        Material.accent: Material.Red
+        onPressed: {
+            sistema.novoSistema(txtGerador.text)
+        }
+    }
 }
