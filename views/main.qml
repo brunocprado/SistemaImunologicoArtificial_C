@@ -178,7 +178,7 @@ ApplicationWindow {
                 } else {
                     menuPausar.text = "Pausar";
                     sistema.resumir();
-                    temporizador.running = true;
+                    if(janela.quantidade_celulas[1] > 0) temporizador.running = true;
                 }
             }
         }
