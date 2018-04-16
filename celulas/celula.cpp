@@ -21,11 +21,17 @@ Celula::Celula(TIPO_CELULA t, double x, double y){
     this->x = x; this->y = y;
 }
 
+void Celula::envelhece(){
+    tempoVida++;
+    if(tempoVida == 400) remove();
+}
+
 void Celula::remove(){
     SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
     emit SistemaImunologico::getInstancia()->eliminaCelula(id);
-    if(tipo == TIPO_CELULA::PATOGENO) {
+    if(tipo == TIPO_CELULA::PATOGENO){
         ((Patogeno*)this)->getVirus()->sub();
+        printf("REMOVE %d\n",this->id);
     }
 }
 

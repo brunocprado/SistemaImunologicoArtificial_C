@@ -22,6 +22,7 @@ public:
     Celula(TIPO_CELULA t,double x,double y);
 
     //=======| Funções |========// TODO : Get/Set
+    void envelhece();
     void move(Celula* celula);
     void move(short xx,short yy);
     double calculaDistancia(short int x,short int y);

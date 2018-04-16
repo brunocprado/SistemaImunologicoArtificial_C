@@ -8,6 +8,14 @@ Macrofago::Macrofago() : Celula(TIPO_CELULA::MACROFAGO){
 }
 
 void Macrofago::loop(){
+    envelhece();
+
+    if(qrand() % 450 == 1){
+        Macrofago *tmp = new Macrofago();
+        tmp->moveToThread(SistemaImunologico::getThread());
+        SistemaImunologico::getInstancia()->renderizaCelula(tmp);
+    }
+
     if(estado == ESTADO::FAGOCITANDO) return;
 
     if(alvo != nullptr){
@@ -54,6 +62,7 @@ Macrofago::ESTADO Macrofago::getEstado(){
 
 QString Macrofago::extra(){
     QJsonObject json;
+    json.insert("tempo de vida",QString("%1 dia(s)").arg((double)(tempoVida/200)));
     json.insert("estado",QVariant::fromValue(estado).value<QString>());
     if(alvo != nullptr) json.insert("alvo",alvo->id);
 

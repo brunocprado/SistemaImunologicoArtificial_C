@@ -26,8 +26,17 @@
     <DELAY_PROPAGACAO>800</DELAY_PROPAGACAO>
     <DELAY_ANTI>500</DELAY_ANTI>
     
-    <!-- Proporcoes x1000 -->  
+    <!-- Proporcoes -->
     <MACROFAGOS>0.053</MACROFAGOS>
     <NEUTROFILOS>0.65</NEUTROFILOS>
     <LINFOCITOS>0.26</LINFOCITOS>
+
+    <!-- Tempo de vida 200 = 24 horas -->
+    <VIDA_ANTIGENO>200</VIDA_ANTIGENO>
+    <INCUBACAO_ANTIGENO>150</INCUBACAO_ANTIGENO>
+    <VIDA_ANTICORPO>500</VIDA_ANTICORPO>
+
+    <!-- Chance de reprodução -->
+    <CHANCE_MACROFAGO>0.2</CHANCE_MACROFAGO>
+
 </parametros>
