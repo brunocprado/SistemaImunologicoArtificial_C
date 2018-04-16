@@ -60,6 +60,8 @@ private:
     CamadaQuimica* quimica;
     QMap<std::string,double>* parametros;
 
+//    static QMap<Celula::TIPO_CELULA,std::string>*; TODO
+
     void carregaParametros();
     void run(); //Loop do QThread
 
