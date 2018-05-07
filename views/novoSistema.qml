@@ -5,157 +5,193 @@ import QtQuick.Controls.Material 2.3
 ApplicationWindow {
     id: novoSistema
     width: 600
-    height: 380
+    height: 400
     property alias toolTip: toolTip
     visible: true
-    Material.accent: Material.Red
+//    Material.accent: Material.Red
 
-    Text {
-        x: 17
-        y: 14
-        text: qsTr("Novo sistema")
-        font.family: "Roboto"
-        font.pixelSize: 22
+    TabBar {
+        id: seletorAba
+        width: parent.width
+
+        TabButton{
+            text: "Simulação"
+        }
+
+        TabButton{
+            text: "Parâmetros"
+        }
     }
 
-    TextField {
-        id: txtGerador
-        x: 17
-        y: 56
-        width: 260
-        height: 36
-        font.pixelSize: 14
-        text: qsTr("")
-        bottomPadding: 10
-        placeholderText: "Gerador"
-        Material.accent: Material.Red
+    SwipeView{
+        y: 50
+        width: parent.width
+        currentIndex: seletorAba.currentIndex
 
-    }
+        Item{
+            Pane{
+                padding: 10
 
-    GroupBox {
-        x: 17
-        y: 120
-        width: 568
-        height: 182
-        title: qsTr("Leucócitos a serem simulados")
-        //Material.theme: Material.Dark
-
-        Column {
-            width: 197
-            height: 135
-            spacing: 5
-
-            Row {
-                width: 200
-                height: 30
-
-                RadioButton {
-                    id: radioButton
-                    y: 0
-                    width: 150
-                    height: 30
-                    text: qsTr("Macrófagos")
-                    autoExclusive: false
-                    checked: true
+                Text {
+                    text: qsTr("Novo sistema")
+                    font.family: "Roboto"
+                    font.pixelSize: 22
                 }
 
-                RoundButton {
-                    id: roundButton
-                    width: 30
-                    height: 30
-                    text: "+"
-                    ToolTip{
-                        id: toolTip
-                        visible: parent.activeFocus
-                        width:180
-                        height:120
-                        rightMargin: 0
+                TextField {
+                    id: txtGerador
+                    y: 56
+                    width: 260
+                    height: 36
+                    font.pixelSize: 14
+                    text: qsTr("")
+                    bottomPadding: 10
+                    placeholderText: "Gerador"
+                    Material.accent: Material.Red
+                }
 
-                        TextField {
-                            id: textField
-                            text: qsTr("Text Field")
+                GroupBox {
+                    y: 120
+                    width: 570
+                    height: 182
+                    title: qsTr("Leucócitos a serem simulados")
+                    //Material.theme: Material.Dark
+
+                    Column {
+                        width: 197
+                        height: 135
+                        spacing: 5
+
+                        Row {
+                            width: 200
+                            height: 30
+
+                            RadioButton {
+                                id: radioButton
+                                y: 0
+                                width: 150
+                                height: 30
+                                text: qsTr("Macrófagos")
+                                autoExclusive: false
+                                checked: true
+                            }
+
+                            RoundButton {
+                                id: roundButton
+                                width: 30
+                                height: 30
+                                text: "+"
+                                ToolTip{
+                                    id: toolTip
+                                    visible: parent.activeFocus
+                                    width:180
+                                    height:120
+                                    rightMargin: 0
+
+                                    TextField {
+                                        id: textField
+                                        text: qsTr("Text Field")
+                                    }
+
+
+                                }
+                            }
                         }
 
+                        Row {
+                            width: 200
+                            height: 30
+                            RadioButton {
+                                id: radioButton1
+                                y: 0
+                                width: 150
+                                height: 30
+                                text: qsTr("Neutrófilos")
+                                checked: true
+                                autoExclusive: false
+                            }
+
+                            RoundButton {
+                                id: roundButton1
+                                width: 30
+                                height: 30
+                                text: "+"
+                            }
+                        }
+
+                        Row {
+                            width: 200
+                            height: 30
+                            RadioButton {
+                                id: radioButton2
+                                y: 0
+                                width: 150
+                                height: 30
+                                text: qsTr("Macrófagos")
+                                checked: true
+                                autoExclusive: false
+                            }
+
+                            RoundButton {
+                                id: roundButton2
+                                width: 30
+                                height: 30
+                                text: "+"
+                            }
+                        }
+
+                        Row {
+                            width: 200
+                            height: 30
+                            RadioButton {
+                                id: radioButton3
+                                y: 0
+                                width: 150
+                                height: 30
+                                text: qsTr("Macrófagos")
+                                checked: true
+                                autoExclusive: false
+                            }
+
+                            RoundButton {
+                                id: roundButton3
+                                width: 30
+                                height: 30
+                                text: "+"
+                            }
+                        }
 
                     }
                 }
-            }
 
-            Row {
-                width: 200
-                height: 30
-                RadioButton {
-                    id: radioButton1
-                    y: 0
-                    width: 150
-                    height: 30
-                    text: qsTr("Neutrófilos")
-                    checked: true
-                    autoExclusive: false
-                }
 
-                RoundButton {
-                    id: roundButton1
-                    width: 30
-                    height: 30
-                    text: "+"
+                Button {
+                    id: btnOk
+                    x: 521
+                    y: 320
+                    text: qsTr("OK")
+                    Material.accent: Material.Red
+                    onPressed: {
+                        sistema.novoSistema(txtGerador.text)
+                    }
                 }
             }
+        }
 
-            Row {
-                width: 200
-                height: 30
-                RadioButton {
-                    id: radioButton2
-                    y: 0
-                    width: 150
-                    height: 30
-                    text: qsTr("Macrófagos")
-                    checked: true
-                    autoExclusive: false
-                }
+        Item{
+            Pane{
+                padding: 10
 
-                RoundButton {
-                    id: roundButton2
-                    width: 30
-                    height: 30
-                    text: "+"
+//                Ta{
+//                    id:lista
+//                }
+
+                Text{
+                    text: "dasdasdas"
+
                 }
             }
-
-            Row {
-                width: 200
-                height: 30
-                RadioButton {
-                    id: radioButton3
-                    y: 0
-                    width: 150
-                    height: 30
-                    text: qsTr("Macrófagos")
-                    checked: true
-                    autoExclusive: false
-                }
-
-                RoundButton {
-                    id: roundButton3
-                    width: 30
-                    height: 30
-                    text: "+"
-                }
-            }
-
         }
     }
 
-
-    Button {
-        id: btnOk
-        x: 521
-        y: 320
-        text: qsTr("OK")
-        Material.accent: Material.Red
-        onPressed: {
-            sistema.novoSistema(txtGerador.text)
-        }
-    }
 }
