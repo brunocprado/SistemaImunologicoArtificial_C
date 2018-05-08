@@ -26,5 +26,6 @@
         <file>views/novoVirus.qml</file>
         <file>imagens/logoBranca.png</file>
         <file>views/estatisticasGerais.qml</file>
+        <file>imagens/apagar.png</file>
     </qresource>
 </RCC>

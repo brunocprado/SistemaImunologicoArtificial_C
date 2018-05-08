@@ -206,7 +206,7 @@ ApplicationWindow {
                     Text{
                         leftPadding: 10
                         height: 40
-                        width: listaParametros.width - 120
+                        width: listaParametros.width - 150
                         text: "Parâmetro"
                         verticalAlignment: Text.AlignVCenter
                         font.bold: true
@@ -237,7 +237,7 @@ ApplicationWindow {
                     Text{
                         leftPadding: 10
                         height: 40
-                        width: listaParametros.width - 120
+                        width: listaParametros.width - 150
                         text: valorTexto
                         verticalAlignment: Text.AlignVCenter
                     }
@@ -248,6 +248,19 @@ ApplicationWindow {
                         width: 100
                         placeholderText: valor
                         inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        MouseArea{
+                            x: 120
+                            y: 10
+                            width: 20
+                            height: 20
+                            cursorShape: Qt.PointingHandCursor
+                            Image {
+                                source: "../imagens/apagar.png"
+                            }
+                            onClicked: {
+                                parent.text = ""
+                            }
+                        }
                     }
                }
             }
