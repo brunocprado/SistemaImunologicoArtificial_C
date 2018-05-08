@@ -7,11 +7,12 @@ ApplicationWindow {
     width: 600
     height: 420
     visible: true
+    title: "Nova simulação"
 
     Component.onCompleted: {
         var tmp = JSON.parse(sistema.getParametros());
         for(var i in tmp){
-            listaParametros.model.append({valorTexto: i,valor:tmp[i]});
+            listaParametros.append({valorTexto: i,valor:tmp[i]});
         }
     }
 
@@ -188,6 +189,7 @@ ApplicationWindow {
                 text: qsTr("OK")
                 Material.accent: Material.Red
                 onPressed: {
+//                    console.info(listaParametros)
                     sistema.novoSistema(txtGerador.text)
                 }
             }
@@ -206,7 +208,7 @@ ApplicationWindow {
                     Text{
                         leftPadding: 10
                         height: 40
-                        width: listaParametros.width - 150
+                        width: lista.width - 150
                         text: "Parâmetro"
                         verticalAlignment: Text.AlignVCenter
                         font.bold: true
@@ -229,15 +231,15 @@ ApplicationWindow {
 
             ListView{
                 y: 45
-                id: listaParametros
+                id: lista
                 width: parent.width
                 height: 310
-                model: ListModel {}
+                model: ListModel { id: listaParametros }
                 delegate: Row{
                     Text{
                         leftPadding: 10
                         height: 40
-                        width: listaParametros.width - 150
+                        width: lista.width - 150
                         text: valorTexto
                         verticalAlignment: Text.AlignVCenter
                     }
