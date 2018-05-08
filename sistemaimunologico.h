@@ -36,6 +36,7 @@ public:
     Q_INVOKABLE void encerra();
     Q_INVOKABLE void addPatogeno(); //DEBUG
     Q_INVOKABLE void mudaParametro(QString parametro,double valor);
+    Q_INVOKABLE QString getParametros();
 
     static SistemaImunologico* getInstancia();
     static QList<CompostoQuimico*>* getCompostos();

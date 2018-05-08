@@ -13,9 +13,9 @@ ApplicationWindow {
     minimumHeight: 700
     minimumWidth: 1000
     color: "#c6c6c6"
-    title: if(temporizador.segundos != 0) "Sistema imunológico artificial C++ - Tempo de execução : " + temporizador.segundos + " segundos | " + (temporizador.segundos/6).toFixed(2) + " dia(s) " + versao; else "Sistema imunológico artificial C++ " + versao;
+    title: if(temporizador.segundos != 0) "Sistema imunológico artificial C++ - Tempo de execução : " + temporizador.segundos + " segundos  |  " + (temporizador.segundos/6).toFixed(2) + " dia(s)  " + versao; else "Sistema imunológico artificial C++  " + versao;
 
-    property string versao : "| Commit nº : " + sistema.versao_git()
+    property string versao : "|  Versão  :  " + sistema.versao_git() + "  Alpha"
     property var quantidade_celulas : [0,0,0,0,0,0,0]
 
     Shortcut {
@@ -39,7 +39,16 @@ ApplicationWindow {
     Shortcut{
         sequence: "Ctrl+N"
         onActivated: {
-            sistema.addPatogeno();
+            novoSistema();
+        }
+    }
+
+    function novoSistema(){
+        if(Script.viewNovoSistema){
+            Script.viewNovoSistema.visible = true;
+        } else {
+            var tmp = Qt.createComponent("novoSistema.qml");
+            Script.viewNovoSistema = tmp.createObject(janela,{});
         }
     }
 
@@ -142,15 +151,14 @@ ApplicationWindow {
         Menu {
             title: "Novo"
             MenuItem {
-                text: "Sistema"
+                text: "Sistema        [Ctrl+N]"
                 onClicked: {
-                    var tmp = Qt.createComponent("novoSistema.qml");
-                    tmp.createObject(janela,{});
+                    novoSistema();
                 }
             }
 
             MenuItem {
-                text: "Patogeno       [Ctrl+N]"
+                text: "Patogeno      [Ctrl+P]"
                 onClicked: {
                     sistema.addPatogeno();
                 }

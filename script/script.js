@@ -1,4 +1,4 @@
-var viewCelula, viewComposto, viewEstatisticas, estatisticaGerais;
+var viewCelula, viewComposto, viewEstatisticas, estatisticaGerais, viewNovoSistema;
 
 var exibeQuimica = true;
 

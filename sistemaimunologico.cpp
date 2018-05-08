@@ -187,6 +187,19 @@ QThread* SistemaImunologico::getThread(){
     return INSTANCIA->thread();
 }
 
+QString SistemaImunologico::getParametros(){
+    QJsonObject json;
+
+    QMapIterator<std::string, double> i(*parametros);
+    while (i.hasNext()) {
+        i.next();
+        json.insert(QString::fromStdString(i.key()), i.value());
+    }
+
+    QJsonDocument tmp(json);
+    return tmp.toJson();
+}
+
 QString SistemaImunologico::versao_git(){
     return GIT_VERSION;
 }
