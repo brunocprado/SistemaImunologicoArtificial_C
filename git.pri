@@ -1,4 +1,4 @@
-VERSION = 0.1.0
+VERSION = 0.2.0
 
 GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 
@@ -6,7 +6,7 @@ GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --alw
     isEmpty(GIT_VERSION) {
         GIT_VERSION = $$VERSION
     } else { # otherwise construct proper git describe string
-        GIT_COMMIT_COUNT = $$system($$BASE_GIT_COMMAND rev-list HEAD --count 2> $$NULL_DEVICE)
+        GIT_COMMIT_COUNT = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags rev-list HEAD --count 2> $$NULL_DEVICE)
         isEmpty(GIT_COMMIT_COUNT) {
             GIT_COMMIT_COUNT = 0
         }
