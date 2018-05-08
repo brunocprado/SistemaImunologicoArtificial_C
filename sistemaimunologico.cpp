@@ -186,3 +186,7 @@ QList<CompostoQuimico*>* SistemaImunologico::getCompostos(){
 QThread* SistemaImunologico::getThread(){
     return INSTANCIA->thread();
 }
+
+QString SistemaImunologico::versao_git(){
+    return GIT_VERSION;
+}

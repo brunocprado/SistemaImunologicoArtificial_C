@@ -49,6 +49,8 @@ public:
 
     void setGerador(int g);
 
+    Q_INVOKABLE static QString versao_git();
+
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
 

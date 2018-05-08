@@ -1,6 +1,8 @@
 QT += quick charts
 CONFIG += c++11 qmlcompiler optimize_full
 
+include(git.pri)
+
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #QMAKE_CXXFLAGS_RELEASE += -O2
@@ -48,12 +50,12 @@ HEADERS += \
     celulas/dendridica.h \
     celulas/comum.h
 
-
 SUBDIRS += \
     SIA_QT.pro
 
 RESOURCES += \
-    qml.qrc
+    qml.qrc \
+    git.pri
 
 RC_ICONS = icone.ico
 
