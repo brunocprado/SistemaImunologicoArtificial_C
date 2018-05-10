@@ -115,9 +115,12 @@ void SistemaImunologico::log(QString cor, QString texto){
 }
 
 void SistemaImunologico::novoSistema(QString parametros){
-    CamadaQuimica* tmp = quimica;
+    CamadaQuimica* quim = quimica;
 
-    setGerador(parametros.toInt());
+    QJsonDocument json = QJsonDocument::fromJson(parametros.toUtf8());
+    QJsonObject jsonParametros = json.object().value("parametros").toObject();
+
+    setGerador(json.object().value("gerador").toInt());
 
     for(int i=0;i<celulas->length();i++){
         emit eliminaCelula(celulas->at(i)->getId());
@@ -132,8 +135,15 @@ void SistemaImunologico::novoSistema(QString parametros){
     quimica = new CamadaQuimica();
     geraPrimeiraGeracao();
 
-    delete tmp;
+    if(json.object().value("qt").toInt() > 0) {
+        Virus* virus = new Virus("SIMULAÇÃO TESTE");
+        for(int i=0;i<json.object().value("qt").toInt();i++){
+            celulas->append(new Patogeno(virus));
+            renderizaCelula(celulas->last());
+        }
+    }
 
+    delete quim;
     emit reseta();
 }
 

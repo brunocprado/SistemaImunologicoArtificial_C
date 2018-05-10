@@ -13,9 +13,11 @@ ApplicationWindow {
     maximumHeight: minimumHeight
     maximumWidth: minimumWidth
 
+    property var parametros: ({})
+
     Component.onCompleted: {
-        var tmp = JSON.parse(sistema.getParametros());
-        for(var i in tmp) listaParametros.append({valorTexto: i,valor:tmp[i]});
+        parametros = JSON.parse(sistema.getParametros());
+        for(var i in parametros) listaParametros.append({valorTexto: i,valor:parametros[i]});
     }
 
     TabBar {
@@ -230,33 +232,24 @@ ApplicationWindow {
                 }
             }
 
-
             Button {
-                id: btnOk
                 x: 511
                 y: 336
                 text: qsTr("OK")
                 Material.accent: Material.Red
                 onPressed: {
                     var tmp = {};
-                    //tmp["inicializar"] = radioInicia.checked;
+                    tmp["gerador"] = (txtGerador.text != "") ? parseInt(txtGerador.text) : 0;
                     tmp["qt"] = (radioInicia.checked && txtQt.text != "") ? parseInt(txtQt.text) : 0;
-                    console.info(JSON.stringify(tmp));
-
-                    //                    console.info(listaParametros)
-                    sistema.novoSistema(txtGerador.text)
+                    tmp["parametros"] = parametros;
+//                    console.info(JSON.stringify(tmp));
+                    sistema.novoSistema(JSON.stringify(tmp));
                 }
             }
-
-
-
-
-
         }
 
         Pane {
             padding: 10
-
             Rectangle{
                 color: '#fafafa'
                 width: parent.width
@@ -301,22 +294,22 @@ ApplicationWindow {
                         text: valorTexto
                         verticalAlignment: Text.AlignVCenter
                     }
-
                     TextField{
                         y: 2
                         height: 40
                         width: 100
                         placeholderText: valor
                         inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        onTextChanged: {
+                            parametros[valorTexto] = text;
+                        }
                         MouseArea{
                             x: 120
                             y: 10
                             width: 20
                             height: 20
                             cursorShape: Qt.PointingHandCursor
-                            Image {
-                                source: "../imagens/apagar.png"
-                            }
+                            Image { source: "../imagens/apagar.png" }
                             onClicked: {
                                 parent.text = ""
                             }
