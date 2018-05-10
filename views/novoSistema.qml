@@ -5,15 +5,17 @@ import QtQuick.Controls.Material 2.3
 ApplicationWindow {
     id: novoSistema
     width: 600
-    height: 460
+    height: 455
     visible: true
     title: "Nova simulação"
+    minimumHeight: height
+    minimumWidth: width
+    maximumHeight: minimumHeight
+    maximumWidth: minimumWidth
 
     Component.onCompleted: {
         var tmp = JSON.parse(sistema.getParametros());
-        for(var i in tmp){
-            listaParametros.append({valorTexto: i,valor:tmp[i]});
-        }
+        for(var i in tmp) listaParametros.append({valorTexto: i,valor:tmp[i]});
     }
 
     TabBar {
@@ -41,8 +43,6 @@ ApplicationWindow {
                 font.pixelSize: 22
             }
 
-
-
             Row {
                 x: 5
                 y: 50
@@ -55,7 +55,7 @@ ApplicationWindow {
                     width: 120
                     height: 36
                     font.pixelSize: 14
-                    text: qsTr("")
+                    validator: IntValidator {bottom: 0;}
                     bottomPadding: 10
                     placeholderText: "Gerador"
                     Material.accent: Material.Red
@@ -67,6 +67,7 @@ ApplicationWindow {
                     height: 36
                     text: "?"
                     checkable: false
+//                    Material.accent: "#"
                 }
 
                 Text {
@@ -74,7 +75,7 @@ ApplicationWindow {
                     visible: btnExibeLegendanda.hovered
                     width: 320
                     height: 35
-                    text: qsTr("Seed do gerador do sistema. Um gerador X sempre irá resultar na mesma simulação")
+                    text: "Seed do gerador do sistema. Um gerador X sempre irá resultar na mesma simulação. (Padrão = 0)"
                     wrapMode: Text.WordWrap
                     verticalAlignment: Text.AlignVCenter
                     topPadding: 0
@@ -96,9 +97,9 @@ ApplicationWindow {
 
             Row {
                 visible: radioInicia.checked
-                x: 294
+                x: 335
                 y: 98
-                width: 280
+                width: 240
                 spacing: 20
 
                 Text {
@@ -110,7 +111,9 @@ ApplicationWindow {
 
                 TextField {
                     id: txtQt
-                    text: qsTr("")
+                    width: 80
+                    validator: IntValidator {bottom: 0; top: 999;}
+                    horizontalAlignment: Text.AlignHCenter
                     placeholderText: "10"
                 }
             }
@@ -235,6 +238,11 @@ ApplicationWindow {
                 text: qsTr("OK")
                 Material.accent: Material.Red
                 onPressed: {
+                    var tmp = {};
+                    //tmp["inicializar"] = radioInicia.checked;
+                    tmp["qt"] = (radioInicia.checked && txtQt.text != "") ? parseInt(txtQt.text) : 0;
+                    console.info(JSON.stringify(tmp));
+
                     //                    console.info(listaParametros)
                     sistema.novoSistema(txtGerador.text)
                 }
