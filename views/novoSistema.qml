@@ -5,7 +5,7 @@ import QtQuick.Controls.Material 2.3
 ApplicationWindow {
     id: novoSistema
     width: 600
-    height: 420
+    height: 460
     visible: true
     title: "Nova simulação"
 
@@ -41,6 +41,8 @@ ApplicationWindow {
                 font.pixelSize: 22
             }
 
+
+
             Row {
                 x: 5
                 y: 50
@@ -59,7 +61,17 @@ ApplicationWindow {
                     Material.accent: Material.Red
                 }
 
+                RoundButton {
+                    id: btnExibeLegendanda
+                    width: 36
+                    height: 36
+                    text: "?"
+                    checkable: false
+                }
+
                 Text {
+                    id: lblLegenda
+                    visible: btnExibeLegendanda.hovered
                     width: 320
                     height: 35
                     text: qsTr("Seed do gerador do sistema. Um gerador X sempre irá resultar na mesma simulação")
@@ -68,10 +80,44 @@ ApplicationWindow {
                     topPadding: 0
                     font.family: "Verdana"
                 }
+
+            }
+
+            RadioButton {
+                id: radioInicia
+                x: 0
+                y: 98
+                height: 40
+                text: qsTr("Inicializar")
+                autoExclusive: false
+                checkable: true
+                checked: true
+            }
+
+            Row {
+                visible: radioInicia.checked
+                x: 294
+                y: 98
+                width: 280
+                spacing: 20
+
+                Text {
+                    height: 40
+                    text: qsTr("Quantidade de antígenos")
+                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: 12
+                }
+
+                TextField {
+                    id: txtQt
+                    text: qsTr("")
+                    placeholderText: "10"
+                }
             }
 
             GroupBox {
-                y: 108
+                x: 5
+                y: 148
                 width: 570
                 height: 182
                 title: qsTr("Leucócitos a serem simulados")
@@ -184,15 +230,19 @@ ApplicationWindow {
 
             Button {
                 id: btnOk
-                x: 506
-                y: 296
+                x: 511
+                y: 336
                 text: qsTr("OK")
                 Material.accent: Material.Red
                 onPressed: {
-//                    console.info(listaParametros)
+                    //                    console.info(listaParametros)
                     sistema.novoSistema(txtGerador.text)
                 }
             }
+
+
+
+
 
         }
 
@@ -233,7 +283,7 @@ ApplicationWindow {
                 y: 45
                 id: lista
                 width: parent.width
-                height: 310
+                height: 340
                 model: ListModel { id: listaParametros }
                 delegate: Row{
                     Text{
@@ -264,7 +314,7 @@ ApplicationWindow {
                             }
                         }
                     }
-               }
+                }
             }
         }
     }
