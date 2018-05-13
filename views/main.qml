@@ -168,11 +168,7 @@ ApplicationWindow {
         MenuBarItem{
             text: "Opções"
             onClicked: {
-                if(opcoes.visible) {
-                    opcoes.close();
-                } else {
-                    opcoes.open();
-                }
+                (opcoes.visible) ? opcoes.close() : opcoes.open();
             }
         }
 
