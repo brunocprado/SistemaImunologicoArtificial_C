@@ -28,7 +28,7 @@ private:
     void inicia();
     void clona();
 
-    std::shared_ptr<Virus> virus;
+    Virus* virus;
 
     QDateTime inicio;
     Celula* alvo = nullptr;

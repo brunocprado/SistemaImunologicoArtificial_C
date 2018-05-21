@@ -11,8 +11,6 @@ class Virus : public QObject {
 public:
     Virus(QString identificador);
 
-    std::shared_ptr<Virus> referencia = std::shared_ptr<Virus>(this);
-
     void addTemporizacao(int tempo);
 
     QString getIdentificador();

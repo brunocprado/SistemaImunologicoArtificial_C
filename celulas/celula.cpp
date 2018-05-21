@@ -30,7 +30,7 @@ void Celula::remove(){
     SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
     emit SistemaImunologico::getInstancia()->eliminaCelula(id);
     if(tipo == TIPO_CELULA::PATOGENO){
-        ((Patogeno*)this)->apagaRef();
+        ((Patogeno*)this)->setParent(nullptr);
     }
 }
 

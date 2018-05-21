@@ -26,5 +26,5 @@ int Virus::getEpitopo(){
 }
 
 short Virus::getQuantidade(){
-    return referencia.use_count() - 1;
+    return children().count();
 }
