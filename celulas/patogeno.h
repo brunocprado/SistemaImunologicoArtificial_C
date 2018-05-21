@@ -20,15 +20,15 @@ public:
     QString extra();
 
     Virus* getVirus();
+    void apagaRef() { virus = nullptr; }
     QDateTime getInicio();
-QTimer* timer;
+    QTimer* timer;
+
 private:
-
-
     void inicia();
     void clona();
 
-    Virus* virus;
+    std::shared_ptr<Virus> virus;
 
     QDateTime inicio;
     Celula* alvo = nullptr;

@@ -12,14 +12,6 @@ Virus::Virus(QString identificador){
     emit SistemaImunologico::getInstancia()->addVirus(this);
 }
 
-void Virus::add(){
-    quantidade++;
-}
-
-void Virus::sub(){
-    quantidade--;
-}
-
 void Virus::addTemporizacao(int tempo){
     tempoMedio = (tempoMedio * qtTempo) + tempo;
     qtTempo++;
@@ -34,5 +26,5 @@ int Virus::getEpitopo(){
 }
 
 short Virus::getQuantidade(){
-    return quantidade;
+    return referencia.use_count() - 1;
 }

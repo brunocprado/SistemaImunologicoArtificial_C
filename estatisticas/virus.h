@@ -11,8 +11,7 @@ class Virus : public QObject {
 public:
     Virus(QString identificador);
 
-    void add();
-    void sub();
+    std::shared_ptr<Virus> referencia = std::shared_ptr<Virus>(this);
 
     void addTemporizacao(int tempo);
 
@@ -21,7 +20,6 @@ public:
     short getQuantidade();
 
 private:
-    short quantidade = 0;
     QString identificador;
     unsigned int epitopo;
 

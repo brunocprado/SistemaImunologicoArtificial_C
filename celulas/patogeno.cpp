@@ -4,23 +4,23 @@
 #include "sistemaimunologico.h"
 
 Patogeno::Patogeno() : Celula(TIPO_CELULA::PATOGENO){
-    this->virus = new Virus("TESTE");
+    this->virus = (new Virus("TESTE"))->referencia;
     this->inicia();
 }
 
 Patogeno::Patogeno(Virus *virus) : Celula(TIPO_CELULA::PATOGENO){
-    this->virus = virus;
+    this->virus = virus->referencia;
     this->inicia();
 }
 
 Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(TIPO_CELULA::PATOGENO,x,y){
-    this->virus = virus;
+    this->virus = virus->referencia;
     this->inicia();
 }
 
 void Patogeno::inicia(){
     inicio = QDateTime::currentDateTime();
-    virus->add();
+//    virus->add();
     emiteQuimica(CompostoQuimico::PAMP,20);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(subThread()));
@@ -28,7 +28,7 @@ void Patogeno::inicia(){
 }
 
 void Patogeno::clona(){
-    Patogeno *tmp = new Patogeno(virus,x+5,y+5);
+    Patogeno *tmp = new Patogeno(virus.get(),x+5,y+5);
     tmp->moveToThread(SistemaImunologico::getThread());
     SistemaImunologico::getInstancia()->renderizaCelula(tmp);
 }
@@ -98,7 +98,7 @@ QString Patogeno::extra(){
 }
 
 Virus* Patogeno::getVirus(){
-    return virus;
+    return virus.get();
 }
 
 QDateTime Patogeno::getInicio(){
