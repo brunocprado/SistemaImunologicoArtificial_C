@@ -132,103 +132,45 @@ ApplicationWindow {
                     height: 135
                     spacing: 5
 
-                    Row {
-                        width: 200
+                    RadioButton {
+                        id: radioMacrofagos
+                        y: 0
+                        width: 150
                         height: 30
-
-                        RadioButton {
-                            id: radioButton
-                            y: 0
-                            width: 150
-                            height: 30
-                            text: qsTr("Macrófagos")
-                            autoExclusive: false
-                            checked: true
-                        }
-
-                        RoundButton {
-                            id: roundButton
-                            width: 30
-                            height: 30
-                            text: "+"
-                            ToolTip{
-                                id: toolTip
-                                visible: parent.activeFocus
-                                width:180
-                                height:120
-                                rightMargin: 0
-
-                                TextField {
-                                    id: textField
-                                    text: qsTr("Text Field")
-                                }
-                            }
-                        }
+                        text: qsTr("Macrófagos")
+                        autoExclusive: false
+                        checked: true
                     }
 
-                    Row {
-                        width: 200
+                    RadioButton {
+                        id: radioNeutrofilos
+                        y: 0
+                        width: 150
                         height: 30
-                        RadioButton {
-                            id: radioButton1
-                            y: 0
-                            width: 150
-                            height: 30
-                            text: qsTr("Neutrófilos")
-                            checked: true
-                            autoExclusive: false
-                        }
-
-                        RoundButton {
-                            id: roundButton1
-                            width: 30
-                            height: 30
-                            text: "+"
-                        }
+                        text: qsTr("Neutrófilos")
+                        checked: true
+                        autoExclusive: false
                     }
 
-                    Row {
-                        width: 200
+                    RadioButton {
+                        id: radioButton2
+                        y: 0
+                        width: 150
                         height: 30
-                        RadioButton {
-                            id: radioButton2
-                            y: 0
-                            width: 150
-                            height: 30
-                            text: qsTr("Macrófagos")
-                            checked: true
-                            autoExclusive: false
-                        }
-
-                        RoundButton {
-                            id: roundButton2
-                            width: 30
-                            height: 30
-                            text: "+"
-                        }
+                        text: qsTr("Macrófagos")
+                        checked: true
+                        autoExclusive: false
                     }
 
-                    Row {
-                        width: 200
+                    RadioButton {
+                        id: radioButton3
+                        y: 0
+                        width: 150
                         height: 30
-                        RadioButton {
-                            id: radioButton3
-                            y: 0
-                            width: 150
-                            height: 30
-                            text: qsTr("Macrófagos")
-                            checked: true
-                            autoExclusive: false
-                        }
-
-                        RoundButton {
-                            id: roundButton3
-                            width: 30
-                            height: 30
-                            text: "+"
-                        }
+                        text: qsTr("Macrófagos")
+                        checked: true
+                        autoExclusive: false
                     }
-
                 }
             }
 
@@ -240,10 +182,12 @@ ApplicationWindow {
                 onPressed: {
                     var tmp = {};
                     tmp["gerador"] = (txtGerador.text != "") ? parseInt(txtGerador.text) : 0;
-                    tmp["qt"] = (radioInicia.checked && txtQt.text != "") ? parseInt(txtQt.text) : 0;
+                    tmp["qt"] = (radioInicia.checked && txtQt.text != "") ? parseInt(txtQt.text) : 10;
+                    if(!radioInicia.checked) tmp["qt"] = 0;
                     tmp["parametros"] = parametros;
 //                    console.info(JSON.stringify(tmp));
                     sistema.novoSistema(JSON.stringify(tmp));
+                    novoSistema.close();
                 }
             }
         }
