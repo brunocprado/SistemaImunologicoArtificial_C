@@ -17,6 +17,7 @@ SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
 */
 
 SistemaImunologico::SistemaImunologico() : QThread(){
+    qDebug() << "\033[0;32mSistema imunológico artificial C++ Versão GIT:" << GIT_VERSION << "\033[0;0m";
     GERADOR = time(0); qsrand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     celulas = new QList<Celula*>();

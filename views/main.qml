@@ -13,7 +13,7 @@ ApplicationWindow {
     minimumHeight: 700
     minimumWidth: 1000
     color: "#c6c6c6"
-    title: if(temporizador.segundos != 0) "Sistema imunológico artificial C++ - Tempo de execução : " + temporizador.segundos + " segundos  |  " + (temporizador.segundos/6).toFixed(2) + " dia(s)  " + versao; else "Sistema imunológico artificial C++  " + versao;
+    title: (temporizador.segundos != 0) ? "Sistema imunológico artificial C++ - Tempo de execução : " + temporizador.segundos + " segundos  |  " + (temporizador.segundos/6).toFixed(2) + " dia(s)  " + versao : "Sistema imunológico artificial C++  " + versao;
 
     property string versao : "|  Versão  :  " + sistema.versao_git() + "  Alpha"
     property var quantidade_celulas : [0,0,0,0,0,0,0]
