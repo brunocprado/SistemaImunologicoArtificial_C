@@ -185,8 +185,8 @@ ApplicationWindow {
                     tmp["qt"] = (radioInicia.checked && txtQt.text != "") ? parseInt(txtQt.text) : 10;
                     if(!radioInicia.checked) tmp["qt"] = 0;
                     tmp["parametros"] = parametros;
-//                    console.info(JSON.stringify(tmp));
                     sistema.novoSistema(JSON.stringify(tmp));
+                    if(radioInicia.checked) temporizador.running = true;
                     novoSistema.close();
                 }
             }
