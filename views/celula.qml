@@ -24,7 +24,7 @@ Image {
             var tmp = Qt.createComponent("tooltip.qml");
             var t;
             switch(celula.tipo){
-                case 0: t = "comum"; break;
+                case 0: t = "epitelial"; break;
                 case 1: t = "patógeno"; break;
                 case 2: t = "macrófago"; break;
                 case 3: t = "neutrófilo"; break;
