@@ -33,7 +33,7 @@ ApplicationWindow {
         ValueAxis {
             id: y
             titleText: "Quantidade"
-            max: 40
+            max: 20
         }
 
         SplineSeries {
@@ -49,7 +49,7 @@ ApplicationWindow {
 
     Timer{
         running: parent.visible
-        interval: 200
+        interval: 250
         repeat: true
         onTriggered: {
             if(x.max <= qtAntigenos.count) x.max++;      
