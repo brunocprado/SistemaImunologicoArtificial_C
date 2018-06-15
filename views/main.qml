@@ -461,11 +461,19 @@ ApplicationWindow {
                     width: 265
                     height: 35
                     live: true
-                    value: 0.5
+                    from: 0
+                    value: 1
+                    to:2
+//                    stepSize: 0.2
+//                    snapMode: Slider.SnapOnRelease
                     ToolTip {
                         parent: slider.handle
                         visible: slider.pressed
-                        text: slider.value.toFixed(1)
+                        text: slider.value.toFixed(1) + " x"
+                    }
+                    onValueChanged: {
+//                        console.info((value < 1) ? 2 - value : 1/value);
+                        sistema.mudaVelocidade((value < 1) ? 2 - value : 1/value);
                     }
                 }
             }

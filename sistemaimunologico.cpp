@@ -168,7 +168,7 @@ void SistemaImunologico::addPatogeno(){
     }
 }
 
-void SistemaImunologico::setGerador(int g){
+void SistemaImunologico::setGerador(unsigned int g){
     this->GERADOR = g;
     qsrand(GERADOR);
 }
@@ -180,6 +180,10 @@ double SistemaImunologico::getParametro(std::string parametro){
 void SistemaImunologico::mudaParametro(QString parametro, double valor){
     parametros->insert(parametro.toStdString(),valor);
     log("[ " + parametro + " ] ALTERADO PARA : " + QString::number(valor));
+}
+
+void SistemaImunologico::mudaVelocidade(double vel){
+    this->velocidade = vel;
 }
 
 CamadaQuimica* SistemaImunologico::getQuimica(){
