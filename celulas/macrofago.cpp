@@ -39,7 +39,7 @@ void Macrofago::loop(){
             alvo = composto->getEmissor();
             tempoDetectado = QDateTime::currentDateTime();
 
-            Patogeno* tmp = (Patogeno*)alvo;
+//            Patogeno* tmp = static_cast<Patogeno*>(alvo);
 //            tmp->getVirus()->addTemporizacao(tempoDetectado.toSecsSinceEpoch() - tmp->getInicio().toSecsSinceEpoch());
 
 //            if(dist <= 4) fagocita();

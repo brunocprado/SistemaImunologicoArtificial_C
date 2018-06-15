@@ -53,12 +53,11 @@ void Patogeno::loop(){
     if(processando) {   
         if(inicioProc.elapsed() >= 800){
             processando = false;
-            alvo->remove();
+//            alvo->remove();
 
-
-//            Comum* tmp = (Comum*)alvo;
-//            tmp->setEstado(ESTADO::INFECTADA);
-
+            Comum* tmp = static_cast<Comum*>(alvo);
+            tmp->setEstado(ESTADO::INFECTADA);
+            tmp->setVirus(virus);
 
             alvo = nullptr;
             clona();
@@ -81,7 +80,10 @@ void Patogeno::loop(){
     QList<Celula*>* tmp = SistemaImunologico::getInstancia()->getCelulas();
     for (int i = 0; i < tmp->length(); i++){
         Celula* celula = tmp->at(i);
+
         if(celula->getTipo() != TIPO_CELULA::COMUM) continue;
+        if(((Comum*)celula)->getVirus()) continue;
+
         dist = calculaDistancia(celula);
         if(maisprox > dist){
             maisprox = dist;

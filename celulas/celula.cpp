@@ -30,7 +30,7 @@ void Celula::remove(){
     SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
     emit SistemaImunologico::getInstancia()->eliminaCelula(id);
     if(tipo == TIPO_CELULA::PATOGENO){
-        ((Patogeno*)this)->setParent(nullptr);
+        static_cast<Patogeno*>(this)->setParent(nullptr);
     }
 }
 
@@ -48,7 +48,7 @@ void Celula::move(short xx, short yy){
     emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 
-double Celula::calculaDistancia(short x, short y){
+double Celula::calculaDistancia(int x, int y){
     return sqrt(pow(this->x - x,2) + pow(this->y - y,2));
 }
 
