@@ -4,12 +4,13 @@
 #include "sistemaimunologico.h"
 #include "quimica/camadaquimica.h"
 #include "celulas/comum.h"
+#include "celulas/celulab.h"
 #include "celulas/macrofago.h"
 #include "celulas/neutrofilo.h"
 #include "celulas/linfocito.h"
 #include "celulas/patogeno.h"
 
-SistemaImunologico* SistemaImunologico::INSTANCIA = 0;
+SistemaImunologico* SistemaImunologico::INSTANCIA = nullptr;
 
 /**
  * Classe principal <br>
@@ -82,7 +83,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     }
 
     for(int i =0;i<(nInicial * parametros->value("LINFOCITOS"));i++){
-        renderizaCelula(new Linfocito());
+        renderizaCelula(new CelulaB());
     }
 
     for(int i=0;i< 80;i++){

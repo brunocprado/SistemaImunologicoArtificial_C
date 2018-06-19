@@ -29,6 +29,7 @@ Image {
                 case 2: t = "macrófago"; break;
                 case 3: t = "neutrófilo"; break;
                 case 4: t = "linfócito"; break;
+                case 5: t = "Célula B"; break;
             }
 
             tooltip = tmp.createObject(this,{"celula": celula,"tipo": t,"imagem":parent.source});

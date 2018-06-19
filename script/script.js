@@ -30,6 +30,7 @@ function cria(parente,celula) {
         case 2: tmp = "macro.png"; break;
         case 3: tmp = "neutrofilo.png"; break;
         case 4: tmp = "Linfocito.png"; break;
+        case 5: tmp = "Linfocito.png"; break;
     }
 
     tmp = "../imagens/" + tmp;
