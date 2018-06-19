@@ -82,7 +82,7 @@ void Patogeno::loop(){
         Celula* celula = tmp->at(i);
 
         if(celula->getTipo() != TIPO_CELULA::COMUM) continue;
-        if(((Comum*)celula)->getVirus()) continue;
+        if(static_cast<Comum*>(celula)->getVirus()) continue;
 
         dist = calculaDistancia(celula);
         if(maisprox > dist){
