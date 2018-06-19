@@ -48,6 +48,14 @@ void Celula::move(short xx, short yy){
     emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 
+void Celula::moveRand(){
+//    printf("sdasdas\n");
+    x += qrand() % 3 - 1;
+    y += qrand() % 3 - 1;
+    emit SistemaImunologico::getInstancia()->movimentaCelula(id);
+//    move(x + (qrand() % 4 - 1),y + (qrand() % 4 - 1));
+}
+
 double Celula::calculaDistancia(int x, int y){
     return sqrt(pow(this->x - x,2) + pow(this->y - y,2));
 }

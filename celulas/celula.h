@@ -25,6 +25,7 @@ public:
     void envelhece();
     void move(Celula* celula);
     void move(short xx,short yy);
+    void moveRand();
     double calculaDistancia(int x,int y);
     double calculaDistancia(Celula* c);
     void emiteQuimica(short tipo,int qt);
