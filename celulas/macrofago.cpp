@@ -52,7 +52,7 @@ void Macrofago::loop(){
         }
     }
 
-    if(alvo == nullptr) move(x + (qrand() % 4 - 1),y + (qrand() % 4 - 1));
+    if(alvo == nullptr) moveRand();
 
 }
 
