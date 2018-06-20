@@ -44,12 +44,8 @@ ApplicationWindow {
     }
 
     function novoSistema(){
-        if(Script.viewNovoSistema){
-            Script.viewNovoSistema.visible = true;
-        } else {
-            var tmp = Qt.createComponent("novoSistema.qml");
-            Script.viewNovoSistema = tmp.createObject(janela,{});
-        }
+        if(Script.viewNovoSistema) Script.viewNovoSistema.destroy();
+        Script.viewNovoSistema = Qt.createComponent("novoSistema.qml").createObject(janela,{});
     }
 
     Component.onCompleted: {
