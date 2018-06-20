@@ -21,7 +21,6 @@ Image {
         property var tooltip: 0
         onClicked: {
             if(tooltip !== 0) { tooltip.visible = true; return; }
-            var tmp = Qt.createComponent("tooltip.qml");
             var t;
             switch(celula.tipo){
                 case 0: t = "epitelial"; break;
@@ -32,7 +31,7 @@ Image {
                 case 5: t = "Célula B"; break;
             }
 
-            tooltip = tmp.createObject(this,{"celula": celula,"tipo": t,"imagem":parent.source});
+            tooltip = Qt.createComponent("tooltip.qml").createObject(this,{"celula": celula,"tipo": t,"imagem":parent.source});
         }
     }
 }

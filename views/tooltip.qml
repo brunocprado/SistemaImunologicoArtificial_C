@@ -2,14 +2,13 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 
 ToolTip {
-    property string tipo: ""
-    property string imagem: ""
+    property string tipo
+    property string imagem
     property var celula
-    property var extra : ""
 
     parent: parent
     visible: true
-    width: 220
+    width: 230
     height: 120
 
     Component.onCompleted: {
@@ -18,6 +17,7 @@ ToolTip {
 
     function atualizaInfo(){
         txtPosicao.text = "Posição : " + celula.x.toFixed(2) + " x " + celula.y.toFixed(2)
+        var extra;
         if(celula.extra !== "") extra = JSON.parse(celula.extra); else return;
         txtExtra.text = "";
         for(var chave in extra){

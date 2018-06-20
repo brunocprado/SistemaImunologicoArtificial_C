@@ -21,21 +21,8 @@ function inicia(){
     estatisticaGerais = Qt.createComponent("../views/estatisticasGerais.qml").createObject(janela,{});
 }
 
-function cria(parente,celula) {
-    var tmp;
-
-    switch(celula.tipo){
-        case 0: tmp = "celula.png"; break;
-        case 1: tmp = "opcoes.png"; break;
-        case 2: tmp = "macro.png"; break;
-        case 3: tmp = "neutrofilo.png"; break;
-        case 4: tmp = "Linfocito.png"; break;
-        case 5: tmp = "Linfocito.png"; break;
-    }
-
-    tmp = "../imagens/" + tmp;
-
-    celulas[celula.id] = viewCelula.createObject(parente,{"celula":celula,"source":tmp});
+function cria(parente,celula){
+    celulas[celula.id] = viewCelula.createObject(parente,{"celula":celula,"source":"../imagens/" + celula.tipo + ".png"});
 }
 
 function addComposto(parente,id,cor,raio,x,y){
