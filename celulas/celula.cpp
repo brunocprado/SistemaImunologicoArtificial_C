@@ -65,7 +65,7 @@ double Celula::calculaDistancia(Celula *c){
 }
 
 void Celula::emiteQuimica(short tipo, int qt){
-    CompostoQuimico* composto = new CompostoQuimico((CompostoQuimico::TIPO_COMPOSTO) tipo,qt,this);
+    CompostoQuimico* composto = new CompostoQuimico(static_cast<CompostoQuimico::TIPO_COMPOSTO>(tipo),qt,this);
     SistemaImunologico::getInstancia()->getQuimica()->getCompostos()->append(composto);
     emit SistemaImunologico::getInstancia()->adicionaComposto(composto->getId(),composto->getTipo(),composto->getRaio(),composto->x,composto->y);
 }
