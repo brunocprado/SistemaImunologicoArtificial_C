@@ -25,12 +25,12 @@ void Celula::envelhece(){
     tempoVida++;
 
     switch(tipo){
-        case TIPO_CELULA::PATOGENO: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_ANTIGENO")) remove(); break;
+        case TIPO_CELULA::PATOGENO:  if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_ANTIGENO")) remove(); break;
         case TIPO_CELULA::MACROFAGO: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_MACROFAGO")) remove(); break;
-        case TIPO_CELULA::CELULA_B: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_CELULA_B")) remove(); break;
+        case TIPO_CELULA::CELULA_B:  if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_CELULA_B")) remove(); break;
+        case TIPO_CELULA::ANTICORPO: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_ANTICORPO")) remove(); break;
+        default: break;
     }
-
-    if(tempoVida == 400) remove();
 }
 
 void Celula::remove(){
@@ -56,11 +56,15 @@ void Celula::move(short xx, short yy){
 }
 
 void Celula::moveRand(){
-//    printf("sdasdas\n");
     x += qrand() % 3 - 1;
     y += qrand() % 3 - 1;
     emit SistemaImunologico::getInstancia()->movimentaCelula(id);
-//    move(x + (qrand() % 4 - 1),y + (qrand() % 4 - 1));
+}
+
+void Celula::moveRand(double v){
+    x += (qrand() % 3 - 1) * v;
+    y += (qrand() % 3 - 1) * v;
+    emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 
 double Celula::calculaDistancia(int x, int y){
@@ -77,6 +81,4 @@ void Celula::emiteQuimica(short tipo, int qt){
     emit SistemaImunologico::getInstancia()->adicionaComposto(composto->getId(),composto->getTipo(),composto->getRaio(),composto->x,composto->y);
 }
 
-Celula::TIPO_CELULA Celula::getTipo(){
-    return tipo;
-}
+Celula::TIPO_CELULA Celula::getTipo(){ return tipo; }

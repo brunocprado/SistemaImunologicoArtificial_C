@@ -21,11 +21,12 @@ public:
     Celula(TIPO_CELULA t = TIPO_CELULA::COMUM);
     Celula(TIPO_CELULA t,double x,double y);
 
-    //=======| Funções |========// TODO : Get/Set
+    //=======| Funções |========//
     void envelhece();
     void move(Celula* celula);
     void move(short xx,short yy);
     void moveRand();
+    void moveRand(double v);
     double calculaDistancia(int x,int y);
     double calculaDistancia(Celula* c);
     void emiteQuimica(short tipo,int qt);
