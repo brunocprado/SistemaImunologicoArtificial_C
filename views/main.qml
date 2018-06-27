@@ -25,7 +25,12 @@ ApplicationWindow {
 
     Shortcut {
         sequences: ["Ctrl+-","S"]
-        onActivated: if(celulas.scale > 1) celulas.scale -= 0.2
+        onActivated: {
+            if(celulas.scale >= 1.2) celulas.scale -= 0.2;
+            if(width > 1600 && celulas.scale == 1){
+                celulas.scale = width/1600;
+            }
+        }
     }
 
     Shortcut {
