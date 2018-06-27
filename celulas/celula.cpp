@@ -12,7 +12,7 @@ Celula::Celula(TIPO_CELULA t){
     id=contador; contador++;
     tipo = t;
     x = qrand() % 1600 + 1;
-    y = qrand() % 900 + 1;
+    y = qrand() % 900 + 1; //TODO moveToThread(Sistema)???? <-- AVALIAR
 }
 
 Celula::Celula(TIPO_CELULA t, double x, double y){
@@ -23,6 +23,13 @@ Celula::Celula(TIPO_CELULA t, double x, double y){
 
 void Celula::envelhece(){
     tempoVida++;
+
+    switch(tipo){
+        case TIPO_CELULA::PATOGENO: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_ANTIGENO")) remove(); break;
+        case TIPO_CELULA::MACROFAGO: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_MACROFAGO")) remove(); break;
+        case TIPO_CELULA::CELULA_B: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_CELULA_B")) remove(); break;
+    }
+
     if(tempoVida == 400) remove();
 }
 
