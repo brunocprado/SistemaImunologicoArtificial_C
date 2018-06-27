@@ -40,7 +40,7 @@ void SistemaImunologico::inicia(){
 }
 
 SistemaImunologico* SistemaImunologico::getInstancia(){
-    if(INSTANCIA == 0) INSTANCIA = new SistemaImunologico();
+    if(!INSTANCIA) INSTANCIA = new SistemaImunologico();
     return INSTANCIA;
 }
 
@@ -86,7 +86,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
         renderizaCelula(new CelulaB());
     }
 
-    for(int i=0;i< 80;i++){
+    for(int i=0;i< 160;i++){
         renderizaCelula(new Comum());
     }
 }
