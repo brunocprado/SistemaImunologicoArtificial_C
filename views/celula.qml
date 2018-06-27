@@ -7,6 +7,9 @@ Image {
     width: 10
     height: 10
 
+    transformOrigin: Item.Center
+    rotation: 0
+
     x: celula.x - 5
     y: celula.y - 5
 
@@ -29,6 +32,7 @@ Image {
                 case 3: t = "neutrófilo"; break;
                 case 4: t = "linfócito"; break;
                 case 5: t = "Célula B"; break;
+                case 6: t = "Anticorpo"; break;
             }
 
             tooltip = Qt.createComponent("tooltip.qml").createObject(this,{"celula": celula,"tipo": t,"imagem":parent.source});

@@ -77,6 +77,7 @@ ApplicationWindow {
         }
         onMovimentaCelula: {
             if(Script.celulas[id] === undefined) return;
+            Script.celulas[id].rotation += Math.floor((Math.random() * 5) - 2);
             Script.celulas[id].atualizaPos();
         }
         onEliminaCelula: {
