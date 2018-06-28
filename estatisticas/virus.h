@@ -8,6 +8,7 @@ class Virus : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString identificador READ getIdentificador CONSTANT)
     Q_PROPERTY(short quantidade READ getQuantidade)
+    Q_PROPERTY(short anticorpos READ getQtAnticorpos)
 public:
     Virus(QString identificador);
 
@@ -16,6 +17,8 @@ public:
     QString getIdentificador();
     int getEpitopo();
     short getQuantidade();
+    short getQtAnticorpos();
+    void setQtAnticorpos(short qt);
 
 private:
     QString identificador;
@@ -24,6 +27,7 @@ private:
     //====| Estatisticas |====//
     double tempoMedio = 0;
     short qtTempo = 0;
+    short qtAnticorpos = 0;
 };
 
 #endif // VIRUS_H

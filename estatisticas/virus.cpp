@@ -29,3 +29,11 @@ int Virus::getEpitopo(){
 short Virus::getQuantidade(){
     return children().count();
 }
+
+short Virus::getQtAnticorpos(){
+    return qtAnticorpos;
+}
+
+void Virus::setQtAnticorpos(short qt){
+    qtAnticorpos = qt;
+}
