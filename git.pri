@@ -1,4 +1,4 @@
-VERSION = 0.2.0
+VERSION = 0.5.0
 
 GIT_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 
