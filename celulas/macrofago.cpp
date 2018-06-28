@@ -58,7 +58,8 @@ void Macrofago::loop(){
 
 QString Macrofago::extra(){
     QJsonObject json;
-    json.insert("tempo de vida",QString("%1 dia(s)").arg((double)(tempoVida/200)));
+
+    json.insert("tempo de vida", QString().sprintf("%.2g dia(s)",(double) tempoVida/200));
     json.insert("estado",QVariant::fromValue(estado).value<QString>());
     if(alvo != nullptr) json.insert("alvo",alvo->id);
 
