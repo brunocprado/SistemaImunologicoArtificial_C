@@ -20,9 +20,9 @@ public:
     QString extra();
 
     Virus* getVirus();
-    void apagaRef() { virus = nullptr; }
     QDateTime getInicio();
     QTimer* timer;
+    bool suprimido = false;
 
 private:
     void inicia();

@@ -4,7 +4,7 @@
 #include "sistemaimunologico.h"
 
 Patogeno::Patogeno() : Celula(TIPO_CELULA::PATOGENO){
-    this->virus = (new Virus("TESTE"));
+    this->virus = new Virus("TESTE");
     setParent(this->virus);
     this->inicia();
 }
@@ -22,7 +22,6 @@ Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(TIPO_CELULA::PATOG
 
 void Patogeno::inicia(){
     inicio = QDateTime::currentDateTime();
-//    virus->add();
     emiteQuimica(CompostoQuimico::PAMP,20);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(subThread()));
@@ -31,6 +30,7 @@ void Patogeno::inicia(){
 
 void Patogeno::clona(){
     Patogeno *tmp = new Patogeno(virus,x+5,y+5);
+    tmp->moveRand();
 
     tmp->moveToThread(virus->thread());
     tmp->setParent(virus);
@@ -38,12 +38,17 @@ void Patogeno::clona(){
 }
 
 void Patogeno::subThread(){
-    if(SistemaImunologico::getInstancia()->pausado) return;
+    if(SistemaImunologico::getInstancia()->pausado || suprimido) return;
     if(!SistemaImunologico::getInstancia()->getCelulas()->contains(this)) {timer->stop(); return;}
     emiteQuimica(CompostoQuimico::PAMP,20);
 }
 
 void Patogeno::loop(){
+    envelhece();
+
+    if(suprimido) return;
+
+    if(alvo && static_cast<Comum*>(alvo)->getVirus()) alvo = nullptr; //TODO??
 
     if(processando && !SistemaImunologico::getInstancia()->getCelulas()->contains(alvo)){
         processando = false;
@@ -51,7 +56,7 @@ void Patogeno::loop(){
     }
 
     if(processando) {   
-        if(inicioProc.elapsed() >= 800){
+        if(inicioProc.elapsed() >= 1100){
             processando = false;
 //            alvo->remove();
 
