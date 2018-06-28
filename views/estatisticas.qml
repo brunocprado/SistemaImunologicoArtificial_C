@@ -1,7 +1,8 @@
-import QtQuick 2.10
+import QtQuick 2.11
 import QtQuick.Controls 2.3
 import QtCharts 2.2
 import QtQuick.Window 2.3
+import QtQuick.Controls.Material 2.3
 
 ApplicationWindow {
     property var virus
@@ -9,10 +10,11 @@ ApplicationWindow {
     id: estatisticas
     visible: true
     width: 800
-    minimumWidth: 520
+    minimumWidth: 540
     height: 600
     minimumHeight: 380
     title: "Estatisticas da simulação [ " + virus.identificador + " ]"
+    color: "#8f4f4f"
 
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
@@ -36,8 +38,11 @@ ApplicationWindow {
             text: qsTr("Nova entrada")
             anchors.right: parent.right
             anchors.rightMargin: 41
+            Material.background: Material.BlueGrey
+            highlighted: true
+
             onClicked: {
-                sistema.addPatogeno(); // AQUI <--
+                sistema.addPatogeno(virus);
             }
         }
 
