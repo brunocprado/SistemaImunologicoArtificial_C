@@ -9,7 +9,9 @@ ApplicationWindow {
     id: estatisticas
     visible: true
     width: 800
+    minimumWidth: 520
     height: 600
+    minimumHeight: 380
     title: "Estatisticas da simulação [ " + virus.identificador + " ]"
 
     Component.onCompleted: {
@@ -18,20 +20,36 @@ ApplicationWindow {
     }
 
     ChartView {
-        title: "Estatisticas"
+        id: chartView
+        height: 550
         anchors.fill: parent
+        title: "Estatisticas"
         antialiasing: true
         dropShadowEnabled: true
 
+        Button {
+            id: btnNovaEntrada
+            x: 633
+            y: 23
+            width: 126
+            height: 47
+            text: qsTr("Nova entrada")
+            anchors.right: parent.right
+            anchors.rightMargin: 41
+            onClicked: {
+                sistema.addPatogeno(); // AQUI <--
+            }
+        }
+
         ValueAxis {
-            id: x
+            id: xx
             titleText: "Tempo"
             max: 5
             labelsVisible: false
         }
 
         ValueAxis {
-            id: y
+            id: yy
             titleText: "Quantidade"
             max: 20
         }
@@ -39,11 +57,15 @@ ApplicationWindow {
         SplineSeries {
             id:qtAntigenos
             name: "Antigenos"
-            axisX: x
-            axisY: y
-            onClicked: {
-                console.log(point.x,point.y)
-            }
+            axisX: xx
+            axisY: yy
+        }
+
+        SplineSeries {
+            id:qtAnticorpos
+            name: "Anticorpos"
+            axisX: xx
+            axisY: yy
         }
     }
 
@@ -52,8 +74,9 @@ ApplicationWindow {
         interval: 250
         repeat: true
         onTriggered: {
-            if(x.max <= qtAntigenos.count) x.max++;      
+            if(xx.max <= qtAntigenos.count) xx.max++;
             qtAntigenos.append(qtAntigenos.count, virus.quantidade);
+            qtAnticorpos.append(qtAnticorpos.count, virus.anticorpos);
             if(virus.quantidade <= 0) running = false;
         }
     }
