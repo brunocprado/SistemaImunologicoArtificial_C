@@ -130,6 +130,10 @@ void SistemaImunologico::novoSistema(QString parametros){
     free(celulas);
     this->celulas = new QList<Celula*>();
 
+    for(auto i = jsonParametros.begin();i != jsonParametros.end();i++){
+        if(i.value().isString()) mudaParametro(i.key(),i.value().toString().toDouble());
+    }
+
     for(int i=0;i<quimica->getCompostos()->length();i++){
         emit eliminaComposto(quimica->getCompostos()->at(i)->getId());
     }

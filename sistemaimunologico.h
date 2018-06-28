@@ -77,7 +77,7 @@ signals:
 
     void adicionaComposto(int id,int tipo,int raio,int x,int y);
     void mudaComposto(short id,short varRaio,short concentracao);
-    void eliminaComposto(short id);
+    void eliminaComposto(int id);
 
     void escreveLog(QString cor,QString texto);
     void addParametro(QString parametro);
