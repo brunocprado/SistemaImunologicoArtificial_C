@@ -38,7 +38,7 @@ void Patogeno::clona(){
 }
 
 void Patogeno::subThread(){
-    if(SistemaImunologico::getInstancia()->pausado || suprimido) return;
+    if(SistemaImunologico::getInstancia()->pausado || estado == ESTADO::SUPRIMIDA) return;
     if(!SistemaImunologico::getInstancia()->getCelulas()->contains(this)) {timer->stop(); return;}
     emiteQuimica(CompostoQuimico::PAMP,20);
 }
@@ -46,7 +46,7 @@ void Patogeno::subThread(){
 void Patogeno::loop(){
     envelhece();
 
-    if(suprimido) return;
+    if(estado == ESTADO::SUPRIMIDA) return;
 
     if(alvo && static_cast<Comum*>(alvo)->getVirus()) alvo = nullptr; //TODO??
 

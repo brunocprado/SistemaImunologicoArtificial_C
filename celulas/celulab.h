@@ -16,13 +16,11 @@ public:
     void loop();
 
     Virus* getVirus();
-//    ESTADO getEstado();
     QString extra(){return "";}
 
 private:
     Patogeno* alvo = nullptr;
     Virus* virus = nullptr;
-    ESTADO estado = ESTADO::REPOUSO;
     QTimer* timer;
 
     void inicia();

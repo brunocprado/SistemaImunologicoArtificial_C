@@ -13,14 +13,10 @@ public:
 
     QString extra();
 
-    ESTADO getEstado();
-
 private:
-    ESTADO estado;
-
-    //====| RUNTIME |====//
     Celula* alvo = nullptr;
     QDateTime tempoDetectado;
+
 };
 
 #endif // MACROFAGO_H

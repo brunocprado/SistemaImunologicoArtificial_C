@@ -82,3 +82,8 @@ void Celula::emiteQuimica(short tipo, int qt){
 }
 
 Celula::TIPO_CELULA Celula::getTipo(){ return tipo; }
+Celula::ESTADO Celula::getEstado(){ return estado; }
+
+void Celula::setEstado(Celula::ESTADO e){
+    estado = e;
+}

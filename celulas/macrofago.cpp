@@ -56,10 +56,6 @@ void Macrofago::loop(){
 
 }
 
-Macrofago::ESTADO Macrofago::getEstado(){
-    return this->estado;
-}
-
 QString Macrofago::extra(){
     QJsonObject json;
     json.insert("tempo de vida",QString("%1 dia(s)").arg((double)(tempoVida/200)));

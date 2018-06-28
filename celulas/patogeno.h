@@ -22,7 +22,6 @@ public:
     Virus* getVirus();
     QDateTime getInicio();
     QTimer* timer;
-    bool suprimido = false;
 
 private:
     void inicia();

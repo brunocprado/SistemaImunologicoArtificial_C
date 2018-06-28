@@ -14,7 +14,7 @@ public:
     enum class TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO,DENDRIDICA};
     Q_ENUM(TIPO_CELULA)
 
-    enum class ESTADO {REPOUSO,ATIVO,FAGOCITANDO,INFECTADA,OPSONIZADO};
+    enum class ESTADO {REPOUSO,ATIVO,FAGOCITANDO,INFECTADA,SUPRIMIDA};
     Q_ENUM(ESTADO)
 
     //=======| Construtores |======//
@@ -35,20 +35,23 @@ public:
     virtual void loop() = 0;
     virtual QString extra() = 0;
 
-    TIPO_CELULA getTipo();
-    double getVelMovimento();
-
     int id;
     double x,y;
 
     int getId(){ return id; }
     double getX(){ return x; }
     double getY(){ return y; }
+    TIPO_CELULA getTipo();
+    ESTADO getEstado();
+    double getVelMovimento();
+
+    void setEstado(Celula::ESTADO e);
 
 protected:
     TIPO_CELULA tipo;
+    ESTADO estado = ESTADO::REPOUSO;
     short tempoVida = 0;
-    double velMovimento = 1.0;
+    double velMovimento = 1.0; //TODO INCLUIR * velMovimento no Celula::move()
 
 signals:
     void posicaoMudou();
