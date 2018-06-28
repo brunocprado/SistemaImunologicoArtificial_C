@@ -169,6 +169,12 @@ void SistemaImunologico::addPatogeno(){
     }
 }
 
+void SistemaImunologico::addPatogeno(Virus* v){
+    Patogeno* tmp = new Patogeno(v);
+    celulas->append(tmp);
+    renderizaCelula(tmp);
+}
+
 void SistemaImunologico::setGerador(unsigned int g){
     this->GERADOR = g;
     qsrand(GERADOR);
