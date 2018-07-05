@@ -43,6 +43,7 @@ ApplicationWindow {
 
             onClicked: {
                 sistema.addPatogeno(virus);
+                if(!temporizacaoGrafico.running) temporizacaoGrafico.running = parent.visible;
             }
         }
 
@@ -75,14 +76,15 @@ ApplicationWindow {
     }
 
     Timer{
+        id: temporizacaoGrafico
         running: parent.visible
-        interval: 250
+        interval: 100
         repeat: true
         onTriggered: {
             if(xx.max <= qtAntigenos.count) xx.max++;
             qtAntigenos.append(qtAntigenos.count, virus.quantidade);
             qtAnticorpos.append(qtAnticorpos.count, virus.anticorpos);
-            if(virus.quantidade <= 0) running = false;
+            if(virus.quantidade <= 0 && virus.anticorpos <= 0) running = false;
         }
     }
 }
