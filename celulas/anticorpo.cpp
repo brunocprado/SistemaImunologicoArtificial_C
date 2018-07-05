@@ -8,6 +8,8 @@ Anticorpo::Anticorpo(double x,double y,Virus* v) : Celula(TIPO_CELULA::ANTICORPO
 
 void Anticorpo::loop(){
 
+    envelhece();
+
     QList<Celula*>* tmp = SistemaImunologico::getInstancia()->getCelulas();
     for (int i = 0; i < tmp->length(); i++){
         Celula* celula = tmp->at(i);
@@ -25,14 +27,15 @@ void Anticorpo::loop(){
     moveRand(2);
 }
 
-int Anticorpo::getEpitopo(){
-    return virus->getEpitopo();
-}
-
 QString Anticorpo::extra(){
     QJsonObject json;
     json.insert("epitopo",virus->getEpitopo());
+    json.insert("tempo de vida", QString().sprintf("%.2g dia(s)",(double) tempoVida/200));
 
     QJsonDocument tmp(json);
     return tmp.toJson();
+}
+
+Virus* Anticorpo::getVirus(){
+    return virus;
 }

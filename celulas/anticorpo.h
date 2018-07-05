@@ -9,7 +9,8 @@ public:
     Anticorpo(double x,double y,Virus* v);
 
     void loop();
-    int getEpitopo();
+
+    Virus* getVirus();
 
     QString extra();
 
