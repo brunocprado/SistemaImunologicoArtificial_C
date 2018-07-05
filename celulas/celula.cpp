@@ -4,6 +4,7 @@
 #include "sistemaimunologico.h"
 #include "celula.h"
 #include "celulas/patogeno.h"
+#include "celulas/anticorpo.h"
 #include "quimica/compostoquimico.h"
 
 static int contador = 0;
@@ -23,7 +24,6 @@ Celula::Celula(TIPO_CELULA t, double x, double y){
 
 void Celula::envelhece(){
     tempoVida++;
-
     switch(tipo){
         case TIPO_CELULA::PATOGENO:  if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_ANTIGENO")) remove(); break;
         case TIPO_CELULA::MACROFAGO: if(tempoVida >= SistemaImunologico::getInstancia()->getParametro("VIDA_MACROFAGO")) remove(); break;
@@ -39,6 +39,11 @@ void Celula::remove(){
     if(tipo == TIPO_CELULA::PATOGENO){
         static_cast<Patogeno*>(this)->setParent(nullptr);
     }
+    if(tipo == TIPO_CELULA::ANTICORPO){
+        Virus* v = static_cast<Anticorpo*>(this)->getVirus();
+        v ->setQtAnticorpos(v->getQtAnticorpos() - 1);
+    }
+
 }
 
 void Celula::move(Celula* c){
