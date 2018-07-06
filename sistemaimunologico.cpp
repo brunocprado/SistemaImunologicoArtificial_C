@@ -97,6 +97,21 @@ void SistemaImunologico::run(){
         for (int i = 0;i < celulas->length(); i++){
             celulas->at(i)->loop();
         }
+
+        for(int i =0;i<3;i++){
+            if(qrand() % 100 <= 25){
+                CelulaB *tmp = new CelulaB();
+                tmp->moveToThread(SistemaImunologico::getThread());
+                renderizaCelula(tmp);
+            }
+        }
+
+        if(qrand() % 100 <= 42){
+            Macrofago *tmp = new Macrofago();
+            tmp->moveToThread(SistemaImunologico::getThread());
+            renderizaCelula(tmp);
+        }
+
         msleep(30 * velocidade);
     }
 }

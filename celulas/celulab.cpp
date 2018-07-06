@@ -13,18 +13,12 @@ CelulaB::CelulaB(double x, double y) : Celula(TIPO_CELULA::CELULA_B,x,y){
 void CelulaB::inicia(){
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(produzAnticorpo()));
-    timer->start(500);
+    timer->start(700);
 }
 
 void CelulaB::loop(){
 
     envelhece();
-
-    if(qrand() % 400 == 1){
-        CelulaB *tmp = new CelulaB();
-        tmp->moveToThread(SistemaImunologico::getThread());
-        SistemaImunologico::getInstancia()->renderizaCelula(tmp);
-    }
 
     if(virus) return;
 
