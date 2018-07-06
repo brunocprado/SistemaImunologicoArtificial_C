@@ -73,6 +73,7 @@ void SistemaImunologico::carregaParametros() {
 void SistemaImunologico::geraPrimeiraGeracao(){
     int nInicial = qrand() % (int)(parametros->value("TAM_MEDIO_SUPERIOR") - parametros->value("TAM_MEDIO_INFERIOR")) + parametros->value("TAM_MEDIO_INFERIOR");
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
+    qtInicial = nInicial;
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){
 //        renderizaCelula(new Neutrofilo());
@@ -99,14 +100,14 @@ void SistemaImunologico::run(){
         }
 
         for(int i =0;i<3;i++){
-            if(qrand() % 100 <= 25){
+            if(qrand() % 100 <= 25*((double)qtInicial/800)){
                 CelulaB *tmp = new CelulaB();
                 tmp->moveToThread(SistemaImunologico::getThread());
                 renderizaCelula(tmp);
             }
         }
 
-        if(qrand() % 100 <= 42){
+        if(qrand() % 100 <= 42*((double)qtInicial/800)){
             Macrofago *tmp = new Macrofago();
             tmp->moveToThread(SistemaImunologico::getThread());
             renderizaCelula(tmp);

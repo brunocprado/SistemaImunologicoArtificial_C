@@ -64,6 +64,7 @@ private:
     QList<Celula*>* celulas;
     CamadaQuimica* quimica;
     QMap<std::string,double>* parametros;
+    int qtInicial;
 
 //    static QMap<Celula::TIPO_CELULA,std::string>*; TODO
 
