@@ -13,7 +13,6 @@
         <file>views/terminal.qml</file>
         <file>views/novoSistema.qml</file>
         <file>views/tooltip.qml</file>
-        <file>views/sobre.qml</file>
         <file>parametros.xml</file>
         <file>views/composto.qml</file>
         <file>views/estatisticas.qml</file>
