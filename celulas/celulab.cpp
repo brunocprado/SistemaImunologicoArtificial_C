@@ -39,7 +39,7 @@ void CelulaB::loop(){
             alvo = static_cast<Patogeno*>(celula);
         }
     }
-    if(maisprox <= 10){
+    if(maisprox <= 20){
         virus = alvo->getVirus();
 
 //        inicia();
