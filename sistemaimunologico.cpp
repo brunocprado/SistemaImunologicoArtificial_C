@@ -36,7 +36,8 @@ void SistemaImunologico::inicia(){
     carregaParametros();
     quimica = new CamadaQuimica();
     geraPrimeiraGeracao();
-    this->start(QThread::HighPriority);
+    if(flag) addPatogeno();
+    this->start(QThread::HighestPriority);
 }
 
 SistemaImunologico* SistemaImunologico::getInstancia(){
@@ -73,6 +74,7 @@ void SistemaImunologico::carregaParametros() {
 void SistemaImunologico::geraPrimeiraGeracao(){
     int nInicial = qrand() % (int)(parametros->value("TAM_MEDIO_SUPERIOR") - parametros->value("TAM_MEDIO_INFERIOR")) + parametros->value("TAM_MEDIO_INFERIOR");
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
+//    nInicial *= 4;
     qtInicial = nInicial;
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){

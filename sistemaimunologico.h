@@ -54,6 +54,8 @@ public:
 
     Q_INVOKABLE QString versao_git();
 
+    bool flag = false; //TESTE
+
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
 
@@ -65,8 +67,6 @@ private:
     CamadaQuimica* quimica;
     QMap<std::string,double>* parametros;
     int qtInicial;
-
-//    static QMap<Celula::TIPO_CELULA,std::string>*; TODO
 
     void carregaParametros();
     void run(); //Loop do QThread
