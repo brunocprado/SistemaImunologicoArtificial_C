@@ -16,7 +16,7 @@ ApplicationWindow {
         onTriggered: {
             if(x.max <= qtLinfocitos.count) x.max++;
             qtMacrofagos.append(qtMacrofagos.count,janela.quantidade_celulas[2]);
-            qtLinfocitos.append(qtLinfocitos.count, janela.quantidade_celulas[4]);
+            qtLinfocitos.append(qtLinfocitos.count, janela.quantidade_celulas[5]);
         }
     }
 
@@ -24,8 +24,8 @@ ApplicationWindow {
         title: "Estatisticas"
         anchors.fill: parent
         antialiasing: true
-        dropShadowEnabled: true
-        theme: ChartView.ChartThemeDark
+//        dropShadowEnabled: true
+//        theme: ChartView.ChartThemeDark
 
         ValueAxis {
             id: x
@@ -36,7 +36,7 @@ ApplicationWindow {
         ValueAxis {
             id: y
             titleText: "Quantidade"
-            max: 300
+            max: 500
         }
 
         SplineSeries {
