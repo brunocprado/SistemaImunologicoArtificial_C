@@ -13,7 +13,7 @@ CelulaB::CelulaB(double x, double y) : Celula(TIPO_CELULA::CELULA_B,x,y){
 void CelulaB::inicia(){
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(produzAnticorpo()));
-    timer->start(700);
+    timer->start(750);
 }
 
 void CelulaB::loop(){

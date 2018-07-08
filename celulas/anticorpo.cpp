@@ -17,7 +17,7 @@ void Anticorpo::loop(){
         if(celula->getTipo() != TIPO_CELULA::PATOGENO) continue;
 
         Patogeno* tmp = static_cast<Patogeno*>(celula);
-        if(calculaDistancia(celula) <= 10 && celula->getEstado() != ESTADO::SUPRIMIDA && tmp->getVirus() == virus){
+        if(calculaDistancia(celula) <= 15 && celula->getEstado() != ESTADO::SUPRIMIDA && tmp->getVirus() == virus){
             tmp->setEstado(ESTADO::SUPRIMIDA);
         }
     }
