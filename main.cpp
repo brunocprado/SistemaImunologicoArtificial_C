@@ -22,18 +22,25 @@ int main(int argc, char *argv[]){
     qRegisterMetaType<Celula*>("Celula*");
     qRegisterMetaType<Virus*>("Virus*");
 
-    engine.load(QUrl(QStringLiteral("qrc:/views/terminal.qml")));
+//    engine.load(QUrl(QStringLiteral("qrc:/views/terminal.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/views/main.qml")));
 
     QObject::connect(&engine, &QQmlApplicationEngine::quit, &app, &QApplication::quit);
+
+    bool tmp = false;
 
     for(int a = 1; a < QCoreApplication::arguments().length();a++){
         if(QCoreApplication::arguments().at(a) == QString("gerador")) {
             sistema->setGerador(QCoreApplication::arguments().at(a+1).toInt());
         }
+        if(QCoreApplication::arguments().at(a) == QString("inicia")) {
+            tmp = true;
+        }
     }
 
     sistema->inicia();
+
+    if(tmp) sistema->addPatogeno();
 
     return app.exec();
 }
