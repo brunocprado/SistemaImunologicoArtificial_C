@@ -24,7 +24,7 @@ void Anticorpo::loop(){
 
     //TODO REMOVE
 
-    moveRand(2);
+    moveRand(4);
 }
 
 QString Anticorpo::extra(){

@@ -32,7 +32,8 @@ private:
     QDateTime inicio;
     Celula* alvo = nullptr;
     bool processando = false;
-    QElapsedTimer inicioProc;
+//    QElapsedTimer inicioProc;
+    short qtTicks = 0;
 
 public slots:
     void subThread();

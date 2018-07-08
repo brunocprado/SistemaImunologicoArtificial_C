@@ -1,7 +1,7 @@
 #include "comum.h"
 
 Comum::Comum() : Celula(TIPO_CELULA::COMUM){
-
+    velMovimento = 2;
 }
 
 void Comum::loop(){

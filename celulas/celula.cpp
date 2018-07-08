@@ -48,21 +48,21 @@ void Celula::remove(){
 
 void Celula::move(Celula* c){
     double angulo = atan2(c->y - y,c->x - x);
-    x += cos(angulo);
-    y += sin(angulo);
+    x += cos(angulo) * velMovimento;
+    y += sin(angulo) * velMovimento;
     emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 
 void Celula::move(short xx, short yy){
     double angulo = atan2(yy - y,xx - x);
-    x += cos(angulo);
-    y += sin(angulo);
+    x += cos(angulo) * velMovimento;
+    y += sin(angulo) * velMovimento;
     emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 
 void Celula::moveRand(){
-    x += qrand() % 3 - 1;
-    y += qrand() % 3 - 1;
+    x += (qrand() % 3 - 1) * velMovimento;
+    y += (qrand() % 3 - 1) * velMovimento;
     emit SistemaImunologico::getInstancia()->movimentaCelula(id);
 }
 

@@ -21,6 +21,7 @@ Patogeno::Patogeno(Virus *virus, double x, double y) : Celula(TIPO_CELULA::PATOG
 }
 
 void Patogeno::inicia(){
+    velMovimento = 1.6;
     inicio = QDateTime::currentDateTime();
     emiteQuimica(CompostoQuimico::PAMP,20);
     timer = new QTimer(this);
@@ -30,7 +31,7 @@ void Patogeno::inicia(){
 
 void Patogeno::clona(){
     Patogeno *tmp = new Patogeno(virus,x+5,y+5);
-    tmp->moveRand();
+    tmp->moveRand(6);
 
     tmp->moveToThread(virus->thread());
     tmp->setParent(virus);
@@ -56,7 +57,7 @@ void Patogeno::loop(){
     }
 
     if(processando) {   
-        if(inicioProc.elapsed() >= 1100){
+        if(qtTicks >= SistemaImunologico::getInstancia()->getParametro("INCUBACAO_ANTIGENO")){
             processando = false;
 //            alvo->remove();
 
@@ -65,14 +66,17 @@ void Patogeno::loop(){
             tmp->setVirus(virus);
 
             alvo = nullptr;
-            clona();
-        } else return;
+
+            for(int i=0;i<5;i++){
+                clona();
+            }
+            qtTicks = 0;
+        } else {qtTicks++; return;}
     }
 
     if(alvo != nullptr){
         if(calculaDistancia(alvo) < 6){
             processando = true;
-            inicioProc.start();
         } else {
             move(alvo);
         }
