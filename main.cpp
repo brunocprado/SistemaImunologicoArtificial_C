@@ -27,20 +27,20 @@ int main(int argc, char *argv[]){
 
     QObject::connect(&engine, &QQmlApplicationEngine::quit, &app, &QApplication::quit);
 
-    bool tmp = false;
+//    bool tmp = false;
 
     for(int a = 1; a < QCoreApplication::arguments().length();a++){
         if(QCoreApplication::arguments().at(a) == QString("gerador")) {
             sistema->setGerador(QCoreApplication::arguments().at(a+1).toInt());
         }
         if(QCoreApplication::arguments().at(a) == QString("inicia")) {
-            tmp = true;
+            sistema->flag = true;
         }
     }
 
     sistema->inicia();
 
-    if(tmp) sistema->addPatogeno();
+//    if(tmp) sistema->addPatogeno();
 
     return app.exec();
 }
