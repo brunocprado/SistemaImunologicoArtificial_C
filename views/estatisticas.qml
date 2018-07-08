@@ -11,10 +11,14 @@ ApplicationWindow {
     visible: true
     width: 800
     minimumWidth: 540
-    height: 600
+    height: 400
     minimumHeight: 380
     title: "Estatisticas da simulação [ " + virus.identificador + " ]"
-    color: "#8f4f4f"
+
+//    color: "transparent"
+//    flags: Qt.Popup //TODO IF
+//    x: janela.x + janela.width - 550
+//    y: janela.y + 50
 
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
@@ -57,7 +61,7 @@ ApplicationWindow {
         ValueAxis {
             id: yy
             titleText: "Quantidade"
-            max: 20
+            max: 40
         }
 
         SplineSeries {
@@ -82,6 +86,8 @@ ApplicationWindow {
         repeat: true
         onTriggered: {
             if(xx.max <= qtAntigenos.count) xx.max++;
+            if(yy.max <= virus.quantidade || yy.max <= virus.anticorpos) yy.max+=2;
+
             qtAntigenos.append(qtAntigenos.count, virus.quantidade);
             qtAnticorpos.append(qtAnticorpos.count, virus.anticorpos);
             if(virus.quantidade <= 0 && virus.anticorpos <= 0) running = false;
