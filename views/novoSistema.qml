@@ -157,7 +157,7 @@ ApplicationWindow {
                         y: 0
                         width: 150
                         height: 30
-                        text: qsTr("Macrófagos")
+                        text: qsTr("Linfócitos B")
                         checked: true
                         autoExclusive: false
                     }
@@ -167,7 +167,7 @@ ApplicationWindow {
                         y: 0
                         width: 150
                         height: 30
-                        text: qsTr("Macrófagos")
+                        text: qsTr("Linfócitos T")
                         checked: true
                         autoExclusive: false
                     }
