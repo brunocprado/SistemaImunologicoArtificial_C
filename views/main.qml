@@ -284,6 +284,56 @@ ApplicationWindow {
         }
     }
 
+    ToolTip {
+        visible: radioDebug.checked
+        height: 200
+        width: 200
+        y: 10
+        x: janela.width - 210
+
+        Timer{
+            interval: 250
+            running: radioDebug.checked
+            onTriggered: {
+                var total = 0;
+                for(var i=0;i<quantidade_celulas.length;i++){
+                    total += janela.quantidade_celulas[i];
+                }
+
+                txtQtAgentes.text = "Quantidade de agentes:" + total;
+            }
+        }
+
+        Column{
+            spacing: 10
+
+            Text{
+                width: 170
+                text: "DEBUG"
+                color: "white"
+                font.bold: true
+                font.pixelSize: 16
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Text{
+                id: txtQtAgentes
+                text: "Quantidade de agentes:"
+                color: "white"
+            }
+
+            Text{
+                text: "Frame time:"
+                color: "white"
+            }
+
+            Text{
+                text: "Uso de CPU (%):"
+                color: "white"
+            }
+        }
+    }
+
     Drawer {
         id: opcoes
         width: 320
@@ -377,6 +427,7 @@ ApplicationWindow {
                     }
                 }
                 Switch {
+                    id: radioDebug
                     height: 30
                     text: qsTr("Sim")
                     checked: false
