@@ -59,9 +59,12 @@ public:
 private:
     static SistemaImunologico* INSTANCIA; //SINGLETON
 
+    bool DEBUG = false;
+
     unsigned int GERADOR;
 
     QDateTime INICIO_SISTEMA;
+    QElapsedTimer* timer;
 
     QList<Celula*>* celulas;
     CamadaQuimica* quimica;
@@ -85,6 +88,9 @@ signals:
     void addVirus(Virus* virus);
 
     void reseta();
+
+    //DEBUG
+    void debug(int tempo);
 };
 
 #endif // SISTEMAIMUNOLOGICO_H

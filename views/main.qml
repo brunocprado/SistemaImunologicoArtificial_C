@@ -109,6 +109,9 @@ ApplicationWindow {
             temporizador.segundos = 0;
             temporizador.restart(); temporizador.stop();
         }
+        onDebug: {
+            debug.frameTime = tempo;
+        }
     }
 
     Timer{
@@ -285,22 +288,27 @@ ApplicationWindow {
     }
 
     ToolTip {
+        id: debug
         visible: radioDebug.checked
         height: 200
         width: 200
         y: 10
         x: janela.width - 210
 
+        property string qtAgentes
+        property string frameTime
+
         Timer{
             interval: 250
+            repeat: true
             running: radioDebug.checked
             onTriggered: {
                 var total = 0;
-                for(var i=0;i<quantidade_celulas.length;i++){
+                for(var i=0;i<janela.quantidade_celulas.length;i++){
                     total += janela.quantidade_celulas[i];
                 }
 
-                txtQtAgentes.text = "Quantidade de agentes:" + total;
+                debug.qtAgentes = total;
             }
         }
 
@@ -317,18 +325,18 @@ ApplicationWindow {
             }
 
             Text{
-                id: txtQtAgentes
-                text: "Quantidade de agentes:"
+                text: "Quantidade de agentes: " + debug.qtAgentes
                 color: "white"
             }
 
             Text{
-                text: "Frame time:"
+                text: "Frame time: " + debug.frameTime
                 color: "white"
             }
 
             Text{
-                text: "Uso de CPU (%):"
+                width: 170
+                text: "Uso de CPU (%): [TODO] Implementar APIs nativas ou ler do /proc/cpuinfo"
                 color: "white"
             }
         }
@@ -432,9 +440,9 @@ ApplicationWindow {
                     text: qsTr("Sim")
                     checked: false
                     onToggled: {
-                        var tmp = sistema.getVirus(0);
-                        console.log(tmp);
-                        console.log(tmp.getQuantidade());
+//                        var tmp = sistema.getVirus(0);
+//                        console.log(tmp);
+//                        console.log(tmp.getQuantidade());
                     }
                 }
             }
