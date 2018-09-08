@@ -440,9 +440,7 @@ ApplicationWindow {
                     text: qsTr("Sim")
                     checked: false
                     onToggled: {
-//                        var tmp = sistema.getVirus(0);
-//                        console.log(tmp);
-//                        console.log(tmp.getQuantidade());
+                        sistema.setDebug(radioDebug.checked)
                     }
                 }
             }

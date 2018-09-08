@@ -116,7 +116,7 @@ void SistemaImunologico::run(){
             renderizaCelula(tmp);
         }
 
-        if(true) { emit debug(timer->elapsed()); timer->start(); }
+        if(DEBUG) { emit debug(timer->elapsed()); timer->start(); }
 
         msleep(30 * velocidade);
     }
@@ -228,6 +228,10 @@ QList<Celula*>* SistemaImunologico::getCelulas(){
 
 QList<CompostoQuimico*>* SistemaImunologico::getCompostos(){
     return INSTANCIA->getQuimica()->getCompostos();
+}
+
+void SistemaImunologico::setDebug(bool d){
+    DEBUG = d;
 }
 
 QThread* SistemaImunologico::getThread(){
