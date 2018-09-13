@@ -98,6 +98,9 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 void SistemaImunologico::run(){
     while(true){
         while(pausado) msleep(5);
+
+        if (DEBUG) timer->start();
+
         for (int i = 0;i < celulas->length(); i++){
             celulas->at(i)->loop();
         }
@@ -116,9 +119,9 @@ void SistemaImunologico::run(){
             renderizaCelula(tmp);
         }
 
-        if(DEBUG) { emit debug(timer->elapsed()); timer->start(); }
+        if(DEBUG) { emit debug(timer->elapsed()); }
 
-        msleep(30 * velocidade);
+        msleep(DELAY * velocidade);
     }
 }
 

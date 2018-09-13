@@ -11,6 +11,8 @@
 #include "celulas/celula.h"
 #include "estatisticas/virus.h"
 
+#define DELAY 20
+
 class SistemaImunologico : public QThread{
     Q_OBJECT
 public:

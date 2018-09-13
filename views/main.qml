@@ -287,9 +287,18 @@ ApplicationWindow {
         }
     }
 
-    ToolTip {
+    Popup {
         id: debug
         visible: radioDebug.checked
+        closePolicy: Popup.NoAutoClose
+
+        background: Rectangle {
+            id: rect
+            radius: 8
+            border.color: "black"
+            color: Qt.rgba(1,1,1,.75)
+        }
+
         height: 200
         width: 200
         y: 10
@@ -318,26 +327,23 @@ ApplicationWindow {
             Text{
                 width: 170
                 text: "DEBUG"
-                color: "white"
                 font.bold: true
                 font.pixelSize: 16
                 horizontalAlignment: Text.AlignHCenter
+                bottomPadding: 10
             }
 
             Text{
                 text: "Quantidade de agentes: " + debug.qtAgentes
-                color: "white"
             }
 
             Text{
-                text: "Frame time: " + debug.frameTime
-                color: "white"
+                text: "Frame time: " + debug.frameTime + " ms | FPS : " + (1000/debug.frameTime).toFixed(0)
             }
 
             Text{
                 width: 170
                 text: "Uso de CPU (%): [TODO] Implementar APIs nativas ou ler do /proc/cpuinfo"
-                color: "white"
             }
         }
     }
