@@ -19,7 +19,7 @@ SistemaImunologico* SistemaImunologico::INSTANCIA = nullptr;
 
 SistemaImunologico::SistemaImunologico() : QThread(){
     qDebug() << "\033[0;32mSistema imunológico artificial C++ Versão GIT:" << GIT_VERSION << "\033[0;0m";
-    GERADOR = time(0); qsrand(GERADOR);
+    GERADOR = time(nullptr); qsrand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
     timer = new QElapsedTimer(); timer->start();
     celulas = new QList<Celula*>();
@@ -102,7 +102,12 @@ void SistemaImunologico::run(){
         if (DEBUG) timer->start();
 
         for (int i = 0;i < celulas->length(); i++){
-            celulas->at(i)->loop();
+            if(celulas->at(i)->getTipo() != Celula::TIPO_CELULA::PATOGENO || celulas->at(i)->getTipo() != Celula::TIPO_CELULA::CELULA_B)
+                QtConcurrent::run(QThreadPool::globalInstance(),[=]() {
+                    celulas->at(i)->loop();
+                });
+            else
+                celulas->at(i)->loop();
         }
 
         for(int i =0;i<3;i++){
