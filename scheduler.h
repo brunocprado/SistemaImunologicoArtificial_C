@@ -3,37 +3,49 @@
 
 #include <QThreadPool>
 #include "celulas/celula.h"
+#include "sistemaimunologico.h"
+
+#define DELAY 20
 
 class Runnable : public QRunnable{
+    private:
+        QElapsedTimer* timer = new QElapsedTimer();
     public:
         QList<Celula*>* lista = new QList<Celula*>();
 
         void run(){
+            SistemaImunologico* s = SistemaImunologico::getInstancia();
             while(true){
+                while(s->pausado) QThread::msleep(10);
+
+                timer->start();
 
                 for(int i =0;i<lista->length();i++){
                     lista->at(i)->loop();
                 }
 
-                QThread::msleep(10);
+//                emit s->debug(timer->elapsed());
+//                qDebug() << timer->elapsed();
+
+                QThread::msleep(DELAY);
             }
         }
 };
 
 class Scheduler{
 public:
-    Scheduler(int threads);
-
-    void distribuiCelula(Celula* c);
+    explicit Scheduler(int threads);
+    ~Scheduler();
 
     int nThreads = 0;
-
-    int atual = 0; //TODO ESCALONAR DE FORMA EQUILIBRADA
-
     Runnable *THREADS;
 
-private:
+    static Scheduler* getInstancia();
+    void distribuiCelula(Celula* c);
 
+private:
+    static Scheduler* INSTANCIA;
+    int atual = 0; //TODO ESCALONAR DE FORMA EQUILIBRADA
 
 };
 

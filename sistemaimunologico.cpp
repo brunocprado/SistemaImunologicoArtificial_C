@@ -1,7 +1,7 @@
-#include <QtConcurrent/QtConcurrent>
 #include <stdlib.h>
 
 #include "sistemaimunologico.h"
+#include "scheduler.h"
 #include "quimica/camadaquimica.h"
 #include "celulas/comum.h"
 #include "celulas/celulab.h"
@@ -11,6 +11,7 @@
 #include "celulas/patogeno.h"
 
 SistemaImunologico* SistemaImunologico::INSTANCIA = nullptr;
+Scheduler* scheduler = nullptr;
 
 /**
  * Classe principal <br>
@@ -21,14 +22,15 @@ SistemaImunologico::SistemaImunologico() : QThread(){
     qDebug() << "\033[0;32mSistema imunológico artificial C++ Versão GIT:" << GIT_VERSION << "\033[0;0m";
     GERADOR = time(nullptr); qsrand(GERADOR);
     INICIO_SISTEMA = QDateTime::currentDateTime();
-    timer = new QElapsedTimer(); timer->start();
     celulas = new QList<Celula*>();
+    qDebug() << "Quantidade de Threads do escalonador : " << QThreadPool::globalInstance()->maxThreadCount();
 }
 
 SistemaImunologico::~SistemaImunologico(){
     printf("Encerrando a Thread %d [Sistema imunologico (Logica)]\n",thread());
     free(celulas);
     delete quimica;
+    delete scheduler;
     this->terminate();
 }
 
@@ -75,8 +77,9 @@ void SistemaImunologico::carregaParametros() {
 void SistemaImunologico::geraPrimeiraGeracao(){
     int nInicial = qrand() % (int)(parametros->value("TAM_MEDIO_SUPERIOR") - parametros->value("TAM_MEDIO_INFERIOR")) + parametros->value("TAM_MEDIO_INFERIOR");
     log("#0f0",QString().fromStdString("Gerando Sistema com GERADOR = " + std::to_string(GERADOR) + " e " + std::to_string(nInicial * 10) + " leucócitos por microlitro de sangue"));
-//    nInicial *= 4;
     qtInicial = nInicial;
+
+    scheduler = Scheduler::getInstancia();
 
     for(int i =0;i<(nInicial * parametros->value("NEUTROFILOS"));i++){
 //        renderizaCelula(new Neutrofilo());
@@ -93,23 +96,12 @@ void SistemaImunologico::geraPrimeiraGeracao(){
     for(int i=0;i< 160;i++){
         renderizaCelula(new Comum());
     }
+
+
 }
 
 void SistemaImunologico::run(){
     while(true){
-        while(pausado) msleep(5);
-
-        if (DEBUG) timer->start();
-
-        for (int i = 0;i < celulas->length(); i++){
-            if(celulas->at(i)->getTipo() != Celula::TIPO_CELULA::PATOGENO || celulas->at(i)->getTipo() != Celula::TIPO_CELULA::CELULA_B)
-                QtConcurrent::run(QThreadPool::globalInstance(),[=]() {
-                    celulas->at(i)->loop();
-                });
-            else
-                celulas->at(i)->loop();
-        }
-
         for(int i =0;i<3;i++){
             if(qrand() % 100 <= 25*((double)qtInicial/800)){
                 CelulaB *tmp = new CelulaB();
@@ -118,20 +110,17 @@ void SistemaImunologico::run(){
             }
         }
 
-        if(qrand() % 100 <= 42*((double)qtInicial/800)){
-            Macrofago *tmp = new Macrofago();
-            tmp->moveToThread(SistemaImunologico::getThread());
-            renderizaCelula(tmp);
-        }
+        Macrofago *tmp = new Macrofago();
+        tmp->moveToThread(SistemaImunologico::getThread());
+        renderizaCelula(tmp);
 
-        if(DEBUG) { emit debug(timer->elapsed()); }
-
-        msleep(DELAY * velocidade);
+        msleep(50);
     }
 }
 
 void SistemaImunologico::renderizaCelula(Celula* celula){
-    celulas->append(celula);
+    celulas->append(celula); //TODO
+    scheduler->distribuiCelula(celula);
     emit adicionaCelula(celula);
 }
 
@@ -153,6 +142,9 @@ void SistemaImunologico::novoSistema(QString parametros){
 
     setGerador(json.object().value("gerador").toInt());
 
+    for(int i=0;i<scheduler->nThreads;i++){
+        scheduler->THREADS[i].lista = new QList<Celula*>();
+    }
     for(int i=0;i<celulas->length();i++){
         emit eliminaCelula(celulas->at(i)->getId());
     }
