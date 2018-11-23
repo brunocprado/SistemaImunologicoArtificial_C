@@ -36,6 +36,7 @@ public:
     virtual QString extra() = 0;
 
     int id;
+    int tid = -1;
     double x,y;
 
     int getId(){ return id; }

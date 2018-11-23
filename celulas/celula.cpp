@@ -2,6 +2,7 @@
 #include <math.h>
 
 #include "sistemaimunologico.h"
+#include "scheduler.h"
 #include "celula.h"
 #include "celulas/patogeno.h"
 #include "celulas/anticorpo.h"
@@ -35,14 +36,18 @@ void Celula::envelhece(){
 
 void Celula::remove(){
     SistemaImunologico::getInstancia()->getCelulas()->removeOne(this);
+    Scheduler::getInstancia()->THREADS[tid].lista->removeOne(this);
     emit SistemaImunologico::getInstancia()->eliminaCelula(id);
     if(tipo == TIPO_CELULA::PATOGENO){
         static_cast<Patogeno*>(this)->setParent(nullptr);
+//         static_cast<Patogeno*>(this)->
     }
     if(tipo == TIPO_CELULA::ANTICORPO){
         Virus* v = static_cast<Anticorpo*>(this)->getVirus();
         v ->setQtAnticorpos(v->getQtAnticorpos() - 1);
     }
+    //TODO GARBAGE COLECTOR
+//    SistemaImunologico::getInstancia()->gc->append(this);
 
 }
 
