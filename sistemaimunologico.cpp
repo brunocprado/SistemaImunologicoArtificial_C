@@ -102,6 +102,7 @@ void SistemaImunologico::geraPrimeiraGeracao(){
 
 void SistemaImunologico::run(){
     while(true){
+        while(pausado) msleep(5);
         for(int i =0;i<3;i++){
             if(qrand() % 100 <= 25*((double)qtInicial/800)){
                 CelulaB *tmp = new CelulaB();
