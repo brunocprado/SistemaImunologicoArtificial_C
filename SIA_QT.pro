@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     celulas/celulab.cpp \
     celulas/anticorpo.cpp \
     celulas/dendridica.cpp \
-    celulas/comum.cpp
+    celulas/comum.cpp \
+    scheduler.cpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -48,7 +49,8 @@ HEADERS += \
     celulas/celulab.h \
     celulas/anticorpo.h \
     celulas/dendridica.h \
-    celulas/comum.h
+    celulas/comum.h \
+    scheduler.h
 
 SUBDIRS += \
     SIA_QT.pro
