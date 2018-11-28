@@ -76,7 +76,6 @@ private:
 
 signals:
     void adicionaCelula(Celula* celula);
-    void movimentaCelula(int id);
     void eliminaCelula(int id);
 
     void adicionaComposto(int id,int tipo,int raio,int x,int y);

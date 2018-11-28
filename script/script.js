@@ -5,8 +5,6 @@ var exibeQuimica = true;
 var celulas = {};
 var compostos = {};
 
-//enum class TIPO_CELULA {COMUM,PATOGENO,MACROFAGO,NEUTROFILO,LINFOCITO,CELULA_B,ANTICORPO};
-
 var tipoCelula = {
     "COMUM" : 0,
     "PATOGENO" : 1,

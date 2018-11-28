@@ -1,5 +1,5 @@
-import QtQuick 2.11
-import QtQuick.Controls 2.3
+import QtQuick 2.12
+import QtQuick.Controls 2.4
 import QtQuick.Controls.Material 2.3
 import QtQuick.Window 2.3
 
@@ -74,11 +74,6 @@ ApplicationWindow {
         onAdicionaCelula: {
             Script.cria(celulas,celula);
             janela.quantidade_celulas[celula.tipo] ++;
-        }
-        onMovimentaCelula: {
-            if(Script.celulas[id] === undefined) return;
-            Script.celulas[id].rotation += Math.floor((Math.random() * 5) - 2);
-            Script.celulas[id].atualizaPos();
         }
         onEliminaCelula: {
             if(Script.celulas[id] === undefined) return;

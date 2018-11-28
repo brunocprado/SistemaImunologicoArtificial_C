@@ -6,8 +6,8 @@
 class Celula : public QObject {
     Q_OBJECT
     Q_PROPERTY(int id READ getId CONSTANT)
-    Q_PROPERTY(double x READ getX NOTIFY posicaoMudou)
-    Q_PROPERTY(double y READ getY NOTIFY posicaoMudou)
+    Q_PROPERTY(double x MEMBER x NOTIFY posicaoMudou)
+    Q_PROPERTY(double y MEMBER y NOTIFY posicaoMudou)
     Q_PROPERTY(TIPO_CELULA tipo READ getTipo CONSTANT)
     Q_PROPERTY(QString extra READ extra)
 public:
@@ -40,8 +40,7 @@ public:
     double x,y;
 
     int getId(){ return id; }
-    double getX(){ return x; }
-    double getY(){ return y; }
+
     TIPO_CELULA getTipo();
     ESTADO getEstado();
     double getVelMovimento();

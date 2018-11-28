@@ -1,29 +1,23 @@
-import QtQuick 2.11
+import QtQuick 2.12
 
 Image {
-    property var celula
+    property QtObject celula
 
     visible: true
     width: 10
     height: 10
 
     transformOrigin: Item.Center
-    rotation: 0
 
-    x: celula.x - 5
-    y: celula.y - 5
-
-    function atualizaPos(){
-        x = celula.x - 5;
-        y = celula.y - 5;
-    }
+    x: celula.x
+    y: celula.y
 
     MouseArea{
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        property var tooltip: 0
+        property QtObject tooltip
         onClicked: {
-            if(tooltip !== 0) { tooltip.visible = true; return; }
+            if(tooltip) { tooltip.visible = true; return; }
             var t;
             switch(celula.tipo){
                 case 0: t = "epitelial"; break;
